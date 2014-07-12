@@ -1,0 +1,119 @@
+/* @override 
+	http://iviewsource.com/exercises/ajax/mystyle.css */
+
+body {
+	background: #DAD7C7;
+}
+
+#calcarea{
+	margin:0 auto;    /*why does this move div to the middle? */
+	text-align: center;
+	background: #BF996B;
+	padding: 10px;
+	width: 60%;
+	-webkit-border-radius: 10px 10px 0 0;
+	-moz-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+}
+
+#calcarea label {
+	font: bold 1.3em Arial;
+	text-transform: uppercase;
+	padding-bottom: 5px;
+	color: #A61C1C;
+}
+
+#calcarea p {
+	margin: 0;
+	line-height: 1em;
+	padding-bottom:5px;
+}
+
+#bio input {
+	width:10%;     /*percentages make it responsive*/
+	text-align: center;
+	}
+	
+#update {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	width: 70%;
+	margin: 0 auto;
+	border-top: 1px solid #CCC;	
+}
+
+#update ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#update ul li {
+	width: 100%;
+	padding: 0 20px;
+	background: #EEE;
+	padding-bottom: 10px;
+	height: 110px;
+	overflow: hidden;
+	border-bottom: 1px dotted #CCC;
+	/* calls the myanim css3 effect */
+	-webkit-animation: myanim 1s;
+	-moz-animation: myanim 1s;
+	-o-animation: myanim 1s;
+	animation: myanim 1s;
+	
+	/*makes for smoother transition */
+	-webkit-transition: height 0.3s ease-out 0s;
+	-moz-transition: height 0.3s ease-out 0s;
+	-o-transition: height 0.3s ease-out 0s;
+	transition: height 0.3s ease-out 0s;
+}
+
+#update li:hover{
+	background: #FFFCE5;
+	min-height: 110px;
+	height: 250px;
+	overflow:visible;
+}
+
+#update h2{
+	margin:0;
+	padding:0;
+	font-size: 1.2em;
+	padding-bottom: 5px;
+	padding-top: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #BF5841;
+	border-bottom: 1px dotted #CCC;
+	margin-bottom: 10px;
+}
+
+#update img {
+	float:left;
+	width:80px;
+	margin-right:10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+
+/*CSS3 keyframes 0% (start) to 100% (end) */
+@-webkit-keyframes myanim{
+	0% { opacity: 0.3;}
+	100% { opacity: 1.0;}
+}
+
+@-moz-keyframes myanim{
+	0% { opacity: 0.3;}
+	100% { opacity: 1.0;}
+}
+
+@-o-keyframes myanim{
+	0% { opacity: 0.3;}
+	100% { opacity: 1.0;}
+}
+
+@keyframes myanim{
+	0% { opacity: 0.3;}
+	100% { opacity: 1.0;}
+}
