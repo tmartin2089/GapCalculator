@@ -31,6 +31,10 @@ function totalLoans(){
 	console.log(total);
 };
 
+//going to need separate total for need/cost calcs
+
+//maybe if value > 3 need += needArray[i]?
+
 // function checkNeed(){
 	// var loanType = $('.loans').val();
 	// var loanAmt = $('#loanAmt').val();
