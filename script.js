@@ -21,9 +21,9 @@ function checkCost(){
 
 //this totals loans - now need to total by need and non-need
 function totalLoans(){
- var arr = document.getElementsByName('loanAmt');
+ var arr = $('[name="loanAmt"]');
  var total=0;
- var arrLength = arr.length;
+ var arrLength = arr.length; 
 	for(var i=0; i<arr.length; i++){
 	if(parseInt(arr[i].value))
 		total+= parseInt(arr[i].value);
