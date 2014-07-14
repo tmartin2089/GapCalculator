@@ -15,16 +15,44 @@
 		<input type="text" id="coa" placeholder="Cost/Sem" />
 	</div>
 	<div id="loan">	
+		<h2>Loans</h2>
 		<form action="">
-		<select name="loans" id="loans">
+		<select name="loans" class="loans">
 		<option value="1">Unsub</option>
 		<option value="2">PLUS</option>
 		<option value="3">BOT</option>
 		<option value="4">CAL/Alt</option>
 		<option value="5">Sub</option>
 		<option value="6">Perkins</option>
+		<input type="text" name="loanAmt" id="loanAmt" class="loans" placeholder="enter amt here" />
 		</select>
-		<input type="text" id="loanAmt" placeholder="enter amt here" onkeyup="calculateAll()" />
+		<select name="loans" class="loans">
+		<option value="1">Unsub</option>
+		<option value="2">PLUS</option>
+		<option value="3">BOT</option>
+		<option value="4">CAL/Alt</option>
+		<option value="5">Sub</option>
+		<option value="6">Perkins</option>
+		<input type="text" name="loanAmt"  id="loanAmt" placeholder="enter amt here" />
+		</select>
+		<select name="loans" class="loans">
+		<option value="1">Unsub</option>
+		<option value="2">PLUS</option>
+		<option value="3">BOT</option>
+		<option value="4">CAL/Alt</option>
+		<option value="5">Sub</option>
+		<option value="6">Perkins</option>
+		<input type="text" name="loanAmt"  id="loanAmt" placeholder="enter amt here" />
+		</select>
+		<select name="loans" class="loans">
+		<option value="1">Unsub</option>
+		<option value="2">PLUS</option>
+		<option value="3">BOT</option>
+		<option value="4">CAL/Alt</option>
+		<option value="5">Sub</option>
+		<option value="6">Perkins</option>
+		<input type="text" name="loanAmt"  id="loanAmt" placeholder="enter amt here" onkeyup="totalLoans();" />
+		</select>
 		</form>
 	</div>
 </div>

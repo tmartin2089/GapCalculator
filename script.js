@@ -19,16 +19,30 @@ function checkCost(){
 //need to check totalCost - totalAid 
 };
 
-function checkNeed(){
-	var loanType = $('#loans').val();
-	var loanAmt = $('#loanAmt').val();
-	if(loanType > 4){
-	console.log(loanAmt + "is need based.")
-	};
-	console.log(loanType);
-	console.log(loanAmt);
-	
+//this totals loans - now need to total by need and non-need
+function totalLoans(){
+ var arr = document.getElementsByName('loanAmt');
+ var total=0;
+ var arrLength = arr.length;
+	for(var i=0; i<arr.length; i++){
+	if(parseInt(arr[i].value))
+		total+= parseInt(arr[i].value);
+	}
+	console.log(total);
 };
+
+// function checkNeed(){
+	// var loanType = $('.loans').val();
+	// var loanAmt = $('#loanAmt').val();
+	
+	// var total = 0;
+	// if(loanType > 4){
+	// console.log(loanAmt + "is need based.")
+	// };
+	// console.log(loanType);
+	// console.log(loanAmt);
+	
+// };
 
 
 //pell chart - convert to json - sort w/ajax req
@@ -36,6 +50,6 @@ function checkNeed(){
 
 function calculateAll(){
 checkCost();
-checkNeed();
+// checkNeed();
 };
 

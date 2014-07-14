@@ -29,6 +29,10 @@ body {
 	padding-bottom:5px;
 }
 
+.loans{
+
+}
+
 #bio input {
 	width:10%;     /*percentages make it responsive*/
 	text-align: center;
