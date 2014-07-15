@@ -28,7 +28,7 @@ function totalLoans(){
 	if(parseInt(arr[i].value))
 		total+= parseInt(arr[i].value);
 	}
-	console.log(total);
+	return total;
 };
 
 //going to need separate total for need/cost calcs
@@ -53,7 +53,8 @@ function totalLoans(){
 
 
 function calculateAll(){
-checkCost();
+var y = totalLoans();  //allows me to capture total value from totalLoans
+console.log(y);
 // checkNeed();
 };
 
