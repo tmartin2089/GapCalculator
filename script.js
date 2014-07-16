@@ -33,21 +33,7 @@ function sumitUp(){
 		console.log(typeofAid);
 		console.log(amtofAid);
 };
-// function sort(){
-	// var valueType = [];
-	// $(".loans").each(function(index) { 
-		// valueType.push($(this).val()); 
-		// });
-		// console.log(valueType);
-// };
 
-// function add(){
-	// var valueType = [];
-	// $('.amount').each(function(index) {
-		// valueType.push($(this).val());
-	// });
-	// console.log(valueType);
-// };
 
 //two competing arrays.  one captures values, the other
 //captures amts  so if valueArray[1]>=4, then 
