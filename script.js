@@ -20,21 +20,34 @@ function checkCost(){
 };
 
 //this captures select values in array
-function sort(){
-	var valueType = [];
-	$(".loans").each(function(index) { 
-		valueType.push($(this).val()); 
-		});
-		console.log(valueType);
-};
 
-function add(){
-	var valueType = [];
-	$('.amount').each(function(index) {
-		valueType.push($(this).val());
-	});
-	console.log(valueType);
+function sumitUp(){
+	var typeofAid =[];
+	var amtofAid =[];
+		$(".loans").each(function(index) { 
+			typeofAid.push($(this).val()); 
+		});
+		$('.amount').each(function(index) {
+			amtofAid.push($(this).val());
+		});
+		console.log(typeofAid);
+		console.log(amtofAid);
 };
+// function sort(){
+	// var valueType = [];
+	// $(".loans").each(function(index) { 
+		// valueType.push($(this).val()); 
+		// });
+		// console.log(valueType);
+// };
+
+// function add(){
+	// var valueType = [];
+	// $('.amount').each(function(index) {
+		// valueType.push($(this).val());
+	// });
+	// console.log(valueType);
+// };
 
 //two competing arrays.  one captures values, the other
 //captures amts  so if valueArray[1]>=4, then 
