@@ -22,6 +22,8 @@ function checkCost(){
 //this captures select values in array
 
 function sumitUp(){
+	var nonNeed = 0;
+	var need = 0;
 	var typeofAid =[];
 	var amtofAid =[];
 		$(".loans").each(function(index) { 
@@ -34,17 +36,16 @@ function sumitUp(){
 		var amtLength = amtofAid.length;
 		for(i=0; i<typeLength; i++){
 			var need = 0;
-			var nonNeed = 0;
 			if(typeofAid[i]<=4){
 			console.log('itsa not need based');	
-			nonNeed += amtofAid[i];
+			nonNeed += parseInt(amtofAid[i]);
 			}
 			else{
 			console.log('itsa need based');	
 			//need += amtofAid[i];	
 			};
-			console.log(nonNeed);	
 		}
+		console.log(nonNeed);	
 
 };
 
