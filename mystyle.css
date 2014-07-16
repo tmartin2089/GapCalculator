@@ -7,13 +7,13 @@ body {
 
 #calcarea{
 	margin:0 auto;    /*why does this move div to the middle? */
-	text-align: center;
 	background: #BF996B;
 	padding: 10px;
 	width: 60%;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	border-radius: 10px 10px 0 0;
+	height: auto;
 }
 
 #calcarea label {
@@ -29,14 +29,21 @@ body {
 	padding-bottom:5px;
 }
 
-.loans{
-
-}
 
 #bio input {
 	width:10%;     /*percentages make it responsive*/
-	text-align: center;
 	}
+	
+
+	
+#loan, #giftAid{
+color: #cc5500;
+}
+
+.giftaid{
+color: #cc5500;
+}
+
 	
 #update {
 	font-family: Georgia, "Times New Roman", Times, serif;

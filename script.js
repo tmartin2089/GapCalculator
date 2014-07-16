@@ -19,6 +19,27 @@ function checkCost(){
 //need to check totalCost - totalAid 
 };
 
+//this captures select values in array
+function sort(){
+	var valueType = [];
+	$(".loans").each(function(index) { 
+		valueType.push($(this).val()); 
+		});
+		console.log(valueType);
+};
+
+function add(){
+	var valueType = [];
+	$('.amount').each(function(index) {
+		valueType.push($(this).val());
+	});
+	console.log(valueType);
+};
+
+//two competing arrays.  one captures values, the other
+//captures amts  so if valueArray[1]>=4, then 
+//amtArray[1]=need based
+
 //this totals loans - now need to total by need and non-need
 function totalLoans(){
  var arr = $('[name="loanAmt"]');
