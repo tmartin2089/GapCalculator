@@ -30,8 +30,22 @@ function sumitUp(){
 		$('.amount').each(function(index) {
 			amtofAid.push($(this).val());
 		});
-		console.log(typeofAid);
-		console.log(amtofAid);
+		var typeLength = typeofAid.length;
+		var amtLength = amtofAid.length;
+		for(i=0; i<typeLength; i++){
+			var need = 0;
+			var nonNeed = 0;
+			if(typeofAid[i]<=4){
+			console.log('itsa not need based');	
+			nonNeed += amtofAid[i];
+			}
+			else{
+			console.log('itsa need based');	
+			//need += amtofAid[i];	
+			};
+			console.log(nonNeed);	
+		}
+
 };
 
 
