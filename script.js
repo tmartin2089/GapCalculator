@@ -19,20 +19,33 @@ function checkCost(){
 //need to check totalCost - totalAid 
 };
 
-//this captures select values in array
-
+//this captures select values in arrays above
 function sumitUp(){
 	var nonNeed = 0;
 	var need = 0;
+	var amtTotal = 0;
 	var typeofAid =[];
 	var amtofAid =[];
-		$(".loans").each(function(index) { 
-			typeofAid.push($(this).val()); 
+	//this captures values of aidInput into above arrays
+		$(".aidInput").children('.amount').each(function(index) {
+			if($(this).val() != ''){
+				amtofAid.push(parseInt($(this).val()));
+			};
+			
+				// amtofAid.push($(this).val());
+				// $(".loans").each(function(index) { 
+					// typeofAid.push($(this).val()); 
+					// });
+			// console.log(amtofAid);
+			// console.log(typeofAid);
+			// };
 		});
-		$('.amount').each(function(index) {
-			amtofAid.push($(this).val());
+		console.log(amtofAid);
+		$(".loans").each(function(index) { 
+		typeofAid.push($(this).val()); 
 		});
 		var typeLength = typeofAid.length;
+		console.log(typeLength);
 		for(i=0; i<typeLength; i++){
 			if(typeofAid[i]<=4){
 			nonNeed += parseInt(amtofAid[i]);
@@ -43,7 +56,7 @@ function sumitUp(){
 		};
 		return {
 		need: need,
-		nonNeed: nonNeed
+		nonNeed: nonNeed,
 		}
 };
 
