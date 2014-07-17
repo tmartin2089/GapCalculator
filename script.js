@@ -33,20 +33,18 @@ function sumitUp(){
 			amtofAid.push($(this).val());
 		});
 		var typeLength = typeofAid.length;
-		var amtLength = amtofAid.length;
 		for(i=0; i<typeLength; i++){
-			var need = 0;
 			if(typeofAid[i]<=4){
-			console.log('itsa not need based');	
 			nonNeed += parseInt(amtofAid[i]);
 			}
 			else{
-			console.log('itsa need based');	
-			//need += amtofAid[i];	
-			};
+			need += parseInt(amtofAid[i]);	
+			}
+		};
+		return {
+		need: need,
+		nonNeed: nonNeed
 		}
-		console.log(nonNeed);	
-
 };
 
 
@@ -87,9 +85,15 @@ function totalLoans(){
 //pell chart - convert to json - sort w/ajax req
 
 
-function calculateAll(){
-var y = totalLoans();  //allows me to capture total value from totalLoans
-console.log(y);
-// checkNeed();
+function calculateAll(){    //allows me to call multiple variables
+	var result = sumitUp();  // bc they are object literal
+	if(result.need > 10){
+	console.log('greater than 10');
+	console.log(result.need);
+	}
+	else{
+	console.log('not greater than 10');
+	}
+	// console.log(result.need);
+	// console.log(result.nonNeed);
 };
-
