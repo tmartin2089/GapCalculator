@@ -26,7 +26,7 @@ function sumitUp(){
 	var need = 0;
 	var typeofAid =[];
 	var amtofAid =[];
-		$(".loans").each(function(index) { 
+		$(".aidType").each(function(index) { 
 			typeofAid.push($(this).val()); 
 		});
 		$('.amount').each(function(index) {
@@ -46,8 +46,6 @@ function sumitUp(){
 		nonNeed: nonNeed
 		}
 };
-
-
 //two competing arrays.  one captures values, the other
 //captures amts  so if valueArray[1]>=4, then 
 //amtArray[1]=need based
