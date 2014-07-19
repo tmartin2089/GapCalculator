@@ -9,7 +9,7 @@
 <body>
 <div id="calcarea">
 	<label for="search">Aid Calculator</label>
-	<button onclick="autofill()">Auto Fill</button>
+	<button onclick="autoSelect()">Auto Fill</button>
 	<p>All the aid that's fit to print</p>
 	<div id="bio">
 		<h2>Bio Information</h2>
@@ -24,7 +24,7 @@
 		<h2>Loans</h2>
 		<form action="">
 			<div class="aidInput">
-				<select name="loans" class="loans">
+				<select name="loans" class="loanType">
 					<option value="1">Unsub</option>
 					<option value="2">PLUS</option>
 					<option value="3">BOT</option>
@@ -35,7 +35,7 @@
 				<input type="text" name="loanAmt1" id="loanAmt1" class="amount" placeholder="enter amt here" />
 			</div>
 			<div class="aidInput">
-				<select name="loans" class="loans">
+				<select name="loans" class="loanType">
 					<option value="1">Unsub</option>
 					<option value="2">PLUS</option>
 					<option value="3">BOT</option>
@@ -46,7 +46,7 @@
 				<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="enter amt here" />
 			</div>
 			<div class="aidInput">
-				<select name="loans" class="loans">
+				<select name="loans" class="loanType">
 					<option value="1">Unsub</option>
 					<option value="2">PLUS</option>
 					<option value="3">BOT</option>
@@ -57,7 +57,7 @@
 				<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="enter amt here" />
 			</div>
 			<div class="aidInput">
-				<select name="loans" class="loans">
+				<select name="loans" class="loanType">
 					<option value="1">Unsub</option>
 					<option value="2">PLUS</option>
 					<option value="3">BOT</option>
@@ -74,7 +74,7 @@
 		<h2>Grants and OSFS Scholarships</h2>
 		<form action="">
 			<div class="aidInput">
-				<select name="giftAid" class="giftAid">
+				<select name="giftAid" class="giftType">
 					<option value="7">Pell</option>
 					<option value="8">TX Grant</option>
 					<option value="9">TX Grant Match</option>
@@ -87,7 +87,7 @@
 				<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="enter amt here" />
 			</div>
 			<div class="aidInput">
-				<select name="giftAid" class="giftAid">
+				<select name="giftAid" class="giftType">
 					<option value="7">Pell</option>
 					<option value="8">TX Grant</option>
 					<option value="9">TX Grant Match</option>
@@ -100,7 +100,7 @@
 				<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="enter amt here" />
 			</div>
 			<div class="aidInput">
-				<select name="giftAid" class="giftAid">
+				<select name="giftAid" class="giftType">
 					<option value="7">Pell</option>
 					<option value="8">TX Grant</option>
 					<option value="9">TX Grant Match</option>
@@ -113,7 +113,7 @@
 				<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="enter amt here" />
 			</div>
 			<div class="aidInput">
-				<select name="giftAid" class="giftAid">
+				<select name="giftAid" class="giftType">
 					<option value="7">Pell</option>
 					<option value="8">TX Grant</option>
 					<option value="9">TX Grant Match</option>

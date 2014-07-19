@@ -46,18 +46,48 @@ function addLinks () {
 
 //time to build autofill button
 
-
+//fills amt field for testing purposes
 function autofill(){
-	var array1= [];
-	for(var i=0; i<8; i++){
+	var amtArray = [];
+	for(i=0; i<8; i++){
 		var randomnumber = Math.floor((Math.random() * 8000)+1);
-		array1[i] = randomnumber;
+		amtArray[i] = randomnumber;
 		var elem = $('.amount')[i];  //returns DOM object unlike just $('#loanAmt1')
-		elem.value =array1[i];       //which would be a jquery object
+		elem.value = amtArray[i];       //which would be a jquery object
 	};
-	console.log(array1);
+	console.log(amtArray);
 };
 
-// var select = Math.floor((Math.random() * 8)+1);
-// console.log(select);
 
+
+function autofillSelectLoans(){
+	var selectloansArray = [];
+	for(i=0; i<4; i++){
+		var randomnumber1 = Math.floor((Math.random() * 6)+1);
+		selectloansArray[i] = randomnumber1;
+		var elem1 = $('.loanType')[i];
+		elem1.value = selectloansArray[i];
+	};
+	console.log(selectloansArray);
+};
+
+//autofills gift select with range of 7-14
+ function autofillselectGift(){
+	 var selectgiftArray = [];
+	 var getRanged = function(min, max){
+		var randomnumber2 = Math.floor(Math.random() * (max - min)) + min;
+		return randomnumber2;
+	 };
+	 for(x=0; x<4; x++){
+		selectgiftArray[x] = getRanged(7,14);
+		var elem2  = $('.giftType')[x];
+		elem2.value = selectgiftArray[x];
+	 }; 
+	 console.log(selectgiftArray);
+};
+
+function autoSelect(){
+	autofill();
+	autofillSelectLoans();
+	autofillselectGift();
+};
