@@ -31,14 +31,6 @@ function sumitUp(){
 			if($(this).val() != ''){
 				amtofAid.push(parseInt($(this).val()));
 			};
-			
-				// amtofAid.push($(this).val());
-				// $(".loans").each(function(index) { 
-					// typeofAid.push($(this).val()); 
-					// });
-			// console.log(amtofAid);
-			// console.log(typeofAid);
-			// };
 		});
 		console.log(amtofAid);
 		$(".loans").each(function(index) { 

@@ -49,13 +49,11 @@ function addLinks () {
 
 function autofill(){
 	var array1= [];
-	for(var i=0; i<4; i++){
+	for(var i=0; i<8; i++){
 		var randomnumber = Math.floor((Math.random() * 8000)+1);
 		array1[i] = randomnumber;
-	};
-	for(var x=0; x < array1.length; x++){
-		var elem = $('.amount')[x];  //returns DOM object unlike just $('#loanAmt1')
-		elem.value =array1[x];       //which would be a jquery object
+		var elem = $('.amount')[i];  //returns DOM object unlike just $('#loanAmt1')
+		elem.value =array1[i];       //which would be a jquery object
 	};
 	console.log(array1);
 };
