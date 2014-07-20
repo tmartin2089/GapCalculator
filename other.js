@@ -55,7 +55,6 @@ function autofill(){
 		var elem = $('.amount')[i];  //returns DOM object unlike just $('#loanAmt1')
 		elem.value = amtArray[i];       //which would be a jquery object
 	};
-	console.log(amtArray);
 };
 
 
@@ -68,7 +67,6 @@ function autofillSelectLoans(){
 		var elem1 = $('.loanType')[i];
 		elem1.value = selectloansArray[i];
 	};
-	console.log(selectloansArray);
 };
 
 //autofills gift select with range of 7-14
@@ -83,7 +81,6 @@ function autofillSelectLoans(){
 		var elem2  = $('.giftType')[x];
 		elem2.value = selectgiftArray[x];
 	 }; 
-	 console.log(selectgiftArray);
 };
 
 function autoSelect(){

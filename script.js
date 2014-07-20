@@ -23,33 +23,40 @@ function checkCost(){
 function sumitUp(){
 	var nonNeed = 0;
 	var need = 0;
-	var amtTotal = 0;
-	var typeofAid =[];
+	var typeofLoan = [];
+	var typeofGift = [];
 	var amtofAid =[];
+	var selectArray = []
 	//this captures values of aidInput into above arrays
-		$(".aidInput").children('.amount').each(function(index) {
-			if($(this).val() != ''){
-				amtofAid.push(parseInt($(this).val()));
-			};
-		});
-		console.log(amtofAid);
-		$(".loans").each(function(index) { 
-		typeofAid.push($(this).val()); 
-		});
-		var typeLength = typeofAid.length;
-		console.log(typeLength);
-		for(i=0; i<typeLength; i++){
-			if(typeofAid[i]<=4){
-			nonNeed += parseInt(amtofAid[i]);
-			}
-			else{
-			need += parseInt(amtofAid[i]);	
-			}
+	//can do away with this error handling if we make new inputs display only if
+	//previous one is filled out
+	$(".aidInput").children('.amount').each(function(index) {
+		if($(this).val() != ''){
+			amtofAid.push(parseInt($(this).val()));
 		};
-		return {
-		need: need,
-		nonNeed: nonNeed,
+	});
+	$(".loanType").each(function(index) { 
+		typeofLoan.push($(this).val()); 
+	});
+	console.log(typeofLoan);
+	$(".giftType").each(function(index) {
+		typeofGift.push($(this).val());
+	});
+	var joinedType = typeofLoan.concat(typeofGift);
+	//habit - capture .length in a variable so jscript doesn't have to recount every iteration
+	var joinedTlength = joinedType.length;
+	for(i=0; i<joinedTlength; i++){
+		if(joinedType[i]<=4){
+		nonNeed += parseInt(amtofAid[i]);
 		}
+		else{
+		need += parseInt(amtofAid[i]);	
+		}
+	};
+	return {
+	need: need,
+	nonNeed: nonNeed,
+	}
 };
 
 
@@ -92,13 +99,6 @@ function totalLoans(){
 
 function calculateAll(){    //allows me to call multiple variables
 	var result = sumitUp();  // bc they are object literal
-	if(result.need > 10){
-	console.log('greater than 10');
-	console.log(result.need);
-	}
-	else{
-	console.log('not greater than 10');
-	}
-	// console.log(result.need);
-	// console.log(result.nonNeed);
+	console.log('need is ' + result.need);
+	console.log('non need is' + result.nonNeed);
 };
