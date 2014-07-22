@@ -4,20 +4,6 @@
 var efc = $('#efc').val();
 
 
-function checkCost(){                      
-//these two will eventually be value captures from index
-	var coa = $('#coa').val();
-	console.log(coa);
-	var totalAid = 500;
-	if(coa - totalAid < 0){
-		var overage = totalAid-coa;
-		console.log("you are $" + overage + " over cost");
-	}
-	else{
-		console.log("Within cost!");
-	}
-//need to check totalCost - totalAid 
-};
 
 //this captures select values in arrays above
 function sumitUp(){
@@ -38,7 +24,6 @@ function sumitUp(){
 	$(".loanType").each(function(index) { 
 		typeofLoan.push($(this).val()); 
 	});
-	console.log(typeofLoan);
 	$(".giftType").each(function(index) {
 		typeofGift.push($(this).val());
 	});
@@ -96,9 +81,12 @@ function totalLoans(){
 
 //pell chart - convert to json - sort w/ajax req
 
+function checkCost(){
+	var result = sumitUp();
+	var k = result.need + result.nonNeed;  //allows me to call multiple variables
+	console.log(k);                        // bc they are object literal
+};
 
-function calculateAll(){    //allows me to call multiple variables
-	var result = sumitUp();  // bc they are object literal
-	console.log('need is ' + result.need);
-	console.log('non need is' + result.nonNeed);
+function calculateAll(){   
+	checkCost();						
 };
