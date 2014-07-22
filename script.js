@@ -41,6 +41,8 @@ function sumitUp(){
 	return {
 	need: need,
 	nonNeed: nonNeed,
+	typeofLoan: typeofLoan,
+	typeofGift: typeofGift,
 	}
 };
 
@@ -83,6 +85,7 @@ function totalLoans(){
 
 function checkCostNeed(){
 	var result = sumitUp();
+	console.log('insideCheckCost the array now shows ' + result.typeofLoan);
 	var bioArray = [];
 	var k = result.need + result.nonNeed;  
 	$('.bio').each(function(index){        
@@ -90,25 +93,34 @@ function checkCostNeed(){
 	});
 		function checkCost(){
 			if(bioArray[0]<k){
-				var overage = k - bioArray[0]; 
-					console.log('Student is over cost by $' + overage);
+				var overageC = k - bioArray[0]; 
+					console.log('Student is over cost by $' + overageC);
 				}
 				else{
 					console.log('all good dog');
 				};
+			return{
+			overageC: overageC,
+			}
 		};
+		
 		function checkNeed(){
 			var need = (bioArray[0] - bioArray[1]) - bioArray[2];
-			if(need>result.need){
-				console.log('You are under need!');
+				if(need>result.need){
+					console.log('You are under need!');
+				}
+				else{
+					var overageN = result.need - need;
+					console.log('You are $' + overageN + ' over need');
+				};
+			return{
+			overageN: overageN,
 			}
-			else{
-				var overage = result.need - need;
-				console.log('You are $' + overage + ' over need');
-			};
 		};
-	checkCost();
-	checkNeed();
+	var overCost = checkCost();
+	var overNeed = checkNeed();
+	console.log(overCost.overageC);
+	console.log(overNeed.overageN);
 	console.log(bioArray);
 	console.log(k);
 	console.log('Total need based aid is ' + result.need);
