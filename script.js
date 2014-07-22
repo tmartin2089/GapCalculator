@@ -81,12 +81,39 @@ function totalLoans(){
 
 //pell chart - convert to json - sort w/ajax req
 
-function checkCost(){
+function checkCostNeed(){
 	var result = sumitUp();
-	var k = result.need + result.nonNeed;  //allows me to call multiple variables
-	console.log(k);                        // bc they are object literal
+	var bioArray = [];
+	var k = result.need + result.nonNeed;  
+	$('.bio').each(function(index){        
+		bioArray.push(parseInt(($(this).val())));
+	});
+		function checkCost(){
+			if(bioArray[0]<k){
+				var overage = k - bioArray[0]; 
+					console.log('Student is over cost by $' + overage);
+				}
+				else{
+					console.log('all good dog');
+				};
+		};
+		function checkNeed(){
+			var need = (bioArray[0] - bioArray[1]) - bioArray[2];
+			if(need>result.need){
+				console.log('You are under need!');
+			}
+			else{
+				var overage = result.need - need;
+				console.log('You are $' + overage + ' over need');
+			};
+		};
+	checkCost();
+	checkNeed();
+	console.log(bioArray);
+	console.log(k);
+	console.log('Total need based aid is ' + result.need);
 };
 
 function calculateAll(){   
-	checkCost();						
+	checkCostNeed();						
 };
