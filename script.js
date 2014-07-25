@@ -3,7 +3,13 @@
 
 var efc = $('#efc').val();
 
-
+function typeamtObject(keys,values){
+	var obj = {};
+		for(var i =0; i < keys.length; i++){
+			obj[keys[i]] = values[i];
+		}
+		console.log(obj);
+}
 
 //this captures select values in arrays above
 function sumitUp(){
@@ -19,8 +25,12 @@ function sumitUp(){
 	$(".aidInput").children('.amount').each(function(index) {
 		if($(this).val() != ''){
 			amtofAid.push(parseInt($(this).val()));
+		}
+		else{
+			amtofAid.push('hi you');
 		};
 	});
+	console.log(amtofAid);
 	$(".loanType").each(function(index) { 
 		typeofLoan.push($(this).val()); 
 	});
@@ -28,6 +38,7 @@ function sumitUp(){
 		typeofGift.push($(this).val());
 	});
 	var joinedType = typeofLoan.concat(typeofGift);
+	console.log(joinedType);
 	//habit - capture .length in a variable so jscript doesn't have to recount every iteration
 	var joinedTlength = joinedType.length;
 	for(i=0; i<joinedTlength; i++){
@@ -38,6 +49,7 @@ function sumitUp(){
 		need += parseInt(amtofAid[i]);	
 		}
 	};
+	typeamtObject(joinedType, amtofAid);
 	return {
 	need: need,
 	nonNeed: nonNeed,
