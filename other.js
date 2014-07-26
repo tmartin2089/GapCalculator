@@ -1,6 +1,4 @@
 
-$(document).ready(addLinks());
-
 
 function addLinks () {
     for (var i=0, link; i<5; i++) { 

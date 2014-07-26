@@ -18,7 +18,6 @@ function sumitUp(){
 	var typeofLoan = [];
 	var typeofGift = [];
 	var amtofAid =[];
-	var selectArray = []
 	//this captures values of aidInput into above arrays
 	//can do away with this error handling if we make new inputs display only if
 	//previous one is filled out
@@ -27,10 +26,9 @@ function sumitUp(){
 			amtofAid.push(parseInt($(this).val()));
 		}
 		else{
-			amtofAid.push('hi you');
+			amtofAid.push(NaN);
 		};
 	});
-	console.log(amtofAid);
 	$(".loanType").each(function(index) { 
 		typeofLoan.push($(this).val()); 
 	});
@@ -38,6 +36,15 @@ function sumitUp(){
 		typeofGift.push($(this).val());
 	});
 	var joinedType = typeofLoan.concat(typeofGift);
+	console.log(amtofAid);
+	console.log(joinedType);
+	for(x=0; x<amtofAid.length; x++){
+		if(isNaN(amtofAid[x])){
+			amtofAid.splice(x,1);
+			joinedType.splice(x,1);
+		};
+	};
+	console.log(amtofAid);
 	console.log(joinedType);
 	//habit - capture .length in a variable so jscript doesn't have to recount every iteration
 	var joinedTlength = joinedType.length;
