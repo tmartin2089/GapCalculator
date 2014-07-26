@@ -40,6 +40,12 @@ function sumitUp(){
 	console.log(joinedType);
 	//habit - capture .length in a variable so jscript doesn't have to recount every iteration
 	var joinedTlength = joinedType.length;
+	var r = [];
+	for(var i =0; i < joinedType.length; i++){
+		r.push({name:joinedType[i], value: amtofAid[i]
+		});
+	};
+	console.log(r);
 	for(i=0; i<joinedTlength; i++){
 		if(joinedType[i]<=4){
 		nonNeed += parseInt(amtofAid[i]);
