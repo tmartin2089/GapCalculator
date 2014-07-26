@@ -1,15 +1,7 @@
 //set temporary global variables until you can bake
 //input fields into index
 
-var efc = $('#efc').val();
 
-function typeamtObject(keys,values){
-	var obj = {};
-		for(var i =0; i < keys.length; i++){
-			obj[keys[i]] = values[i];
-		}
-		console.log(obj);
-}
 
 //this captures select values in arrays above
 function sumitUp(){
@@ -56,7 +48,6 @@ function sumitUp(){
 		need += parseInt(amtofAid[i]);	
 		}
 	};
-	typeamtObject(joinedType, amtofAid);
 	return {
 	need: need,
 	nonNeed: nonNeed,
