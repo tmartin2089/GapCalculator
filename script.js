@@ -30,14 +30,13 @@ function sumitUp(){
 	var joinedType = typeofLoan.concat(typeofGift);
 	console.log(amtofAid);
 	console.log(joinedType);
-	for(x=0; x<amtofAid.length; x++){
-		if(isNaN(amtofAid[x])){
-			amtofAid.splice(x,1);
-			joinedType.splice(x,1);
-		};
-	};
-	console.log(amtofAid);
-	console.log(joinedType);
+	//no longer needed - will use filter to remove NaN from obj array
+	// for(x=0; x<amtofAid.length; x++){
+		// if(isNaN(amtofAid[x])){
+			// amtofAid.splice(x,1);
+			// joinedType.splice(x,1);
+		// };
+	// };
 	//habit - capture .length in a variable so jscript doesn't have to recount every iteration
 	var joinedTlength = joinedType.length;
 	var r = [];
@@ -79,23 +78,6 @@ function totalLoans(){
 	return total;
 };
 
-//going to need separate total for need/cost calcs
-
-//maybe if value > 3 need += needArray[i]?
-
-// function checkNeed(){
-	// var loanType = $('.loans').val();
-	// var loanAmt = $('#loanAmt').val();
-	
-	// var total = 0;
-	// if(loanType > 4){
-	// console.log(loanAmt + "is need based.")
-	// };
-	// console.log(loanType);
-	// console.log(loanAmt);
-	
-// };
-
 
 //pell chart - convert to json - sort w/ajax req
 
@@ -111,9 +93,6 @@ function checkCostNeed(){
 			if(bioArray[0]<k){
 				var overageC = k - bioArray[0]; 
 					console.log('Student is over cost by $' + overageC);
-				}
-				else{
-					console.log('all good dog');
 				};
 			return{
 			overageC: overageC,
