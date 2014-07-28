@@ -42,7 +42,12 @@ function addLinks () {
     // }
 // }
 
-//time to build autofill button
+//fills amt field for testing purposes
+$('#coa').val(25000);
+$('#efc').val(4000);
+$('#osch').val(3000);
+
+
 
 //fills amt field for testing purposes
 function autofill(){
