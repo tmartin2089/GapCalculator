@@ -117,7 +117,6 @@ function checkCostNeed(){
  function sacroSanct(){
 	var result = sumitUp();
 	var typeAmt = result.typeAmt;
-	var needAid = result.needAid;
 	var sacredAid = 0;
 	//identifies entitlements
 	for(var x = 0; x<typeAmt.length; x++){
@@ -126,16 +125,33 @@ function checkCostNeed(){
 		};
 	};
 	console.log(sacredAid);
-	if(needAid > sacredAid){
-		needAid -= sacredAid;
-		console.log(needAid + ' may be reduced after protecting entitlements');
-	}
-//console.log(sacredAid);
+	return{
+	sacredAid: sacredAid,
+	};
+ };
+ 
+ function revisions(){
+	var result = sumitUp();
+	var overResult = checkCostNeed();
+	var typeAmt = result.typeAmt;
+	var overage = overResult.overNeed;
+	var sacred = sacroSanct();
+	var sacredAid = sacred.sacredAid;
+	console.log('inside revision need overage is ' + overage);
+	//revise for need from loans first
+	for(var x = 0; x<typeAmt.length; x++){
+		if(typeAmt[x].type >= 5 && typeAmt[x].type <=6 && overage > 0){
+			overage -= typeAmt[x].amt;
+			console.log(typeAmt[x].type);
+		};
+	};
+	console.log('overage after changes' + overage);
  }
 
 
  function doEverything(){
 	checkCostNeed();
 	sacroSanct();
+	revisions();
  }
 
