@@ -16,6 +16,7 @@ function sumBio(){
 	console.log(cost);
 	if(bio[0] - bio[1] <= 0 || (bio[0] - bio[1]) - bio[2] <= 0){
 		var need = 0;
+		console.log('entitlements only')
 	}
 	else{
 		//COA - EFC - St Res Gift
@@ -83,47 +84,48 @@ function sumitUp(){
 function checkCostNeed(){
 	var bioResult = sumBio();
 	var result = sumitUp();
+	var needbasedAid = result.needAid;
+	var costofAttend = bioResult.cost;
+	var needEligibility = bioResult.need;
 	//sums up P6 aid and St Res Gift
-	var totalAid = (result.needAid  + result.nonneedAid) + bioResult.stRes;
-	console.log(result.needAid + result.nonneedAid);
+	var totalAid = (needbasedAid  + result.nonneedAid) + bioResult.stRes;
+	console.log(needbasedAid + result.nonneedAid);
 	console.log('Total aid and resources is ' + totalAid);
 	//determines if stdt is over cost & how much
-	if(bioResult.cost < totalAid){
-		var overCost = totalAid - bioResult.cost;
+	if(costofAttend < totalAid){
+		var overCost = totalAid - costofAttend;
 		console.log('Student is over cost by $' + overCost);
+	}
+	else{
+		console.log('Student is under cost by $' + (costofAttend - totalAid));
 	};
-	function checkNeed(){
-		//skip unnecessary for loop
-		var need = (bio[0]-bio[1]) - bio[2];
-		var overNeed = result.need - need;
-		//console.log('Total need is $' + need);
-		//console.log('Total need based aid is $' + result.needAid);
-		if(result.need > need){
-			console.log('Student is $' + overNeed + ' over need');
-			return overNeed;
-		}
-		else{
-			console.log('im still working');
-		};
-		return{
-		overNeed: overNeed,
-		}
+	//determines if stdt is over need & how much
+	if(needbasedAid > needEligibility){
+		var overNeed = needbasedAid - needEligibility;
+		console.log('Student is over need by $' + overNeed);
+	}
+	else{
+		console.log('Student is under need by $' + (needEligibility - needbasedAid));
 	};
-	var tjtest = checkNeed();
-	//console.log(tjtest.overNeed);
+	return{
+	overCost: overCost,
+	overNeed: overNeed,
+	};
 };
 
-//totals entitlements for protection
+//totals and protects entitlements
  function sacroSanct(){
 	var result = sumitUp();
 	var typeAmt = result.typeAmt;
 	var needAid = result.needAid;
 	var sacredAid = 0;
+	//identifies entitlements
 	for(var x = 0; x<typeAmt.length; x++){
 		if(typeAmt[x].type >= 12){
 			sacredAid += typeAmt[x].amt;
 		};
 	};
+	console.log(sacredAid);
 	if(needAid > sacredAid){
 		needAid -= sacredAid;
 		console.log(needAid + ' may be reduced after protecting entitlements');
