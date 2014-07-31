@@ -13,7 +13,6 @@ function sumBio(){
 	});
 	var cost = bio[0];
 	var stRes = bio[2];
-	console.log(cost);
 	if(bio[0] - bio[1] <= 0 || (bio[0] - bio[1]) - bio[2] <= 0){
 		var need = 0;
 		console.log('entitlements only')
@@ -50,7 +49,7 @@ function sumitUp(){
 	});
 	//pushes .typeofAid to typeofAid array
 	$('.typeofAid').each(function(index){
-		typeofAid.push($(this).val());
+		typeofAid.push(parseInt($(this).val()));
 	});
 	//pushes amtofAid and typeofAid into object array
 	var amtofAidlength = amtofAid.length;
@@ -63,7 +62,6 @@ function sumitUp(){
 		return !isNaN(loan.amt);
 		return typeAmt;
 	});
-	console.log(typeAmt);
 	//updates Need and Non-need amounts
 	for(var x=0; x<typeAmt.length; x++){
 		if(typeAmt[x].type <= 4){
@@ -89,8 +87,6 @@ function checkCostNeed(){
 	var needEligibility = bioResult.need;
 	//sums up P6 aid and St Res Gift
 	var totalAid = (needbasedAid  + result.nonneedAid) + bioResult.stRes;
-	console.log(needbasedAid + result.nonneedAid);
-	console.log('Total aid and resources is ' + totalAid);
 	//determines if stdt is over cost & how much
 	if(costofAttend < totalAid){
 		var overCost = totalAid - costofAttend;
@@ -105,6 +101,7 @@ function checkCostNeed(){
 		console.log('Student is over need by $' + overNeed);
 	}
 	else{
+		var overNeed = needEligibility - needbasedAid;
 		console.log('Student is under need by $' + (needEligibility - needbasedAid));
 	};
 	return{
@@ -113,45 +110,78 @@ function checkCostNeed(){
 	};
 };
 
+//no longer sure if needed - why not just exclude entitlements 
+//from revision arrays?
 //totals and protects entitlements
- function sacroSanct(){
-	var result = sumitUp();
-	var typeAmt = result.typeAmt;
-	var sacredAid = 0;
-	//identifies entitlements
-	for(var x = 0; x<typeAmt.length; x++){
-		if(typeAmt[x].type >= 12){
-			sacredAid += typeAmt[x].amt;
-		};
-	};
-	console.log(sacredAid);
-	return{
-	sacredAid: sacredAid,
-	};
- };
+ // function sacroSanct(){
+	// var result = sumitUp();
+	// var typeAmt = result.typeAmt;
+	// var sacredAid = 0;
+	// //identifies entitlements
+	// for(var x = 0; x<typeAmt.length; x++){
+		// if(typeAmt[x].type >= 12){
+			// sacredAid += typeAmt[x].amt;
+		// };
+	// };
+	// return{
+	// sacredAid: sacredAid,
+	// };
+ // };
  
  function revisions(){
 	var result = sumitUp();
 	var overResult = checkCostNeed();
 	var typeAmt = result.typeAmt;
 	var overage = overResult.overNeed;
-	var sacred = sacroSanct();
-	var sacredAid = sacred.sacredAid;
-	console.log('inside revision need overage is ' + overage);
-	//revise for need from loans first
-	for(var x = 0; x<typeAmt.length; x++){
-		if(typeAmt[x].type >= 5 && typeAmt[x].type <=6 && overage > 0){
-			overage -= typeAmt[x].amt;
-			console.log(typeAmt[x].type);
+	var typeAmtL = typeAmt.length;
+	var loansFirst = [];
+	var grantsSecond = [];
+	var loansAmt = 0;
+	//gather need based loans first
+	for(var x = 0; x<typeAmtL; x++){
+		if(typeAmt[x].type === 5 || typeAmt[x].type ===6){
+			loansFirst.push(typeAmt[x]);
 		};
 	};
-	console.log('overage after changes' + overage);
+	//next gather grants
+	// for(var i=0; i<typeAmtL; i++){
+		// if(typeAmt[x].type >= 7 && typeAmt[x].type <= 11){
+			// grantsSecond.push(typeAmt[x]);
+		// };
+	// };
+	for(var k=0; k<loansFirst.length; k++){
+		loansAmt += loansFirst[k].amt;
+		console.log(loansAmt);
+	}
+	function reviseloansNeed(overamt,end,total$,needArray){
+		if(overamt <= 0 || end >= needArray.length){   //base case  totalNeed is less than 
+        //at end of revise - if negative then too much was taken away
+		//this returns negative as positive remainder for re-adding
+			if(overamt < 0){
+				var remainder =(Math.abs(overamt));
+				console.log(needArray);
+				console.log('Student can keep $' + remainder);  //will need to re-add remainder to aid
+			}
+			else{
+				var remainOver = overamt;
+				console.log('To be taken from any grants $' + overamt);
+			};
+				console.log(overamt);				  //return outside of function - new fn to rebuild
+		}
+		else
+		{
+			overamt -= needArray[end].amt;
+			total$ -= needArray[end].amt;
+			needArray[end].amt = 0; 
+			return overamt + reviseloansNeed(overamt,end+1,total$,needArray);
+		};
+	}
+	reviseloansNeed(overage,0,loansAmt,loansFirst);
  }
 
 
  function doEverything(){
 	checkCostNeed();
-	sacroSanct();
 	revisions();
  }
 
