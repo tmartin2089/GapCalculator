@@ -78,15 +78,17 @@ function sumitUp(){
 	}
 };
 
-//takes above summations and calculates eligibility
+//takes above summations and calculates eligibility for need & cost
 function checkCostNeed(){
 	var bioResult = sumBio();
 	var result = sumitUp();
 	var needbasedAid = result.needAid;
+	var nonneedAid = result.nonneedAid;
 	var costofAttend = bioResult.cost;
 	var needEligibility = bioResult.need;
+	var outsideresource = bioResult.stRes;
 	//sums up P6 aid and St Res Gift
-	var totalAid = (needbasedAid  + result.nonneedAid) + bioResult.stRes;
+	var totalAid = (needbasedAid  + nonneedAid) + outsideresource;
 	//determines if stdt is over cost & how much
 	if(costofAttend < totalAid){
 		var overCost = totalAid - costofAttend;
@@ -101,8 +103,8 @@ function checkCostNeed(){
 		console.log('Student is over need by $' + overNeed);
 	}
 	else{
-		var overNeed = needEligibility - needbasedAid;
-		console.log('Student is under need by $' + (needEligibility - needbasedAid));
+		var overNeed = 0;
+		console.log('Student is under need by $' + overNeed);
 	};
 	return{
 	overCost: overCost,
@@ -110,24 +112,6 @@ function checkCostNeed(){
 	};
 };
 
-//no longer sure if needed - why not just exclude entitlements 
-//from revision arrays?
-//totals and protects entitlements
- // function sacroSanct(){
-	// var result = sumitUp();
-	// var typeAmt = result.typeAmt;
-	// var sacredAid = 0;
-	// //identifies entitlements
-	// for(var x = 0; x<typeAmt.length; x++){
-		// if(typeAmt[x].type >= 12){
-			// sacredAid += typeAmt[x].amt;
-		// };
-	// };
-	// return{
-	// sacredAid: sacredAid,
-	// };
- // };
- 
  function revisions(){
 	var result = sumitUp();
 	var overResult = checkCostNeed();
@@ -167,6 +151,7 @@ function checkCostNeed(){
 				console.log('To be taken from any grants $' + overamt);
 			};
 				console.log(overamt);				  //return outside of function - new fn to rebuild
+				console.log(needArray);
 		}
 		else
 		{
