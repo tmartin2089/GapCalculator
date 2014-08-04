@@ -8,7 +8,7 @@ function sumBio(){
 				alert('Please use numbers in all fields');
 			}
 			else{
-				bio.push(parseInt(($(this).val())));
+				bio.push(parseInt($(this).val()));
 			};
 	});
 	var cost = bio[0];
@@ -35,9 +35,9 @@ function sumitUp(){
 	var typeofAid = [];
 	var amtofAid = [];
 	var typeAmt = [];
-	//Total non-need based aid
+	//For totaling non-need based aid
 	var nonneedAid = 0;
-	//Total need based aid
+	//For totaling need based aid
 	var needAid = 0;
 	//pushes .amount values or NaN to amtofAid array 
 	$('.aidInput').children('.amount').each(function(index){
@@ -62,7 +62,7 @@ function sumitUp(){
 		return !isNaN(loan.amt);
 		return typeAmt;
 	});
-	//updates Need and Non-need amounts
+	//updates need and non-need amounts
 	for(var x=0; x<typeAmt.length; x++){
 		if(typeAmt[x].type <= 4){
 			nonneedAid += typeAmt[x].amt;
@@ -101,8 +101,8 @@ function checkCostNeed(){
 		console.log('Student is over need by $' + overNeed);
 	}
 	else{
-		var overNeed = needEligibility - needbasedAid;
-		console.log('Student is under need by $' + (needEligibility - needbasedAid));
+		var overNeed = 0;
+		console.log('Student is under need');
 	};
 	return{
 	overCost: overCost,
@@ -133,6 +133,7 @@ function checkCostNeed(){
 	var overResult = checkCostNeed();
 	var typeAmt = result.typeAmt;
 	var overage = overResult.overNeed;
+	var underage = overResult.underNeed;
 	var typeAmtL = typeAmt.length;
 	var loansFirst = [];
 	var grantsSecond = [];
@@ -151,19 +152,21 @@ function checkCostNeed(){
 	// };
 	for(var k=0; k<loansFirst.length; k++){
 		loansAmt += loansFirst[k].amt;
-		console.log(loansAmt);
 	}
+	console.log('Total in need based loans is' + loansAmt);
 	function reviseloansNeed(overamt,end,total$,needArray){
 		if(overamt <= 0 || end >= needArray.length){   //base case  totalNeed is less than 
         //at end of revise - if negative then too much was taken away
 		//this returns negative as positive remainder for re-adding
 			if(overamt < 0){
 				var remainder =(Math.abs(overamt));
+				var remainder1 = "tj did it";
 				console.log(needArray);
 				console.log('Student can keep $' + remainder);  //will need to re-add remainder to aid
 			}
 			else{
 				var remainOver = overamt;
+				var remainder1 = "tj did it";
 				console.log('To be taken from any grants $' + overamt);
 			};
 				console.log(overamt);				  //return outside of function - new fn to rebuild
@@ -175,13 +178,23 @@ function checkCostNeed(){
 			needArray[end].amt = 0; 
 			return overamt + reviseloansNeed(overamt,end+1,total$,needArray);
 		};
+		return{
+		remainder1: remainder1,
+		}
 	}
-	reviseloansNeed(overage,0,loansAmt,loansFirst);
+	var testTj = reviseloansNeed(overage,0,loansAmt,loansFirst);
+	var itWorks = testTj.remainder1;
+	console.log(itWorks);
+	return{
+	itWorks:itWorks,
+	};
  }
 
 
  function doEverything(){
 	checkCostNeed();
 	revisions();
+	var testItWorks = revisions();
+	console.log(testItWorks.itWorks);
  }
 
