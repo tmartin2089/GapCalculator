@@ -130,7 +130,7 @@ function checkCostNeed(){
  // };
  
  //generates loansFirst and loansAmt arrays for reviseloansNeed()
- function needloansArray(){
+ function needArrays(){
 	var result = sumitUp();
 	var typeAmt = result.typeAmt;
 	var typeAmtL = typeAmt.length;
@@ -146,6 +146,7 @@ function checkCostNeed(){
 		loansAmt += loansFirst[k].amt;
 	};
 	loansFirst.sort(function(a,b){return a.type-b.type});
+	//next gather grants
 	return{
 	loansFirst: loansFirst,
 	loansAmt: loansAmt,
@@ -178,14 +179,43 @@ function reviseloansNeed(overamt,end,needArray){
 	remainOver: remainOver,
 	needArray: needArray,
 	remainder: remainder,
-	}
+	};
 }
+
+// function revisegrantsNeed(overamt,end,needArray){
+	// if(overamt <= 0 || end >= needArray.length){   //base case  totalNeed is less than 
+    // //at end of revise - if negative then too much was taken away
+	// //this returns negative as positive remainder for re-adding
+		// if(overamt < 0){
+			// var remainder =(Math.abs(overamt));
+			// console.log(needArray);
+			// console.log('Student can keep $' + remainder);  //will need to re-add remainder to aid
+		// }
+		// else{
+			// var remainOver = overamt;
+			// var needArray = needArray;
+			// console.log('To be taken from any grants $' + overamt);
+			// console.log(needArray);
+		// };
+	// }	
+	// else{
+		// overamt -= needArray[end].amt;
+		// needArray[end].amt = 0; 
+		// return reviseloansNeed(overamt,end+1,needArray);
+	// };
+	// return{
+	// //amt to be taken from non-entitlement grants
+	// remainOver: remainOver,
+	// needArray: needArray,
+	// remainder: remainder,
+	// };
+// }
  
 
  function doEverything(){
 	var overResult = checkCostNeed();
 	var overage = overResult.overNeed;
-	var needArray = needloansArray();
+	var needArray = needArrays();
 	var loansFirst = needArray.loansFirst;
 	var result = reviseloansNeed(overage,0,loansFirst);
 	var remainOver = result.remainOver;
