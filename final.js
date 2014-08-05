@@ -152,7 +152,7 @@ function checkCostNeed(){
 	};
  }
 
-function reviseloansNeed(overamt,end,total$,needArray){
+function reviseloansNeed(overamt,end,needArray){
 	if(overamt <= 0 || end >= needArray.length){   //base case  totalNeed is less than 
     //at end of revise - if negative then too much was taken away
 	//this returns negative as positive remainder for re-adding
@@ -163,25 +163,32 @@ function reviseloansNeed(overamt,end,total$,needArray){
 		}
 		else{
 			var remainOver = overamt;
+			var needArray = needArray;
 			console.log('To be taken from any grants $' + overamt);
 			console.log(needArray);
 		};
 	}	
 	else{
 		overamt -= needArray[end].amt;
-		total$ -= needArray[end].amt;
 		needArray[end].amt = 0; 
-		return overamt + reviseloansNeed(overamt,end+1,total$,needArray);
+		return reviseloansNeed(overamt,end+1,needArray);
 	};
+	return{
+	remainOver: remainOver,
+	needArray: needArray,
+	}
 }
  
 
  function doEverything(){
 	var overResult = checkCostNeed();
-	var needArray = needloansArray();
-	var loansAmt = needArray.loansAmt;
-	var loansFirst = needArray.loansFirst;
 	var overage = overResult.overNeed;
-	reviseloansNeed(overage,0,loansAmt,loansFirst);
+	var needArray = needloansArray();
+	var loansFirst = needArray.loansFirst;
+	var result = reviseloansNeed(overage,0,loansFirst);
+	var remainOver = result.remainOver;
+	var newArray = result.needArray;
+	console.log(remainOver);
+	console.log(needArray);
  }
 
