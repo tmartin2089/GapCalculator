@@ -189,6 +189,7 @@ function reviseloansNeed(overamt,end,needArray){
 	var remainOver = result.remainOver;
 	var newArray = result.needArray;
 	console.log(remainOver);
-	console.log(needArray);
+	console.log(newArray);
+	console.log(loansFirst);
  }
 
