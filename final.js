@@ -135,6 +135,7 @@ function checkCostNeed(){
 	var typeAmt = result.typeAmt;
 	var typeAmtL = typeAmt.length;
 	var loansFirst = [];
+	var grantsSecond = [];
 	var loansAmt = 0;
 	//gather need based loans first
 	for(var x = 0; x<typeAmtL; x++){
@@ -147,9 +148,17 @@ function checkCostNeed(){
 	};
 	loansFirst.sort(function(a,b){return a.type-b.type});
 	//next gather grants
+	for(var y = 0; y<typeAmtL; y++){
+		if(typeAmt[y].type  >= 7 && typeAmt[y].type <= 11){
+			grantsSecond.push(typeAmt[y]);
+		};	
+	};
+	grantsSecond.sort(function(a,b){return a.type-b.type});
+	console.log(grantsSecond);
 	return{
 	loansFirst: loansFirst,
 	loansAmt: loansAmt,
+	grantsSecond: grantsSecond,
 	};
  }
 
