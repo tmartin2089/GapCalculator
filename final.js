@@ -54,7 +54,7 @@ function sumitUp(){
 	//pushes amtofAid and typeofAid into object array
 	var amtofAidlength = amtofAid.length;
 	for(var i=0; i<amtofAidlength; i++){
-		typeAmt.push({type:typeofAid[i], amt: amtofAid[i]
+		typeAmt.push({amt:amtofAid[i], type:typeofAid[i]
 		});
 	};
 	//filters out NaN values
@@ -145,7 +145,7 @@ function checkCostNeed(){
 	for(var k=0; k<loansFirst.length; k++){
 		loansAmt += loansFirst[k].amt;
 	};
-	//var testTj = reviseloansNeed(overage,0,loansAmt,loansFirst);
+	loansFirst.sort(function(a,b){return a.type-b.type});
 	return{
 	loansFirst: loansFirst,
 	loansAmt: loansAmt,
@@ -174,8 +174,10 @@ function reviseloansNeed(overamt,end,needArray){
 		return reviseloansNeed(overamt,end+1,needArray);
 	};
 	return{
+	//amt to be taken from non-entitlement grants
 	remainOver: remainOver,
 	needArray: needArray,
+	remainder: remainder,
 	}
 }
  
@@ -188,8 +190,9 @@ function reviseloansNeed(overamt,end,needArray){
 	var result = reviseloansNeed(overage,0,loansFirst);
 	var remainOver = result.remainOver;
 	var newArray = result.needArray;
-	console.log(remainOver);
+	var readd = result.remainder;
 	console.log(newArray);
+	console.log(readd);
 	console.log(loansFirst);
  }
 
