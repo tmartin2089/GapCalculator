@@ -1,4 +1,3 @@
-
 //captures bio elements into array [0]=coa, [1]=efc [2]=gift
 //Calculates need from bio information (coa-efc-st res)
 function sumBio(){
@@ -8,7 +7,7 @@ function sumBio(){
 				alert('Please use numbers in all fields');
 			}
 			else{
-				bio.push(parseInt(($(this).val())));
+				bio.push(parseInt($(this).val()));
 			};
 	});
 	var cost = bio[0];
@@ -35,9 +34,9 @@ function sumitUp(){
 	var typeofAid = [];
 	var amtofAid = [];
 	var typeAmt = [];
-	//Total non-need based aid
+	//For totaling non-need based aid
 	var nonneedAid = 0;
-	//Total need based aid
+	//For totaling need based aid
 	var needAid = 0;
 	//pushes .amount values or NaN to amtofAid array 
 	$('.aidInput').children('.amount').each(function(index){
@@ -54,7 +53,7 @@ function sumitUp(){
 	//pushes amtofAid and typeofAid into object array
 	var amtofAidlength = amtofAid.length;
 	for(var i=0; i<amtofAidlength; i++){
-		typeAmt.push({type:typeofAid[i], amt: amtofAid[i]
+		typeAmt.push({amt:amtofAid[i], type:typeofAid[i]
 		});
 	};
 	//filters out NaN values
@@ -62,7 +61,7 @@ function sumitUp(){
 		return !isNaN(loan.amt);
 		return typeAmt;
 	});
-	//updates Need and Non-need amounts
+	//updates need and non-need amounts
 	for(var x=0; x<typeAmt.length; x++){
 		if(typeAmt[x].type <= 4){
 			nonneedAid += typeAmt[x].amt;
@@ -95,6 +94,7 @@ function checkCostNeed(){
 		console.log('Student is over cost by $' + overCost);
 	}
 	else{
+		var overCost = 0;
 		console.log('Student is under cost by $' + (costofAttend - totalAid));
 	};
 	//determines if stdt is over need & how much
@@ -104,7 +104,11 @@ function checkCostNeed(){
 	}
 	else{
 		var overNeed = 0;
+<<<<<<< HEAD
 		console.log('Student is under need by $' + overNeed);
+=======
+		console.log('Student is under need');
+>>>>>>> origin/master
 	};
 	return{
 	overCost: overCost,
@@ -112,11 +116,32 @@ function checkCostNeed(){
 	};
 };
 
+<<<<<<< HEAD
  function revisions(){
+=======
+//no longer sure if needed - why not just exclude entitlements 
+//from revision arrays?
+//totals and protects entitlements
+ // function sacroSanct(){
+	// var result = sumitUp();
+	// var typeAmt = result.typeAmt;
+	// var sacredAid = 0;
+	// //identifies entitlements
+	// for(var x = 0; x<typeAmt.length; x++){
+		// if(typeAmt[x].type >= 12){
+			// sacredAid += typeAmt[x].amt;
+		// };
+	// };
+	// return{
+	// sacredAid: sacredAid,
+	// };
+ // };
+ 
+ //generates loansFirst and loansAmt arrays for reviseloansNeed()
+ function needArrays(){
+>>>>>>> origin/master
 	var result = sumitUp();
-	var overResult = checkCostNeed();
 	var typeAmt = result.typeAmt;
-	var overage = overResult.overNeed;
 	var typeAmtL = typeAmt.length;
 	var loansFirst = [];
 	var grantsSecond = [];
@@ -127,14 +152,9 @@ function checkCostNeed(){
 			loansFirst.push(typeAmt[x]);
 		};
 	};
-	//next gather grants
-	// for(var i=0; i<typeAmtL; i++){
-		// if(typeAmt[x].type >= 7 && typeAmt[x].type <= 11){
-			// grantsSecond.push(typeAmt[x]);
-		// };
-	// };
 	for(var k=0; k<loansFirst.length; k++){
 		loansAmt += loansFirst[k].amt;
+<<<<<<< HEAD
 		console.log(loansAmt);
 	}
 	function reviseloansNeed(overamt,end,total$,needArray){
@@ -152,21 +172,92 @@ function checkCostNeed(){
 			};
 				console.log(overamt);				  //return outside of function - new fn to rebuild
 				console.log(needArray);
-		}
-		else
-		{
-			overamt -= needArray[end].amt;
-			total$ -= needArray[end].amt;
-			needArray[end].amt = 0; 
-			return overamt + reviseloansNeed(overamt,end+1,total$,needArray);
-		};
-	}
-	reviseloansNeed(overage,0,loansAmt,loansFirst);
+=======
+	};
+	loansFirst.sort(function(a,b){return a.type-b.type});
+	//next gather grants
+	for(var y = 0; y<typeAmtL; y++){
+		if(typeAmt[y].type  >= 7 && typeAmt[y].type <= 11){
+			grantsSecond.push(typeAmt[y]);
+		};	
+	};
+	grantsSecond.sort(function(a,b){return a.type-b.type});
+	return{
+	loansFirst: loansFirst,
+	loansAmt: loansAmt,
+	grantsSecond: grantsSecond,
+	};
  }
 
+function reviseloansNeed(overamt,end,needArray){
+	if(overamt <= 0 || end >= needArray.length){   //base case  totalNeed is less than 
+    //at end of revise - if negative then too much was taken away
+	//this returns negative as positive remainder for re-adding
+		if(overamt < 0){
+			var remainder =(Math.abs(overamt));
+			var remainOver = 0;
+			console.log(needArray);
+			console.log(overamt);
+			console.log(remainOver);
+			console.log('Student can keep $' + remainder);  //will need to re-add remainder to aid
+>>>>>>> origin/master
+		}
+		else{
+			var remainOver = overamt;
+			console.log(remainOver);
+			var needArray = needArray;
+			console.log('To be taken from any grants $' + overamt);
+			console.log(needArray);
+		};
+	}	
+	else{
+		overamt -= needArray[end].amt;
+		console.log(overamt);
+		needArray[end].amt = 0; 
+		return reviseloansNeed(overamt,end+1,needArray);
+	};
+	return{
+	//amt to be taken from non-entitlement grants
+	remainOver: remainOver,
+	needArray: needArray,
+	remainder: remainder,
+	};
+}
+
+function revisegrantsNeed(overamt,end,needArray){
+    //gathers parameters for var result
+	//start revisegrantsNeed processing
+	console.log(overamt);
+	if(overamt <= 0 || end >= needArray.length){   
+		if(overamt < 0){
+			var remainderGrants =(Math.abs(overamt));
+			console.log(remainderGrants);
+			console.log(needArray);
+		}
+		else{
+			var needArray = needArray;
+			console.log(needArray);
+		};
+	}	
+	else{
+		overamt -= needArray[end].amt;
+		needArray[end].amt = 0; 
+		return revisegrantsNeed(overamt,end+1,needArray);
+	};
+};
+
+ 
 
  function doEverything(){
-	checkCostNeed();
-	revisions();
+	var overResult = checkCostNeed();
+	var overage = overResult.overNeed;
+	var needArray = needArrays();
+	var loansFirst = needArray.loansFirst;
+	var grantsSecond = needArray.grantsSecond;
+	var result = reviseloansNeed(overage,0,loansFirst);
+	var remainOver = result.remainOver;
+	console.log(remainOver);
+	var remainder = result.remainder;
+	var me = revisegrantsNeed(remainOver, 0, grantsSecond);
  }
 
