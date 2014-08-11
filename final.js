@@ -202,6 +202,17 @@ function revisegrantsNeed(overamt,end,needArray){
 	};
 };
 
+function readdRemainder(){
+	//loansFirst
+	var getneed = needArrays();
+	var needL = getneed.loansFirst;
+	console.log(needL);
+	var overResult = checkCostNeed();
+	var overage = overResult.overNeed;
+	var result = reviseloansNeed(overage,0,needL);
+	var revisedneedL = result.needArray;
+	console.log(revisedneedL);
+}
  
 
  function doEverything(){
