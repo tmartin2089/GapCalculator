@@ -104,11 +104,8 @@ function checkCostNeed(){
 	}
 	else{
 		var overNeed = 0;
-<<<<<<< HEAD
 		console.log('Student is under need by $' + overNeed);
-=======
 		console.log('Student is under need');
->>>>>>> origin/master
 	};
 	return{
 	overCost: overCost,
@@ -116,30 +113,8 @@ function checkCostNeed(){
 	};
 };
 
-<<<<<<< HEAD
- function revisions(){
-=======
-//no longer sure if needed - why not just exclude entitlements 
-//from revision arrays?
-//totals and protects entitlements
- // function sacroSanct(){
-	// var result = sumitUp();
-	// var typeAmt = result.typeAmt;
-	// var sacredAid = 0;
-	// //identifies entitlements
-	// for(var x = 0; x<typeAmt.length; x++){
-		// if(typeAmt[x].type >= 12){
-			// sacredAid += typeAmt[x].amt;
-		// };
-	// };
-	// return{
-	// sacredAid: sacredAid,
-	// };
- // };
- 
- //generates loansFirst and loansAmt arrays for reviseloansNeed()
+
  function needArrays(){
->>>>>>> origin/master
 	var result = sumitUp();
 	var typeAmt = result.typeAmt;
 	var typeAmtL = typeAmt.length;
@@ -154,26 +129,8 @@ function checkCostNeed(){
 	};
 	for(var k=0; k<loansFirst.length; k++){
 		loansAmt += loansFirst[k].amt;
-<<<<<<< HEAD
 		console.log(loansAmt);
 	}
-	function reviseloansNeed(overamt,end,total$,needArray){
-		if(overamt <= 0 || end >= needArray.length){   //base case  totalNeed is less than 
-        //at end of revise - if negative then too much was taken away
-		//this returns negative as positive remainder for re-adding
-			if(overamt < 0){
-				var remainder =(Math.abs(overamt));
-				console.log(needArray);
-				console.log('Student can keep $' + remainder);  //will need to re-add remainder to aid
-			}
-			else{
-				var remainOver = overamt;
-				console.log('To be taken from any grants $' + overamt);
-			};
-				console.log(overamt);				  //return outside of function - new fn to rebuild
-				console.log(needArray);
-=======
-	};
 	loansFirst.sort(function(a,b){return a.type-b.type});
 	//next gather grants
 	for(var y = 0; y<typeAmtL; y++){
@@ -200,7 +157,6 @@ function reviseloansNeed(overamt,end,needArray){
 			console.log(overamt);
 			console.log(remainOver);
 			console.log('Student can keep $' + remainder);  //will need to re-add remainder to aid
->>>>>>> origin/master
 		}
 		else{
 			var remainOver = overamt;
