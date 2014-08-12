@@ -28,12 +28,20 @@ function sumBio(){
 
 }
 
+function testme(){
+	var ky=function(){
+		console.log('hi')
+	}
+	return ky;
+}
+
 //Captures amounts and types of aid in arrays
 //Error handling for NaN text inputs
 function sumitUp(){
 	var typeofAid = [];
 	var amtofAid = [];
 	var typeAmt = [];
+	kz = []
 	//For totaling non-need based aid
 	var nonneedAid = 0;
 	//For totaling need based aid
@@ -54,6 +62,8 @@ function sumitUp(){
 	var amtofAidlength = amtofAid.length;
 	for(var i=0; i<amtofAidlength; i++){
 		typeAmt.push({amt:amtofAid[i], type:typeofAid[i]
+		});
+		kz.push({amt:amtofAid[i], type:typeofAid[i]
 		});
 	};
 	//filters out NaN values
@@ -121,16 +131,18 @@ function checkCostNeed(){
 	var loansFirst = [];
 	var grantsSecond = [];
 	var loansAmt = 0;
+	var sayAlert = function(){
+		console.log(loansFirst);
+	}
+	
 	//gather need based loans first
 	for(var x = 0; x<typeAmtL; x++){
 		if(typeAmt[x].type === 5 || typeAmt[x].type ===6){
 			loansFirst.push(typeAmt[x]);
 		};
+		console.log(typeAmt);
 	};
-	for(var k=0; k<loansFirst.length; k++){
-		loansAmt += loansFirst[k].amt;
-		console.log(loansAmt);
-	}
+
 	loansFirst.sort(function(a,b){return a.type-b.type});
 	//next gather grants
 	for(var y = 0; y<typeAmtL; y++){
@@ -141,7 +153,6 @@ function checkCostNeed(){
 	grantsSecond.sort(function(a,b){return a.type-b.type});
 	return{
 	loansFirst: loansFirst,
-	loansAmt: loansAmt,
 	grantsSecond: grantsSecond,
 	};
  }
@@ -205,13 +216,15 @@ function revisegrantsNeed(overamt,end,needArray){
 function readdRemainder(){
 	//loansFirst
 	var getneed = needArrays();
-	var needL = getneed.loansFirst;
-	console.log(needL);
+	console.log(typeof getneed);
+	var needL = getneed.loansFirst;  //you're calling object.property here
+	console.log(typeof needL);
+	console.log(kz);
 	var overResult = checkCostNeed();
 	var overage = overResult.overNeed;
 	var result = reviseloansNeed(overage,0,needL);
-	var revisedneedL = result.needArray;
-	console.log(revisedneedL);
+	//var revisedneedL = result.needArray;
+	//console.log('after recursion' + revisedneedL);
 }
  
 
@@ -220,11 +233,13 @@ function readdRemainder(){
 	var overage = overResult.overNeed;
 	var needArray = needArrays();
 	var loansFirst = needArray.loansFirst;
+	console.log(loansFirst);
 	var grantsSecond = needArray.grantsSecond;
-	var result = reviseloansNeed(overage,0,loansFirst);
+	var result = reviseloansNeed(overage,0,loansyFirst);
 	var remainOver = result.remainOver;
 	console.log(remainOver);
 	var remainder = result.remainder;
 	var me = revisegrantsNeed(remainOver, 0, grantsSecond);
  }
+
 

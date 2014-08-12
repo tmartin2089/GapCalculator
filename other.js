@@ -1,4 +1,18 @@
 
+ function testA(){
+	 var x = 15;
+	 console.log(x);
+	 return x
+ }
+
+ function testB(){
+	 var result = testA();
+	 console.log(result);
+	 console.log(typeof result);
+ };
+
+
+
 
 function addLinks () {
     for (var i=0, link; i<5; i++) { 
