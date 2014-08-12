@@ -152,8 +152,8 @@ function checkCostNeed(){
 	};
 	grantsSecond.sort(function(a,b){return a.type-b.type});
 	return{
-	loansFirst: loansFirst,
-	grantsSecond: grantsSecond,
+		loansFirst: loansFirst,
+		grantsSecond: grantsSecond,
 	};
  }
 
