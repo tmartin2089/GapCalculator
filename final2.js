@@ -1,3 +1,7 @@
+//now need to determine if  too much was taken away
+//and if so, readd back to sub first, then perkins
+//then you have completed revising loans for need
+
 //gathers #bio values in array
 function gatherBio(){
 	var bio = [];
@@ -73,7 +77,7 @@ function totalAid(){
 	return total;
 }
 
-//sums up total amount of need based aid from megaArray function
+//sums total amount of need based aid from megaArray function
 function sumNeed(){
 	//cant reuse megaArray variable name as it's already a global function
 	//knowledge is power!
@@ -114,9 +118,9 @@ function checkCost(){
 	//in future function - if cost is negative, then over cost
 }
 
-
+//if too much nb aid - will return negative.  too little, will return positive
 function checkNeed(){
-	var need = (Math.abs(determineNeed() - sumNeed()));
+	var need = (determineNeed() - sumNeed());
 	//number
 	console.log('overage is ' + need);
 	return need;
@@ -139,6 +143,17 @@ function needbasedLoans(){
 	return needLoans;
 }
 
+//sums up total need based loans
+function nbloanamt(){
+	var needLoans = needbasedLoans();
+	var needLoansAmt = 0;
+	var length = needLoans.length;
+	for(var i= 0; i < length; i++){
+		needLoansAmt += needLoans[i].amt;
+	}
+	return needLoansAmt;
+}
+
 //duh - they're all need based, but want consistent name for a similar function
 function needbasedGrants(){
 	console.log('im working!');
@@ -156,6 +171,36 @@ function needbasedGrants(){
 	return needGrants;
 }
 
+function findloanOverage(){
+	var k = nbloanamt();
+	var j = checkNeed();
+	if(j <= 0){
+		//thrown if there is awarded over need
+		var kj = j - k;
+	};
+	return kj;
+}
+
+//if an overage exists - set all NB loan amounts to = 0
+function reviseLforNeed(){
+	var k = findloanOverage();
+	var j = needbasedLoans();
+	var length = j.length;
+	//checks for falsey/undefined value which would mean kj not initialized and w/in need
+	if(!k){
+		console.log('within need!');
+	}
+	else{
+		for(var i = 0; i<length; i++){
+			j[i].amt = 0;
+		}
+	};
+	return j;
+}
+
+//determine if too much was taken away
+
+//return array with adjusted amounts
 function reviseloansNeed(overamt, end, needArray){
 	if(overamt <= 0 || end >= needArray.length){
 		//to check for remainder
@@ -176,6 +221,9 @@ function reviseloansNeed(overamt, end, needArray){
 
 
 function test(){
-	var k = reviseloansNeed(checkNeed(),0,needbasedLoans());
+	var k = reviseLforNeed();
 	console.log(k);
+	//this is just here to make sure earlier problem doesn't reoccur
+	var j = megaArray();
+	console.log(j);
 }
