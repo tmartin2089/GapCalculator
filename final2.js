@@ -209,21 +209,25 @@ function findloanOverage(){
 }
 
 
-//if findloanOverage returns positive number, no aid needs to be re-added
 function readdLoans(){
-	
-	
+	var k = findloanOverage();
+	//will throw a falsey value if k is undefined.  k is undefined when no need overage exists
+	if(!k){
+		console.log('Nothing to be readded');
+	}
+	else{
+	 console.log((Math.abs(k)) + ' needs to be readded to loans');
+	}
 	//will need to determine new need amounts
 }
 
 //return array with adjusted amounts
 
 
-
 function test(){
 	var k = reviseLforNeed();
 	console.log(k);
-	var l = findloanOverage();
+	var l = readdLoans();
 	//this is just here to make sure earlier problem doesn't reoccur
 	var j = megaArray();
 	console.log(j);
