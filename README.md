@@ -34,7 +34,7 @@ Configuring Need/Cost/GAP rules for Title IV and institutional aid
  checkCost() - Checks if over cost  - COA - totalAid()
  
  checkNeed() - Checks if over need - subtracts total need aid/sumNeed() from 
- Federal Need/determineNeed()
+ Federal Need/determineNeed()- if awarded over need will return a negative number
  
  needbasedLoans() - separates need based loans into separate array to be reduced
  first for need
@@ -46,3 +46,5 @@ Configuring Need/Cost/GAP rules for Title IV and institutional aid
  
  findloanOverage() - Uses checkNeed() to determine if over need, if so, subtracts
  total need based loans/nbloanamt() from checkNeed()
+
+ reviseLforNeed() - set all loan amounts to 0 if over need
