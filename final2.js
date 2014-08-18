@@ -108,7 +108,7 @@ function sumNonNeed(){
 	return nonNeedAid;
 }
 
-//returns need overage
+//returns cost overage
 function checkCost(){
 	var bio = gatherBio();
 	var total = totalAid();
@@ -118,7 +118,7 @@ function checkCost(){
 	//in future function - if cost is negative, then over cost
 }
 
-//if too much nb aid - will return negative.  too little, will return positive
+//subtracts total need based aid from Fed Need 
 function checkNeed(){
 	var need = (determineNeed() - sumNeed());
 	//number
@@ -171,13 +171,16 @@ function needbasedGrants(){
 	return needGrants;
 }
 
+//determnes if overage exists
 function findloanOverage(){
 	var k = nbloanamt();
 	var j = checkNeed();
+	//checkNeed returns a negative number if awarded over need
 	if(j <= 0){
-		//thrown if there is awarded over need
-		var kj = j - k;
+		//thrown if awarded over need
+		var kj = (Math.abs(j)) - k;
 	};
+	console.log(kj);
 	return kj;
 }
 
@@ -199,6 +202,9 @@ function reviseLforNeed(){
 }
 
 //determine if too much was taken away
+function recheckNeed(){
+	//will need to determine new need amounts
+}
 
 //return array with adjusted amounts
 function reviseloansNeed(overamt, end, needArray){
