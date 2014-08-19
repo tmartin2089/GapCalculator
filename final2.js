@@ -36,7 +36,7 @@ function gatherAidamt(){
 	$('.aidInput').children('.amount').each(function(index){
 		if(isNaN(parseInt($(this).val()))){
 			//must push a NaN value if blank or other, so can later be filtered against typeofAid
-			amtofAid.push(NaN);
+			amtofAid.push(0);
 		}else{
 			amtofAid.push(parseInt($(this).val()));
 		};
@@ -64,9 +64,15 @@ function megaArray(){
 		typeAmt.push({amt:amount[i], type:type[i]});
 	}
 	typeAmt = typeAmt.filter(function(loan){
-		return !isNaN(loan.amt);
-	})
+	 return loan.amt > 0;
+	 })
+	console.log(typeAmt);
 	return typeAmt;
+}
+
+function testme(){
+	var k = megaArray();
+	return k;
 }
 
 //sums up all aid + st res gift for cost purposes
@@ -82,11 +88,18 @@ function sumNeed(){
 	//cant reuse megaArray variable name as it's already a global function
 	//knowledge is power!
 	var megaArray1 = megaArray();
+	console.log(megaArray1);
+	console.log(typeof megaArray1);
 	var length = megaArray1.length;
 	var needAid = 0;
 	for(var i = 0; i<length; i++){
-		if(megaArray1[i].type > 4){
+		if(megaArray1[i].type > 4 && megaArray1[i].amt != 0){
+			console.log(megaArray1[i].type);
+			console.log(typeof megaArray1[i].amt);
 			needAid += megaArray1[i].amt;
+		}
+		else{
+			needAid += 0;
 		}
 	};
 	console.log('calculated need based aid is ' + needAid);
@@ -179,7 +192,7 @@ function readdLoans(){
 	console.log(Math.abs(j));
 	//if need overage is less than nb loan amt
 	//then too much was taken away
-	if(j < 0 && (Math.abs(j)) < k){
+	if(j <= 0 && (Math.abs(j)) < k){
 		var readd = k - Math.abs(j); 
 	}
 	else{
@@ -220,7 +233,7 @@ function adjNBloans(){
 
 
 
-//will take above adjNBloans array and total new nb aid amt
+//will take above adjNBloans array and total new amt of nb aid 
 function retotalNeed(){
 	var totalNBamt = 0;
 	var j = adjNBloans();
@@ -303,6 +316,8 @@ function sacredAid(){
 			sacrosanct += k[i].amt;
 		}
 	}
+	console.log('sacrosant is ' + sacrosanct);
+	console.log(typeof sacrosanct);
 	return sacrosanct;
 }
 
@@ -316,6 +331,7 @@ function sacredAidarray(){
 		}	
 	}
 	console.log(holyAid);
+	console.log(typeof holyAid);
 	return holyAid;
 }
 
