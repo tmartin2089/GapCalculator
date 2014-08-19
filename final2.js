@@ -205,7 +205,7 @@ function adjNBloans(){
 	var total = j;
 	if(j === 0){
 		console.log('nothing to be added, move on to checking cost');
-		revisedNeedloans = k;
+		revisedNeedloans = reviseLforNeed();
 	}
 	else{
 		for(x=0; x < k.length; x++){
