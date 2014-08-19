@@ -208,7 +208,7 @@ function adjNBloans(){
 		revisedNeedloans = reviseLforNeed();
 	}
 	else{
-		for(x=0; x < k.length; x++){
+		for(var x=0; x < k.length; x++){
 			if(k[x].amt <  total){
 				revisedNeedloans.push(k[x])
 				total -= k[x].amt;
@@ -224,6 +224,35 @@ function adjNBloans(){
 	}
 	console.log(revisedNeedloans);
 	return revisedNeedloans;
+}
+
+
+//will take above adjNBloans array and total new nb aid amt
+function retotalNeed(){
+	var totalNBamt = 0;
+	var j = adjNBloans();
+	//recalls total need amt from start of function
+	var k = sumNeed();
+	//recalls total need b loan amt from start of function
+	var l = nbloanamt()
+	var newNeed;
+	//sums up revised need amts
+	for(var x = 0; x < j.length; x++){
+		totalNBamt += j[x].amt;
+	}
+	var newNeed = (k - l) + totalNBamt;
+	console.log(newNeed);
+	//returns new amt of need based aid
+	return newNeed;
+}
+
+//takes adjusted need amt and determines if there is an overage 
+function recheckNeed(){
+	var k = determineNeed() - retotalNeed();
+	console.log('grant overage is ' + k);
+	return k;
+	//if need is negative, then over need
+	//if need is positive, then under need
 }
 
 // //determines if too much was taken away
@@ -283,6 +312,8 @@ function test(){
 	var j = megaArray();
 	console.log(j);
 	var z = adjNBloans();
+	var zz = retotalNeed();
+	var zzz = recheckNeed();
 }
 
 
