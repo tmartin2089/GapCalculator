@@ -308,10 +308,24 @@ function sacredAid(){
 	var length = k.length;
 	var sacrosanct = 0;
 	for(var i= 0; i < length; i++){
-		if(k[i].type >= 12)
-		sacrosanct += k[i].amt;
+		if(k[i].type >= 12){
+			sacrosanct += k[i].amt;
+		}
 	}
 	return sacrosanct;
+}
+
+function sacredAidarray(){
+	var k = ALLneedbasedGrants();
+	var length = k.length;
+	var holyAid = [];
+	for(var i= 0; i < length; i++){
+		if(k[i].type >= 12){
+			holyAid.push(k[i]);
+		}	
+	}
+	console.log(holyAid);
+	return holyAid;
 }
 
 //if an overage exists - set all NB grant amounts to = 0
@@ -384,19 +398,28 @@ function adjNBgrants(){
 	return revisedGrants;
 }
 
+//returns new need based array
+function joinRevisedNBaid(){
+	//loans after adj for need & readd
+	var j = adjNBloans();
+	//grants after adj for need & readd
+	var k = adjNBgrants();
+	var l = sacredAidarray()
+	var h = j.concat(k);
+	var newNeedarray = h.concat(l);
+	console.log(newNeedarray);
+	return newNeedarray;
+}
+
+
+
 
 function test(){
-	var k = reviseLforNeed();
+	var k = joinRevisedNBaid();
 	console.log(k);
 	//this is just here to make sure earlier problem doesn't reoccur
 	var j = megaArray();
 	console.log(j);
-	var z = adjNBloans();
-	var zz = retotalNeed();
-	var zzz = recheckNeed();
-	var zzzz = reviseGforNeed();
-	console.log(zzzz);
-	var y = adjNBgrants();
 }
 
 

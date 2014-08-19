@@ -53,3 +53,5 @@ Configuring Need/Cost/GAP rules for Title IV and institutional aid
  total need based loans/nbloanamt() from checkNeed()
 
  reviseLforNeed() - set all loan amounts to 0 if over need
+ 
+ joinRevisedNBaid() - concatenate revised need arrays for later comparison
