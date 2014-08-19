@@ -108,15 +108,6 @@ function sumNonNeed(){
 	return nonNeedAid;
 }
 
-//returns cost overage
-function checkCost(){
-	var bio = gatherBio();
-	var total = totalAid();
-	var cost = bio[0] - total;
-	//number
-	return cost;
-	//in future function - if cost is negative, then over cost
-}
 
 //subtracts total need based aid from Fed Need  - returns if overawarded
 function checkNeed(){
@@ -405,12 +396,33 @@ function joinRevisedNBaid(){
 	//grants after adj for need & readd
 	var k = adjNBgrants();
 	var l = sacredAidarray()
-	var h = j.concat(k);
-	var newNeedarray = h.concat(l);
-	console.log(newNeedarray);
+	var newNeedarray = j.concat(k,l);
 	return newNeedarray;
 }
 
+//sums up new need based aid amts
+function sumRevisedNBaid(){
+	var j = joinRevisedNBaid();
+	var total = 0
+	for(var i = 0; i < j.length; i++){
+		total += j[i].amt;
+	}
+	console.log(total);
+	return total;
+}
+
+
+//returns cost overage
+function checkCost(){
+	var bio = gatherBio();
+	var total = sumNonNeed() + sumRevisedNBaid();
+	var cost = (bio[0] - bio[1]) - total;
+	//number
+	//return cost;
+	console.log('you are over/under by ' + cost);
+	return cost;
+	//in future function - if cost is negative, then over cost
+}
 
 
 
