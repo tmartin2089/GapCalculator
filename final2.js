@@ -179,7 +179,9 @@ function reviseLforNeed(){
 	};
 	return j;
 }
-// j = 3456 and under need
+
+
+
 function readdLoans(){
 	var j = checkNeed();
 	var k = nbloanamt();
@@ -212,19 +214,19 @@ function adjNBloans(){
 			if(k[x].amt <  total){
 				revisedNeedloans.push(k[x])
 				total -= k[x].amt;
+				console.log(total);
 			}
-			else{
-				if(k[x].amt > total){
-					k[x].amt = total
+			else if(k[x].amt > total){
+					k[x].amt = total;
+					total = 0;
 					revisedNeedloans.push(k[x]);
-					break;
-				}
 			}
-		};
-	}
+		}
+	};
 	console.log(revisedNeedloans);
 	return revisedNeedloans;
 }
+
 
 
 //will take above adjNBloans array and total new nb aid amt
@@ -251,45 +253,14 @@ function recheckNeed(){
 	var k = determineNeed() - retotalNeed();
 	console.log('grant overage is ' + k);
 	return k;
-	//if need is negative, then over need
-	//if need is positive, then under need
+	//if k is negative, then over need
+	//if k is positive, then under need
 }
-
-// //determines if too much was taken away
-// function findloanOverage(){
-	// var k = nbloanamt();
-	// console.log('total need based loan amt is ' + k);
-	// var j = checkNeed();
-	// console.log('findloanOverage checkNeed ' + j);
-	// //checkNeed returns a negative number if too much taken away
-	// if(j < 0){
-		// //does not work if there are grants
-		// var kj = (Math.abs(j)) - k;
-	// };
-	// console.log(kj);
-	// //this is the amount that needs to be re-added
-	// return kj;
-// }
-
-
-// function readdLoans(){
-	// var k = findloanOverage();
-	// //will throw a falsey value if k is undefined.  k is undefined when no need overage exists
-	// if(!k){
-		// console.log('Nothing to be readded');
-	// }
-	// else{
-	 // console.log((Math.abs(k)) + ' needs to be readded to loans');
-	// }
-	// //will need to determine new need amounts
-// }
-
-//return array with adjusted amounts
 
 
 //duh - they're all need based, but want consistent name for a similar function
+//this puts adjustable aid (non-entitlements) into array for redux for need
 function needbasedGrants(){
-	console.log('im working!');
 	var callArray = megaArray();
 	var needGrants = [];
 	var length = callArray.length;
@@ -304,6 +275,30 @@ function needbasedGrants(){
 	return needGrants;
 }
 
+//if an overage exists - set all NB loan amounts to = 0
+function reviseGforNeed(){
+	//if k is positive, no overage, if negative, overage
+	var k = recheckNeed();
+	//array of need based loans
+	var j = needbasedGrants();
+	var l = k;
+	var length = j.length;
+	//if checkNeed/k is a positive number, need overage does not exist
+	//if checkNeed/k is a negative number, need overage exists
+	if(k >= 0){
+		console.log('within need!');
+	}
+	//overage exists  - set amts to 0
+	else{
+		for(var i = 0; i<length; i++){
+			j[i].amt = 0;
+		}
+	//then check to see if too much was taken away
+	};
+	return j;
+}
+
+
 
 function test(){
 	var k = reviseLforNeed();
@@ -314,6 +309,8 @@ function test(){
 	var z = adjNBloans();
 	var zz = retotalNeed();
 	var zzz = recheckNeed();
+	var zzzz = reviseGforNeed();
+	console.log(zzzz);
 }
 
 
