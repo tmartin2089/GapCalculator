@@ -275,7 +275,46 @@ function needbasedGrants(){
 	return needGrants;
 }
 
-//if an overage exists - set all NB loan amounts to = 0
+//gathers all grants including entitlements
+function ALLneedbasedGrants(){
+	var callArray = megaArray();
+	var needGrants = [];
+	var length = callArray.length;
+	for(var i= 0; i < length; i++){
+		if(callArray[i].type > 6)
+		needGrants.push(callArray[i]);
+	}
+	//sort in order of preferred reductions
+	needGrants.sort(function(a,b){return a.type - b.type});
+	//object array
+	return needGrants;
+}
+
+//totals all grants
+function nbgrantamt(){
+	var needGrants = ALLneedbasedGrants();
+	var needGrantsAmt = 0;
+	var length = needGrants.length;
+	for(var i= 0; i < length; i++){
+		needGrantsAmt += needGrants[i].amt;
+	}
+	console.log(needGrantsAmt);
+	return needGrantsAmt;
+}
+
+//determines amt of entitlement aid
+function sacredAid(){
+	var k = ALLneedbasedGrants();
+	var length = k.length;
+	var sacrosanct = 0;
+	for(var i= 0; i < length; i++){
+		if(k[i].type >= 12)
+		sacrosanct += k[i].amt;
+	}
+	return sacrosanct;
+}
+
+//if an overage exists - set all NB grant amounts to = 0
 function reviseGforNeed(){
 	//if k is positive, no overage, if negative, overage
 	var k = recheckNeed();
@@ -300,6 +339,23 @@ function reviseGforNeed(){
 
 
 
+function readdGrants(){
+	var j = recheckNeed();
+	var k = nbgrantamt()-sacredAid();
+	console.log(Math.abs(j));
+	//if need overage is less than nb grant amt
+	//then too much was taken away
+	if(j < 0 && (Math.abs(j)) < k){
+		var readd = k - Math.abs(j); 
+	}
+	else{
+		var readd = 0;
+	}
+	console.log('to be readded ' + readd);
+	return readd;	
+}
+
+
 function test(){
 	var k = reviseLforNeed();
 	console.log(k);
@@ -311,6 +367,7 @@ function test(){
 	var zzz = recheckNeed();
 	var zzzz = reviseGforNeed();
 	console.log(zzzz);
+	var y = readdGrants();
 }
 
 

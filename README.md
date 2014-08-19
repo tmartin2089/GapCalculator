@@ -40,9 +40,14 @@ Configuring Need/Cost/GAP rules for Title IV and institutional aid
  first for need
  
  nbloanamt() - sums up total amount of need based loans
+ 
+ nbgrantamt() - sums up total amount of grants - INCLUDES ENTITLEMENTS
 
  needbasedGrants() - separates grants into separate array to be reduced for need
- after loans if necessary
+ after loans if necessary - DOES NOT INCLUDE ENTITLEMENTS
+ 
+ ALLneedbasedGrants() - separates grants into separate array for 
+ totaling amt purposes - INCLUDES ENTITLEMENTS
  
  findloanOverage() - Uses checkNeed() to determine if over need, if so, subtracts
  total need based loans/nbloanamt() from checkNeed()
