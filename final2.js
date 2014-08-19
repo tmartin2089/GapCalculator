@@ -355,6 +355,35 @@ function readdGrants(){
 	return readd;	
 }
 
+//readds grants if too much was zeroed out
+//this will only happen if need overage is less than total loan amt
+function adjNBgrants(){
+	var j = readdGrants();
+	var k = needbasedGrants();
+	var revisedGrants = [];
+	var total = j;
+	if(j === 0){
+		console.log('nothing to be added, move on to checking cost');
+		revisedGrants = reviseGforNeed();
+	}
+	else{
+		for(var x=0; x < k.length; x++){
+			if(k[x].amt <  total){
+				revisedGrants.push(k[x])
+				total -= k[x].amt;
+				console.log(total);
+			}
+			else if(k[x].amt > total){
+					k[x].amt = total;
+					total = 0;
+					revisedGrants.push(k[x]);
+			}
+		}
+	};
+	console.log(revisedGrants);
+	return revisedGrants;
+}
+
 
 function test(){
 	var k = reviseLforNeed();
@@ -367,7 +396,7 @@ function test(){
 	var zzz = recheckNeed();
 	var zzzz = reviseGforNeed();
 	console.log(zzzz);
-	var y = readdGrants();
+	var y = adjNBgrants();
 }
 
 
