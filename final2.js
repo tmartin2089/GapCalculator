@@ -443,7 +443,7 @@ function checkCost(){
 
 
 function test(){
-	var k = joinRevisedNBaid();
+	var k = checkCost();
 	console.log(k);
 	//this is just here to make sure earlier problem doesn't reoccur
 	var j = megaArray();
