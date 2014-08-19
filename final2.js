@@ -179,27 +179,33 @@ function reviseLforNeed(){
 	};
 	return j;
 }
-
+// j = 3456 and under need
 function readdLoans(){
 	var j = checkNeed();
 	var k = nbloanamt();
 	console.log(Math.abs(j));
 	//if need overage is less than nb loan amt
 	//then too much was taken away
-	if((Math.abs(j)) < k){
+	if(j < 0 && (Math.abs(j)) < k){
 		var readd = k - Math.abs(j); 
+	}
+	else{
+		var readd = 0;
 	}
 	console.log('to be readded ' + readd);
 	return readd;	
 }
 
+//readds need based loans if too much was zeroed outerHeight
+//this will only happen if need overage is less than total loan amt
 function adjNBloans(){
 	var j = readdLoans();
 	var k = needbasedLoans();
 	var revisedNeedloans = [];
 	var total = j;
-	if(!j){
-		console.log('nothing to be added, move on to checking cost' + readd);
+	if(j === 0){
+		console.log('nothing to be added, move on to checking cost');
+		revisedNeedloans = k;
 	}
 	else{
 		for(x=0; x < k.length; x++){
