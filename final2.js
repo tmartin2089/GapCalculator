@@ -1,3 +1,5 @@
+"use strict";
+
 //now need to determine if  too much was taken away
 //and if so, readd back to sub first, then perkins
 //then you have completed revising loans for need
@@ -66,7 +68,6 @@ function megaArray(){
 	typeAmt = typeAmt.filter(function(loan){
 	 return loan.amt > 0;
 	 })
-	console.log(typeAmt);
 	return typeAmt;
 }
 
@@ -88,14 +89,10 @@ function sumNeed(){
 	//cant reuse megaArray variable name as it's already a global function
 	//knowledge is power!
 	var megaArray1 = megaArray();
-	console.log(megaArray1);
-	console.log(typeof megaArray1);
 	var length = megaArray1.length;
 	var needAid = 0;
 	for(var i = 0; i<length; i++){
 		if(megaArray1[i].type > 4 && megaArray1[i].amt != 0){
-			console.log(megaArray1[i].type);
-			console.log(typeof megaArray1[i].amt);
 			needAid += megaArray1[i].amt;
 		}
 		else{
@@ -269,13 +266,14 @@ function needbasedGrants(){
 	var needGrants = [];
 	var length = callArray.length;
 	for(var i= 0; i < length; i++){
-		if(callArray[i].type >= 7 && callArray[i].type <= 11){
+		if(callArray[i].type >= 7 && callArray[i].type <= 12){
 			needGrants.push(callArray[i]);
 		}
 	}
 	//sort in order of preferred reductions
 	needGrants.sort(function(a,b){return a.type - b.type});
 	//object array
+	console.log(needGrants);
 	return needGrants;
 }
 
@@ -302,7 +300,6 @@ function nbgrantamt(){
 	for(var i= 0; i < length; i++){
 		needGrantsAmt += needGrants[i].amt;
 	}
-	console.log(needGrantsAmt);
 	return needGrantsAmt;
 }
 
@@ -312,12 +309,10 @@ function sacredAid(){
 	var length = k.length;
 	var sacrosanct = 0;
 	for(var i= 0; i < length; i++){
-		if(k[i].type >= 12){
+		if(k[i].type >= 13){
 			sacrosanct += k[i].amt;
 		}
 	}
-	console.log('sacrosant is ' + sacrosanct);
-	console.log(typeof sacrosanct);
 	return sacrosanct;
 }
 
@@ -326,12 +321,10 @@ function sacredAidarray(){
 	var length = k.length;
 	var holyAid = [];
 	for(var i= 0; i < length; i++){
-		if(k[i].type >= 12){
+		if(k[i].type >= 13){
 			holyAid.push(k[i]);
 		}	
 	}
-	console.log(holyAid);
-	console.log(typeof holyAid);
 	return holyAid;
 }
 
@@ -392,7 +385,6 @@ function adjNBgrants(){
 			if(k[x].amt <  total){
 				revisedGrants.push(k[x])
 				total -= k[x].amt;
-				console.log(total);
 			}
 			else if(k[x].amt > total){
 					k[x].amt = total;
@@ -446,8 +438,8 @@ function test(){
 	var k = checkCost();
 	console.log(k);
 	//this is just here to make sure earlier problem doesn't reoccur
-	var j = megaArray();
-	console.log(j);
+	//var j = megaArray();
+	//console.log(j);
 }
 
 
