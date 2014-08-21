@@ -71,11 +71,6 @@ function megaArray(){
 	return typeAmt;
 }
 
-function testme(){
-	var k = megaArray();
-	return k;
-}
-
 //sums up all aid + st res gift for cost purposes
 function totalAid(){
 	var bio = gatherBio();
@@ -424,7 +419,7 @@ function sumRevisedNBaid(){
 function checkCost(){
 	var bio = gatherBio();
 	var total = sumNonNeed() + sumRevisedNBaid();
-	var cost = (bio[0] - bio[1]) - total;
+	var cost = (bio[0] - bio[2]) - total;
 	//number
 	//return cost;
 	console.log('you are over/under by ' + cost);
@@ -433,10 +428,92 @@ function checkCost(){
 }
 
 
+//
+
+function determineAidtype(type){
+	switch(type){
+	case 1:
+	$('#display2').append('<p>Unsubsidized Loan</p>');
+	
+	break;
+	case 2:
+	$('#display2').append('<p>PLUS Loan</p>');
+	break;
+	case 3:
+	$('#display2').append('<p>Be On Time Loan</p>');
+	break;
+	case 4:
+	$('#display2').append('<p>CAL/Alt Loan</p>');
+	break;
+	case 5:
+	$('#display2').append('<p>Perkins Loan</p>');
+	break;
+	case 6:
+	$('#display2').append('<p>Subsidized Loan</p>');
+	break;
+	case 7:
+	$('#display2').append('<p>UT Grant</p>');
+	break;
+	case 8:
+	$('#display2').append('<p>Partial Tuition Grant</p>');
+	break;
+	case 9:
+	$('#display2').append('<p>TPEG</p>');
+	break;
+	case 10:
+	$('#display2').append('<p>TX Grant Match</p>');
+	break;
+	case 11:
+	$('#display2').append('<p>TX Grant</p>');
+	break;
+	case 12:
+	$('#display2').append('<p>Work-Study</p>');
+	break;
+	case 13:
+	$('#display2').append('<p>Pell:</p>');
+	break;
+	case 14:
+	$('#display2').append('<p>Top 10%:</p>');
+	break;
+	case 15:
+	$('#display2').append('<p>OSFS Scholarship</p>');
+	break;
+	default:
+	console.log('this is the default')
+	//entitlements aren't  changed, so excluded
+	}
+}
+
+function displayupdatedAmts(){
+	var display = checkCost();
+	var display2 = joinRevisedNBaid();
+	var length = display2.length;
+	console.log(display2);
+	console.log(typeof display2[0].type);
+	for(var x = 0; x < length; x++){
+		determineAidtype(display2[x].type);
+		$('#display2').append('<p>' + display2[x].amt + '</p>');
+	};
+	$('#display').append('<p>Must reduce for cost: ' + Math.abs(display) + '</p>');
+	//$('#display2').append('<p> Cost overage is ' + display2[0].type + '</p>');
+}
+
+function displayupdatedAmounts(){
+	var display = joinRevisedNBaid();
+	console.log(display[0][1]);
+	// for(var i = 0; i< display.length; i++){
+		// for(var x = 0; x<display.length; x++){
+			// console.log(display[x][y])
+		// }
+	// }	
+}
+
+
 
 function test(){
 	var k = checkCost();
 	console.log(k);
+	var j = displayupdatedAmts();
 	//this is just here to make sure earlier problem doesn't reoccur
 	//var j = megaArray();
 	//console.log(j);
