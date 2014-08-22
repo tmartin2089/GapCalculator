@@ -199,6 +199,7 @@ function readdLoans(){
 function adjNBloans(){
 	var j = readdLoans();
 	var k = needbasedLoans();
+	var reversed = k.reverse();
 	var revisedNeedloans = [];
 	var total = j;
 	if(j === 0){
@@ -207,15 +208,14 @@ function adjNBloans(){
 	}
 	else{
 		for(var x=0; x < k.length; x++){
-			if(k[x].amt <  total){
-				revisedNeedloans.push(k[x])
-				total -= k[x].amt;
-				console.log(total);
+			if(reversed[x].amt <  total){
+				revisedNeedloans.push(reversed[x])
+				total -= reversed[x].amt;
 			}
-			else if(k[x].amt > total){
-					k[x].amt = total;
+			else if(reversed[x].amt > total){
+					reversed[x].amt = total;
 					total = 0;
-					revisedNeedloans.push(k[x]);
+					revisedNeedloans.push(reversed[x]);
 			}
 		}
 	};
@@ -427,108 +427,97 @@ function checkCost(){
 	//in future function - if cost is negative, then over cost
 }
 
-function determineaidAmt(type2){
-	var display = joinRevisedNBaid();
-	for(var x = 0; x< display.length; x++){
-		if(display[x].type === type2){
-		var amt = display[x].amt;
-		}
-	};
-	return amt;
-}
-//
+// function determineaidAmt(type2){
+	// var display = joinRevisedNBaid();
+	// for(var x = 0; x< display.length; x++){
+		// if(display[x].type === type2){
+		// var amt = display[x].amt;
+		// }
+	// };
+	// return amt;
+// }
+// //
 
-function determineAidtype(type){
-	switch(type){
+// function determineAidtype(type){
+	// switch(type){
 	
-	case 1:
-	$('#display').append('<p>Unsubsidized Loan</p>');
-	$('#display').append(determineaidAmt(type));
-	break;
-	case 2:
-	$('#display2').append('<p>PLUS Loan</p>');
-	$('#display2').append(determineaidAmt(type));
-	break;
-	case 3:
-	$('#display3').append('<p>Be On Time Loan</p>');
-	$('#display3').append(determineaidAmt(type));
-	break;
-	case 4:
-	$('#display4').append('<p>CAL/Alt Loan</p>');
-	$('#display4').append(determineaidAmt(type));
-	break;
-	case 5:
-	$('#display5').append('<p>Perkins Loan</p>');
-	$('#display5').append(determineaidAmt(type));
-	break;
-	case 6:
-	$('#display6').append('<p>Subsidized Loan</p>');
-	$('#display6').append(determineaidAmt(type));
-	break;
-	case 7:
-	$('#display7').append('<p>UT Grant</p>');
-	$('#display7').append(determineaidAmt(type));
-	break;
-	case 8:
-	$('#display8').append('<p>Partial Tuition Grant</p>');
-	$('#display8').append(determineaidAmt(type));
-	break;
-	case 9:
-	$('#display9').append('<p>TPEG</p>');
-	$('#display9').append(determineaidAmt(type));
-	break;
-	case 10:
-	$('#display10').append('<p>TX Grant Match</p>');
-	$('#display10').append(determineaidAmt(type));
-	break;
-	case 11:
-	$('#display11').append('<p>TX Grant</p>');
-	$('#display11').append(determineaidAmt(type));
-	break;
-	case 12:
-	$('#display12').append('<p>Work-Study</p>');
-	$('#display12').append(determineaidAmt(type));
-	break;
-	case 13:
-	$('#display13').append('<p>Pell:</p>');
-	$('#display13').append(determineaidAmt(type));
-	break;
-	case 14:
-	$('#display14').append('<p>Top 10%:</p>');
-	$('#display14').append(determineaidAmt(type));
-	break;
-	case 15:
-	$('#display15').append('<p>OSFS Scholarship</p>');
-	$('#display15').append(determineaidAmt(type));
-	break;
+	// case 1:
+	// $('#display').append('<p>Unsubsidized Loan</p>');
+	// $('#display').append(determineaidAmt(type));
+	// break;
+	// case 2:
+	// $('#display2').append('<p>PLUS Loan</p>');
+	// $('#display2').append(determineaidAmt(type));
+	// break;
+	// case 3:
+	// $('#display3').append('<p>Be On Time Loan</p>');
+	// $('#display3').append(determineaidAmt(type));
+	// break;
+	// case 4:
+	// $('#display4').append('<p>CAL/Alt Loan</p>');
+	// $('#display4').append(determineaidAmt(type));
+	// break;
+	// case 5:
+	// $('#display5').append('<p>Perkins Loan</p>');
+	// $('#display5').append(determineaidAmt(type));
+	// break;
+	// case 6:
+	// $('#display6').append('<p>Subsidized Loan</p>');
+	// $('#display6').append(determineaidAmt(type));
+	// break;
+	// case 7:
+	// $('#display7').append('<p>UT Grant</p>');
+	// $('#display7').append(determineaidAmt(type));
+	// break;
+	// case 8:
+	// $('#display8').append('<p>Partial Tuition Grant</p>');
+	// $('#display8').append(determineaidAmt(type));
+	// break;
+	// case 9:
+	// $('#display9').append('<p>TPEG</p>');
+	// $('#display9').append(determineaidAmt(type));
+	// break;
+	// case 10:
+	// $('#display10').append('<p>TX Grant Match</p>');
+	// $('#display10').append(determineaidAmt(type));
+	// break;
+	// case 11:
+	// $('#display11').append('<p>TX Grant</p>');
+	// $('#display11').append(determineaidAmt(type));
+	// break;
+	// case 12:
+	// $('#display12').append('<p>Work-Study</p>');
+	// $('#display12').append(determineaidAmt(type));
+	// break;
+	// case 13:
+	// $('#display13').append('<p>Pell:</p>');
+	// $('#display13').append(determineaidAmt(type));
+	// break;
+	// case 14:
+	// $('#display14').append('<p>Top 10%:</p>');
+	// $('#display14').append(determineaidAmt(type));
+	// break;
+	// case 15:
+	// $('#display15').append('<p>OSFS Scholarship</p>');
+	// $('#display15').append(determineaidAmt(type));
+	// break;
 	
-	default:
-	console.log('this is the default')
-	}
-}
+	// default:
+	// console.log('this is the default')
+	// }
+//}
 
 function displayupdatedAmts(){
 	var display = checkCost();
 	var display2 = joinRevisedNBaid();
 	var length = display2.length;
-	console.log(display2);
-	console.log(typeof display2[0].type);
 	for(var x = 0; x < length; x++){
-		determineAidtype(display2[x].type);
+		$('#display' + display2[x].type).append('<p>Reduce to: ' + display2[x].amt + '</p>').css("display", "block");
 	};
-	$('#display').append('<p>Must reduce for cost: ' + Math.abs(display) + '</p>');
+	//$('#display').append('<p>Must reduce for cost: ' + Math.abs(display) + '</p>');
 	//$('#display2').append('<p> Cost overage is ' + display2[0].type + '</p>');
 }
 
-function displayupdatedAmounts(){
-	var display = joinRevisedNBaid();
-	console.log(display[0][1]);
-	// for(var i = 0; i< display.length; i++){
-		// for(var x = 0; x<display.length; x++){
-			// console.log(display[x][y])
-		// }
-	// }	
-}
 
 
 

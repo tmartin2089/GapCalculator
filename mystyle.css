@@ -107,7 +107,7 @@ color: #cc5500;
 	border-radius: 10px;
 }
 
-#display{
+#display1{
 	background-color:red;
 }
 
@@ -167,6 +167,22 @@ color: #cc5500;
 	background-color:darkseagreen;
 }
 
+.updated{
+	color: #e6e6e6;
+	display:none;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+
+.updated p {
+	padding:10px 10px;
+}
+
+.updated h3{
+	margin: 5px 5px;
+	padding: 5px 5px;
+}
 
 
 /*CSS3 keyframes 0% (start) to 100% (end) */
