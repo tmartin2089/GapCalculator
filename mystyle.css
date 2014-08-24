@@ -1,49 +1,79 @@
 /* @override 
 	http://iviewsource.com/exercises/ajax/mystyle.css */
+	
 
 body {
 	background: #DAD7C7;
 }
 
-#calcarea{
+#main_container{
 	margin:0 auto;    /*why does this move div to the middle? */
 	background: #BF996B;
 	padding: 10px;
-	width: 60%;
+	width: 50%;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	border-radius: 10px 10px 0 0;
 	height: auto;
 }
 
-#calcarea label {
+#main_container label {
 	font: bold 1.3em Arial;
 	text-transform: uppercase;
 	padding-bottom: 5px;
 	color: #A61C1C;
 }
 
-#calcarea p {
+#main_container p {
 	margin: 0;
 	line-height: 1em;
 	padding-bottom:5px;
 }
 
 
-#bio input {
-	width:10%;     /*percentages make it responsive*/
-	}
-	
-
-	
-#loan, #giftAid{
-color: #cc5500;
+#calcarea{
+	float:left;
+	width: 60%;
 }
 
-.giftaid{
-color: #cc5500;
+
+.aidentry{
+	width: 90%;
+	padding-left: 10px;
 }
 
+#results{
+	float:left;
+	width:30%;
+}
+
+#bio{
+	width:100%;
+}
+
+.bio{
+	width: 15%;
+	padding: 2px 2px;
+}
+
+.aidInput{
+	width: 100%;
+}
+
+.amount{
+	width:25%;
+}
+
+.typeofAid, .amount{
+	background: -webkit-gradient(linear, left top, left 25, from(#FFF), color-stop(4%, #EEEEEE), to(#FFF) );
+	background: -moz-linear-gradient(top, #FFF, #EEEEEE 1px, #FFF 25px);
+}
+
+.typeofAid{
+	width: 35%;
+}
+
+/*These divs are presentation of jscript calcs in hmtl*/
 	
 #update {
 	font-family: Georgia, "Times New Roman", Times, serif;
@@ -105,6 +135,10 @@ color: #cc5500;
 	-webkit-border-radius:10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+}
+
+#results{
+	float:right;
 }
 
 #display1{
@@ -173,6 +207,7 @@ color: #cc5500;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
+	margin-bottom: 5px;
 }
 
 .updated p {
@@ -182,6 +217,10 @@ color: #cc5500;
 .updated h3{
 	margin: 5px 5px;
 	padding: 5px 5px;
+}
+
+#footer{
+	clear:both;
 }
 
 
