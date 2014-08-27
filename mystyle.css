@@ -141,6 +141,10 @@ body {
 	float:right;
 }
 
+#cost{
+	background-color: #e6e6e6;
+}
+
 #display1{
 	background-color:red;
 }

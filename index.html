@@ -67,12 +67,37 @@
 							</select>
 							<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="$" />
 						</div>
+						<div class="aidInput">
+							<select name="loans" class="typeofAid loanType">
+								<option value="1">Unsub</option>
+								<option value="2">PLUS</option>
+								<option value="3">BOT</option>
+								<option value="4">CAL/Alt</option>
+								<option value="5">Perkins</option>
+								<option value="6">Sub</option>
+							</select>
+							<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="$" />
+						</div>
 					</form>
 				<!--end loan div  -->
 				</div>
 				<div id="giftAid" class="aidentry">
 					<h2>Gift Aid</h2>
 					<form action="">
+						<div class="aidInput">
+							<select name="giftAid" class="typeofAid giftType">
+								<option value="7">UT Grant</option>
+								<option value="8">Partial Tuit</option>
+								<option value="9">TPEG</option>
+								<option value="10">TX Grant Match</option>
+								<option value="11">TX Grant</option>
+								<option value="12">FWS</option>
+								<option value="13">Pell</option>
+								<option value="14">Top 10%</option>
+								<option value="15">OSFS SCH</option>
+							</select>
+							<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="$" />
+						</div>
 						<div class="aidInput">
 							<select name="giftAid" class="typeofAid giftType">
 								<option value="7">UT Grant</option>
@@ -136,6 +161,7 @@
 			<!--end calcarea div -->
 			</div>
 			<div id="results">
+				<div id="cost"></div>
 				<div id="display1" class="updated">
 					<h3>Unsub</h3>
 				</div>

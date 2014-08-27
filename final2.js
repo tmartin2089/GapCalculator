@@ -13,7 +13,6 @@ function gatherBio(){
 			bio.push(parseInt($(this).val()))
 		};
 	});
-	cons
 	return bio;
 }
 
@@ -421,6 +420,13 @@ function checkCost(){
 	var cost = (bio[0] - bio[2]) - total;
 	//number
 	//return cost;
+	if(cost < 0){
+		cost = cost;
+	}
+	//if cost > 0 - then no cost overage exists
+	else{
+		cost = 0;
+	}
 	console.log('you are over/under by ' + cost);
 	return cost;
 	//in future function - if cost is negative, then over cost
@@ -434,7 +440,7 @@ function displayupdatedAmts(){
 	for(var x = 0; x < length; x++){
 		$('#display' + display2[x].type).append('<p>Reduce to: ' + display2[x].amt + '</p>').css("display", "block");
 	};
-	//$('#display').append('<p>Must reduce for cost: ' + Math.abs(display) + '</p>');
+	$('#cost').append('<p>Must reduce for cost: $' + Math.abs(display) + '</p>');
 	//$('#display2').append('<p> Cost overage is ' + display2[0].type + '</p>');
 }
 
