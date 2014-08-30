@@ -168,8 +168,6 @@ function reviseLforNeed(){
 		for(var i = 0; i<length; i++){
 			j[i].amt = 0;
 		}
-	//then check to see if too much was taken away
-	readdLoans();
 	};
 	return j;
 }
@@ -471,6 +469,22 @@ function reviseLforCost(){
 	return j;
 }
 
+
+function readdCostloans(){
+	var j = checkCost();
+	var k = sumNonNeed();
+	console.log(Math.abs(j));
+	//if need overage is less than nb loan amt
+	//then too much was taken away
+	if(j <= 0 && (Math.abs(j)) < k){
+		var readd = k - Math.abs(j); 
+	}
+	else{
+		var readd = 0;
+	}
+	console.log('to be readded for cost ' + readd);
+	return readd;	
+}
 
 function displayupdatedAmts(){
 	var display = checkCost();
