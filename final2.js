@@ -192,7 +192,7 @@ function readdLoans(){
 	return readd;	
 }
 
-//readds need based loans if too much was zeroed outerHeight
+//readds need based loans if too much was zeroed 
 //this will only happen if need overage is less than total loan amt
 function adjNBloans(){
 	var j = readdLoans();
@@ -449,6 +449,28 @@ function nonNeedLoans(){
 	return nonneedLoans;
 }
 
+//if an overage exists - set all other loan amounts to = 0
+function reviseLforCost(){
+	//if k is positive, no overage, if negative, overage
+	var k = checkCost();
+	//array of need based loans
+	var j = nonNeedLoans();
+	var length = j.length;
+	//if checkCost/k is a positive number, Cost overage does not exist
+	//if checkCost/k is a negative number, Cost overage exists
+	if(k >= 0){
+		console.log('within cost!');
+	}
+	//else an overage exists  - set amts to 0
+	else{
+		for(var i = 0; i<length; i++){
+			j[i].amt = 0;
+		}
+	};
+	console.log(j);
+	return j;
+}
+
 
 function displayupdatedAmts(){
 	var display = checkCost();
@@ -465,7 +487,7 @@ function displayupdatedAmts(){
 
 
 function test(){
-	var k = checkCost();
+	var k = reviseLforCost();
 	console.log(k);
 	var j = displayupdatedAmts();
 	//this is just here to make sure earlier problem doesn't reoccur
