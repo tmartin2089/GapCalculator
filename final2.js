@@ -162,7 +162,7 @@ function reviseLforNeed(){
 	//if checkNeed/k is a positive number, need overage does not exist
 	//if checkNeed/k is a negative number, need overage exists
 	if(k >= 0){
-		console.log('within need!');
+		//console.log('within need!');
 	}
 	//overage exists  - set amts to 0
 	else{
@@ -444,7 +444,7 @@ function nonNeedLoans(){
 	//sort so perkins can be reduced before sub
 	nonneedLoans.sort(function(a,b){return a.type - b.type});
 	//object array
-	//console.log(nonneedLoans);
+	console.log(nonneedLoans);
 	return nonneedLoans;
 }
 
@@ -520,9 +520,13 @@ function adjCostloans(){
 function displayupdatedAmts(){
 	var display = checkCost();
 	var display2 = joinRevisedNBaid();
+	var display3 = adjCostloans();
 	var length = display2.length;
 	for(var x = 0; x < length; x++){
 		$('#display' + display2[x].type).append('<p>Reduce to: ' + display2[x].amt + '</p>').css("display", "block");
+	};
+	for(var y = 0; y < display3.length; y++){
+		$('#display' + display3[y].type).append('<p>Reduce to: ' + display3[y].amt + '</p>').css("display", "block");
 	};
 	$('#cost').append('<p>Must reduce for cost: $' + Math.abs(display) + '</p>');
 	//$('#display2').append('<p> Cost overage is ' + display2[0].type + '</p>');
