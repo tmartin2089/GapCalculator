@@ -1,6 +1,7 @@
 "use strict";
 
 //need to filter out $ and other non-numeric values
+//need to dynamically add form elements - see http://www.randomsnippets.com/2008/02/21/how-to-dynamically-add-form-elements-via-javascript/
 
 //gathers #bio values in array
 function gatherBio(){
@@ -26,7 +27,7 @@ function determineNeed(){
 	//COA - EFC - St Res Gift
 	var need = (bio[0]-bio[1]) - bio[2];
 	};
-	console.log('calculated need is ' + need);
+	//console.log('calculated need is ' + need);
 	return need;
 }
 
@@ -92,7 +93,7 @@ function sumNeed(){
 			needAid += 0;
 		}
 	};
-	console.log('calculated need based aid is ' + needAid);
+	//console.log('calculated need based aid is ' + needAid);
 	//number
 	return needAid;
 }
@@ -116,7 +117,7 @@ function sumNonNeed(){
 function checkNeed(){
 	var need = (determineNeed() - sumNeed());
 	//number
-	console.log('overage is ' + need);
+	//console.log('overage is ' + need);
 	return need;
 	//if need is negative, then over need
 	//if need is positive, then under need
@@ -173,11 +174,11 @@ function reviseLforNeed(){
 }
 
 
-
+//checks to determine if too much was taken away
 function readdLoans(){
 	var j = checkNeed();
 	var k = nbloanamt();
-	console.log(Math.abs(j));
+	//console.log(Math.abs(j));
 	//if need overage is less than nb loan amt
 	//then too much was taken away
 	if(j <= 0 && (Math.abs(j)) < k){
@@ -186,7 +187,7 @@ function readdLoans(){
 	else{
 		var readd = 0;
 	}
-	console.log('to be readded ' + readd);
+	//console.log('to be readded ' + readd);
 	return readd;	
 }
 
@@ -215,7 +216,7 @@ function adjNBloans(){
 			}
 		}
 	};
-	console.log(revisedNeedloans);
+	//console.log(revisedNeedloans);
 	return revisedNeedloans;
 }
 
@@ -235,7 +236,7 @@ function retotalNeed(){
 		totalNBamt += j[x].amt;
 	}
 	var newNeed = (k - l) + totalNBamt;
-	console.log(newNeed);
+	//console.log(newNeed);
 	//returns new amt of need based aid
 	return newNeed;
 }
@@ -243,7 +244,7 @@ function retotalNeed(){
 //takes adjusted need amt and determines if there is an overage 
 function recheckNeed(){
 	var k = determineNeed() - retotalNeed();
-	console.log('grant overage is ' + k);
+	//console.log('grant overage is ' + k);
 	return k;
 	//if k is negative, then over need
 	//if k is positive, then under need
@@ -264,7 +265,7 @@ function needbasedGrants(){
 	//sort in order of preferred reductions
 	needGrants.sort(function(a,b){return a.type - b.type});
 	//object array
-	console.log(needGrants);
+	//console.log(needGrants);
 	return needGrants;
 }
 
@@ -330,7 +331,7 @@ function reviseGforNeed(){
 	//if checkNeed/k is a positive number, need overage does not exist
 	//if checkNeed/k is a negative number, need overage exists
 	if(k >= 0){
-		console.log('within need!');
+		//console.log('within need!');
 	}
 	//overage exists  - set amts to 0
 	else{
@@ -356,7 +357,7 @@ function readdGrants(){
 	else{
 		var readd = 0;
 	}
-	console.log('to be readded ' + readd);
+	//console.log('to be readded ' + readd);
 	return readd;	
 }
 
@@ -368,7 +369,7 @@ function adjNBgrants(){
 	var revisedGrants = [];
 	var total = j;
 	if(j === 0){
-		console.log('nothing to be added, move on to checking cost');
+		//console.log('nothing to be added, move on to checking cost');
 		revisedGrants = reviseGforNeed();
 	}
 	else{
@@ -384,7 +385,7 @@ function adjNBgrants(){
 			}
 		}
 	};
-	console.log(revisedGrants);
+	//console.log(revisedGrants);
 	return revisedGrants;
 }
 
@@ -406,12 +407,12 @@ function sumRevisedNBaid(){
 	for(var i = 0; i < j.length; i++){
 		total += j[i].amt;
 	}
-	console.log(total);
+	//console.log(total);
 	return total;
 }
 
 
-//returns cost overage
+//checks for cost overage after NB aid revision
 function checkCost(){
 	var bio = gatherBio();
 	var total = sumNonNeed() + sumRevisedNBaid();
@@ -443,7 +444,7 @@ function nonNeedLoans(){
 	//sort so perkins can be reduced before sub
 	nonneedLoans.sort(function(a,b){return a.type - b.type});
 	//object array
-	console.log(nonneedLoans);
+	//console.log(nonneedLoans);
 	return nonneedLoans;
 }
 
@@ -469,7 +470,7 @@ function reviseLforCost(){
 	return j;
 }
 
-
+//returns amount to be re-added from zeroed loans, if any
 function readdCostloans(){
 	var j = checkCost();
 	var k = sumNonNeed();
@@ -484,6 +485,36 @@ function readdCostloans(){
 	}
 	console.log('to be readded for cost ' + readd);
 	return readd;	
+}
+
+//readds need based loans if too much was zeroed 
+//this will only happen if need overage is less than total loan amt
+function adjCostloans(){
+	var j = readdCostloans();
+	var k = nonNeedLoans();
+	//to make sure bot is reduced last
+	var reversed = k.reverse();
+	var revisedCostloans = [];
+	var total = j;
+	if(j === 0){
+		console.log('nothing to be added, move on to checking cost');
+		revisedCostloans = reviseLforCost();
+	}
+	else{
+		for(var x=0; x < k.length; x++){
+			if(reversed[x].amt <  total){
+				revisedCostloans.push(reversed[x])
+				total -= reversed[x].amt;
+			}
+			else if(reversed[x].amt > total){
+					reversed[x].amt = total;
+					total = 0;
+					revisedCostloans.push(reversed[x]);
+			}
+		}
+	};
+	console.log(revisedCostloans);
+	return revisedCostloans;
 }
 
 function displayupdatedAmts(){
@@ -501,7 +532,7 @@ function displayupdatedAmts(){
 
 
 function test(){
-	var k = reviseLforCost();
+	var k = adjCostloans();
 	console.log(k);
 	var j = displayupdatedAmts();
 	//this is just here to make sure earlier problem doesn't reoccur
