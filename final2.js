@@ -432,6 +432,23 @@ function checkCost(){
 	//in future function - if cost is negative, then over cost
 }
 
+//gather non need loans into array
+function nonNeedLoans(){
+	var callArray = megaArray();
+	var nonneedLoans = [];
+	var length = callArray.length;
+	for(var i= 0; i < length; i++){
+		if(callArray[i].type < 5){
+			nonneedLoans.push(callArray[i]);
+		}
+	}
+	//sort so perkins can be reduced before sub
+	nonneedLoans.sort(function(a,b){return a.type - b.type});
+	//object array
+	console.log(nonneedLoans);
+	return nonneedLoans;
+}
+
 
 function displayupdatedAmts(){
 	var display = checkCost();
