@@ -5,6 +5,21 @@ title IV revision calculator
 Configuring Need/Cost/GAP rules for Title IV and institutional aid
 
  ++++++++++++++++++++++
+ +Future to do        +
+ ++++++++++++++++++++++
+	I. Block Copy/Paste from P6 to determine
+	amounts and types of aid - do away with selects and inputs
+		a. Split strings along blanks - should produce 3 
+		fields - i.e. 214025 Subsidized Loan 3500.00
+			1. Plug into array from there.  First 6 #s and amt - 
+			won't need title except for secondary verification
+			2. To determine if need or need based - large array -
+			for loop to search through type (all will be 6 numbers)
+			to match need/nonneed types
+
+
+
+ ++++++++++++++++++++++
  +Gather Form Elements+
  ++++++++++++++++++++++
  
