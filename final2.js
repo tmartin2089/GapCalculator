@@ -528,7 +528,7 @@ function displayupdatedAmts(){
 	for(var y = 0; y < display3.length; y++){
 		$('#display' + display3[y].type).append('<p>Reduce to: ' + display3[y].amt + '</p>').css("display", "block");
 	};
-	$('#cost').append('<p>Must reduce for cost: $' + Math.abs(display) + '</p>');
+	$('#cost').append('<p>Must reduce for cost: $' + Math.abs(display) + '</p>').css("display", "block");
 	//$('#display2').append('<p> Cost overage is ' + display2[0].type + '</p>');
 }
 
