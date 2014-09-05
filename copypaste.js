@@ -2,6 +2,11 @@
 //todo: reset all named scholarships to 331000
 //todo: reset all gms/terry to 341000
 
+
+"use strict";
+//gathers award information
+
+
 //gets rid of all extraneous and returns numbers only
 function getPaste(){
 	var pasted = $('.paste').val().replace(/_/g,' ');
@@ -23,7 +28,7 @@ function separateType(){
 			type.push(getArray[x]);
 	};
 	console.log(type);
-	convertType(type);
+	return type;
 }
 
 function separateAmt(){
@@ -47,7 +52,8 @@ function pastedtoObject(){
 	return typeAmt;
 }
 
-function convertType(val){
+function convertType(){
+	var val = separateType();
 	for(var x= 0; x < val.length; x++){
 		switch(val[x]){
 		
@@ -166,7 +172,9 @@ function convertType(val){
 };
 	
 	
+//-----------------------------------------------//
 
+//gathers bio information
 
 
 // 131252 UT Grant-UG  _1500.00
