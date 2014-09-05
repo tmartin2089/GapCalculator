@@ -1,24 +1,24 @@
 
- function testA(){
-	 var x = 15;
-	 console.log(x);
-	 return x
- }
+ // function testA(){
+	 // var x = 15;
+	 // console.log(x);
+	 // return x
+ // }
 
- function testB(){
-	for(var x = 0; x < 5000, x++){
-		link = document.createElement("a");
-        link.innerHTML = "Link " + i;
-		//on each iteration of the loop, local variable num 
-		//will be set to current value of i 
-        link.onclick = function(num) {
-			return function(){
-            alert(num);
-			};
-        }(i);
-        document.body.appendChild(link);
-	};
- };
+ // function testB(){
+	// for(var x = 0; x < 5000, x++){
+		// link = document.createElement("a");
+        // link.innerHTML = "Link " + i;
+		// //on each iteration of the loop, local variable num 
+		// //will be set to current value of i 
+        // link.onclick = function(num) {
+			// return function(){
+            // alert(num);
+			// };
+        // }(i);
+        // document.body.appendChild(link);
+	// };
+ // };
 
 
 
