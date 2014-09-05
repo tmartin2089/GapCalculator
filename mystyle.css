@@ -6,9 +6,6 @@ body {
 	background: #DAD7C7;
 }
 
-#csstest{
-	background-color: darkgreen;
-}
 
 #main_container{
 	margin:0 auto;    /*why does this move div to the middle? */
