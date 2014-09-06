@@ -4,16 +4,18 @@
 //need to dynamically add form elements - see http://www.randomsnippets.com/2008/02/21/how-to-dynamically-add-form-elements-via-javascript/
 
 //gathers #bio values in array
+
+
+
+
 function gatherBio(){
 	var bio = [];
 	$('.bio').each(function(index){
-		if(isNaN(parseInt($(this).val()))){
-			bio.push(0);
+		if(parseInt($(this).val())){
+			bio.push(parseInt($(this).val()));
 		}
-		else{
-			bio.push(parseInt($(this).val()))
-		};
 	});
+	console.log(bio);
 	return bio;
 }
 

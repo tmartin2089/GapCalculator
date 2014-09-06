@@ -168,11 +168,13 @@ function convertType(val){
 	return val;
 	console.log(typeof val);
 };
+
+
 	
 	
 //final step - creates mega array of aid types	
 function pastedtoObject(){
-	var getType = convertType();
+	var getType = separateType();
 	var getAmt = separateAmt();
 	var typeAmt = [];
 	for(var x = 0; x< getType.length; x++){
@@ -181,12 +183,19 @@ function pastedtoObject(){
 	console.log(typeAmt);
 	return typeAmt;
 }
+
+
+
+function canIcall(){
+	var k = gatherBio();
+	console.log(k);
+}
 	
 //-----------------------------------------------//
 
 //gathers bio information
 
 
-// 131252 UT Grant-UG  _1500.00
-// 131110 TPEG Residen _2500.00
-// 131200 Partial Tuit __644.00
+ // 131252 UT Grant-UG  _1500.00
+ // 131110 TPEG Residen _2500.00
+ // 131200 Partial Tuit __644.00
