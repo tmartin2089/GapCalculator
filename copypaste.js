@@ -37,7 +37,8 @@ function separateType(){
 			type.push(getArray[x]);
 	};
 	console.log(type);
-	return type;
+	console.log(convertType(type));
+	return convertType(type);
 }
 
 function separateAmt(){
@@ -50,8 +51,7 @@ function separateAmt(){
 	return amt;
 }
 
-function convertType(){
-	var val = separateType();
+function convertType(val){
 	for(var x= 0; x < val.length; x++){
 		switch(val[x]){
 		
