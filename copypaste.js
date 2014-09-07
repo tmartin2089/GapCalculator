@@ -1,6 +1,7 @@
 //todo: remove 342000 from array p6 osch code
 //todo: reset all named scholarships to 331000
 //todo: reset all gms/terry to 341000
+//todo:  future- shouldn't matter w/copy and paste but 0 amts fuck it up
 
 
 "use strict";
@@ -160,11 +161,7 @@ function convertType(val){
 		break;
 		}
 	};	
-	
-	console.log('convertype is now working');
-	console.log(val);
 	return val;
-	console.log(typeof val);
 };
 
 
@@ -182,20 +179,7 @@ function aidObject(){
 	 typeAmt = typeAmt.filter(function(loan){
 	 return loan.amt > 0;
 	 })
+	 console.log(typeAmt);
 	return typeAmt;
 }
 
-
-function canIcall(){
-	var k = gatherBio();
-	console.log(k);
-}
-	
-//-----------------------------------------------//
-
-//gathers bio information
-
-
- // 131252 UT Grant-UG  _1500.00
- // 131110 TPEG Residen _2500.00
- // 131200 Partial Tuit __644.00
