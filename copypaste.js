@@ -36,8 +36,6 @@ function separateType(){
 		if(getArray[x].toString().length === 6)
 			type.push(getArray[x]);
 	};
-	console.log(type);
-	console.log(convertType(type));
 	return convertType(type);
 }
 
@@ -173,17 +171,19 @@ function convertType(val){
 	
 	
 //final step - creates mega array of aid types	
-function pastedtoObject(){
+function aidObject(){
 	var getType = separateType();
 	var getAmt = separateAmt();
 	var typeAmt = [];
 	for(var x = 0; x< getType.length; x++){
 		typeAmt.push({type:getType[x], amt:getAmt[x]});
 	}
-	console.log(typeAmt);
+	//removes .amt and .type if amt = 0
+	 typeAmt = typeAmt.filter(function(loan){
+	 return loan.amt > 0;
+	 })
 	return typeAmt;
 }
-
 
 
 function canIcall(){
