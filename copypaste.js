@@ -34,8 +34,21 @@ function separateType(){
 	var getArray = getPaste();
 	var type = [];
 	for(var x = 0; x< getArray.length; x++){
-		if(getArray[x].toString().length === 6)
-			type.push(getArray[x]);
+		if(getArray[x].toString().length === 6){
+			type.push(getArray[x])
+		};
+	};
+	//umbrella converts all 331 scholarships to 15
+	for(var y = 0; y < type.length; y++){
+		if(type[y].toString().substring(0,3)==="331" || "341"){
+			type[y] = 15;
+		};
+	};
+	//ibid all 341 scholarships to 15
+	for(var y = 0; y < type.length; y++){
+		if(type[y].toString().substring(0,3)==="331"){
+			type[y] = 15;
+		};
 	};
 	return convertType(type);
 }
@@ -144,11 +157,6 @@ function convertType(val){
 		val[x] = 14;
 		break;
 		
-		//need to add in named - convert to 331000
-		case 331000:
-		case 331000:
-		val[x] = 15;
-		break;
 		
 		//catchall for gms/terry - convert to 341000
 		case 341000:
