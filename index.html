@@ -7,215 +7,89 @@
 	</head>
 	<body>
 		<div id="main_container">
-		<div id="csstest"><input type="text" class="paste" id="paste" placeholder="Paste P6 here" /><div>
-		<button onclick="aidObject()">get paste</button>
 			<div id="calcarea">
 				<label for="search">Aid Calculator</label>
-				<button onclick="autoSelect()">Auto Fill</button>
 				<p>All the aid that's fit to print</p>
-				<div id="bio" class="aidentry">
+				<div class="aidentry">
 					<h2>Bio Information</h2>
 						<div id="bio">
-							<input type="text" class="bio" id="coa" placeholder="Cost/Sem" />
-							<input type="text" class="bio" id="efc" placeholder="EFC/Sem" />
-							<input type="text" class="bio" id="osch" placeholder="St Res Gift" />
-						</div>
-					
-				</div>
-				<div id="loan" class="aidentry">	
-					<h2>Loans</h2>
-					<form action="">
-						<div class="aidInput">
-							<select name="loans" class="typeofAid loanType">
-								<option value="1">PLUS</option>
-								<option value="2">Unsub</option>
-								<option value="3">CAL/Alt</option>
-								<option value="4">BOT</option>
-								<option value="5">Perkins</option>
-								<option value="6">Sub</option>
-							</select>
-							<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="$" />
-						</div>
-						<div class="aidInput">
-							<select name="loans" class="typeofAid loanType">
-								<option value="1">PLUS</option>
-								<option value="2">Unsub</option>
-								<option value="3">CAL/Alt</option>
-								<option value="4">BOT</option>
-								<option value="5">Perkins</option>
-								<option value="6">Sub</option>
-							</select>
-							<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="$" />
-						</div>
-						<div class="aidInput">
-							<select name="loans" class="typeofAid loanType">
-								<option value="1">PLUS</option>
-								<option value="2">Unsub</option>
-								<option value="3">CAL/Alt</option>
-								<option value="4">BOT</option>
-								<option value="5">Perkins</option>
-								<option value="6">Sub</option>
-							</select>
-							<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="$" />
-						</div>
-						<div class="aidInput">
-							<select name="loans" class="typeofAid loanType">
-								<option value="1">PLUS</option>
-								<option value="2">Unsub</option>
-								<option value="3">CAL/Alt</option>
-								<option value="4">BOT</option>
-								<option value="5">Perkins</option>
-								<option value="6">Sub</option>
-							</select>
-							<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="$" />
-						</div>
-						<div class="aidInput">
-							<select name="loans" class="typeofAid loanType">
-								<option value="1">PLUS</option>
-								<option value="2">Unsub</option>
-								<option value="3">CAL/Alt</option>
-								<option value="4">BOT</option>
-								<option value="5">Perkins</option>
-								<option value="6">Sub</option>
-							</select>
-							<input type="text" name="loanAmt" id="loanAmt" class="amount" placeholder="$" />
-						</div>
-					</form>
-				<!--end loan div  -->
-				</div>
-				<div id="giftAid" class="aidentry">
-					<h2>Gift Aid</h2>
-					<form action="">
-						<div class="aidInput">
-							<select name="giftAid" class="typeofAid giftType">
-								<option value="7">UT Grant</option>
-								<option value="8">Partial Tuit</option>
-								<option value="9">TPEG</option>
-								<option value="10">TX Grant Match</option>
-								<option value="11">TX Grant</option>
-								<option value="12">FWS</option>
-								<option value="13">Pell</option>
-								<option value="14">Top 10%</option>
-								<option value="15">OSFS SCH</option>
-							</select>
-							<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="$" />
-						</div>
-						<div class="aidInput">
-							<select name="giftAid" class="typeofAid giftType">
-								<option value="7">UT Grant</option>
-								<option value="8">Partial Tuit</option>
-								<option value="9">TPEG</option>
-								<option value="10">TX Grant Match</option>
-								<option value="11">TX Grant</option>
-								<option value="12">FWS</option>
-								<option value="13">Pell</option>
-								<option value="14">Top 10%</option>
-								<option value="15">OSFS SCH</option>
-							</select>
-							<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="$" />
-						</div>
-						<div class="aidInput">
-							<select name="giftAid" class="typeofAid giftType">
-								<option value="7">UT Grant</option>
-								<option value="8">Partial Tuit</option>
-								<option value="9">TPEG</option>
-								<option value="10">TX Grant Match</option>
-								<option value="11">TX Grant</option>
-								<option value="12">FWS</option>
-								<option value="13">Pell</option>
-								<option value="14">Top 10%</option>
-								<option value="15">OSFS SCH</option>
-							</select>
-							<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="$" />
-						</div>
-						<div class="aidInput">
-							<select name="giftAid" class="typeofAid giftType">
-								<option value="7">UT Grant</option>
-								<option value="8">Partial Tuit</option>
-								<option value="9">TPEG</option>
-								<option value="10">TX Grant Match</option>
-								<option value="11">TX Grant</option>
-								<option value="12">FWS</option>
-								<option value="13">Pell</option>
-								<option value="14">Top 10%</option>
-								<option value="15">OSFS SCH</option>
-							</select>
-							<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="$" />
-						</div>
-						<div class="aidInput">
-							<select name="giftAid" class="typeofAid giftType">
-								<option value="7">UT Grant</option>
-								<option value="8">Partial Tuit</option>
-								<option value="9">TPEG</option>
-								<option value="10">TX Grant Match</option>
-								<option value="11">TX Grant</option>
-								<option value="12">FWS</option>
-								<option value="13">Pell</option>
-								<option value="14">Top 10%</option>
-								<option value="15">OSFS SCH</option>
-							</select>
-							<input type="text" name="giftAmt" id="giftAmt" class="amount" placeholder="$" />
-						</div>
-					</form>
-					<button class="calc" onclick="test()">Help Me</button>
-				<!-- end giftAid div -->
-				</div>
-			<!--end calcarea div -->
-			</div>
+							<div id="coa" class="p6">
+								<p>COA/Sem</p>
+								<input type="text" class="bio" id="coa" placeholder="Cost/Sem" />
+							</div>
+							
+							<div id="coa" class="p6">
+								<p>EFC/Sem</p>
+								<input type="text" class="bio" id="efc" placeholder="EFC/Sem" />
+							</div>
+							
+							<div id="coa" class="p6">
+								<p>St Rest Gift/Sem</p>
+								<input type="text" class="bio" id="osch" placeholder="St Res Gift" />
+							</div>
+
+							<div id="csstest" class="p6">
+								<p>Paste P6 here</p>
+								<input type="text" class="paste" id="paste" placeholder="Paste P6 here" />
+							</div>
+						</div><!--end bio -->
+					<button class="calc" onclick="test()">Calc It Yo!</button>	
+				</div><!--end aidentry -->
+		
+			</div><!--end calcarea div -->
 			<div id="results">
-				<div id="cost" class="updated"></div>
-				<div id="display1" class="updated">
-					<h3>PLUS</h3>
-				</div>
-				<div id="display2" class="updated">
-					<h3>Unsub</h3>
-				</div>
-				<div id="display3" class="updated">
-					<h3>CAL/Alt</h3>
-				</div>
-				<div id="display4" class="updated">
-					<h3>BOT</h3>
-				</div>
-				<div id="display5" class="updated">
-					<h3>Perkins</h3>
-				</div>
-				<div id="display6" class="updated">
-					<h3>Sub</h3>
-				</div>
-				<div id="display7" class="updated">
-					<h3>UT Grant</h3>
-				</div>
-				<div id="display8" class="updated">
-					<h3>Partial Tuition Grant</h3>
-				</div>
-				<div id="display9" class="updated">
-					<h3>TPEG</h3>
-				</div>
-				<div id="display10" class="updated">
-					<h3>TX Grant Match</h3>
-				</div>
-				<div id="display11" class="updated">
-					<h3>TX Grant</h3>
-				</div>
-				<div id="display12" class="updated">
-					<h3>FWS</h3>
-				</div>
-				<div id="display13" class="updated">
-					<h3>Pell</h3>
-				</div>
-				<div id="display14" class="updated">
-					<h3>Top 10%</h3>
-				</div>
-				<div id="display15" class="updated">
-					<h3>OSFS Scholarship</h3>
-				</div>
-			
+					<div id="cost" class="updated"></div>
+					<div id="display1" class="updated">
+						<h3>PLUS</h3>
+					</div>
+					<div id="display2" class="updated">
+						<h3>Unsub</h3>
+					</div>
+					<div id="display3" class="updated">
+						<h3>CAL/Alt</h3>
+					</div>
+					<div id="display4" class="updated">
+						<h3>BOT</h3>
+					</div>
+					<div id="display5" class="updated">
+						<h3>Perkins</h3>
+					</div>
+					<div id="display6" class="updated">
+						<h3>Sub</h3>
+					</div>
+					<div id="display7" class="updated">
+						<h3>UT Grant</h3>
+					</div>
+					<div id="display8" class="updated">
+						<h3>Partial Tuition Grant</h3>
+					</div>
+					<div id="display9" class="updated">
+						<h3>TPEG</h3>
+					</div>
+					<div id="display10" class="updated">
+						<h3>TX Grant Match</h3>
+					</div>
+					<div id="display11" class="updated">
+						<h3>TX Grant</h3>
+					</div>
+					<div id="display12" class="updated">
+						<h3>FWS</h3>
+					</div>
+					<div id="display13" class="updated">
+						<h3>Pell</h3>
+					</div>
+					<div id="display14" class="updated">
+						<h3>Top 10%</h3>
+					</div>
+					<div id="display15" class="updated">
+						<h3>OSFS Scholarship</h3>
+					</div>
+				
 			</div><!--end results div -->
 			<footer id="footer">Thanks for using me!</footer>
 		</div><!--end main container div -->
 	<script src="final3.js"></script>
 	<script src="copypaste.js"></script>
 	<script src="jquery.js"></script>
-	<script src="other.js"></script>
 	</body>
 </html>

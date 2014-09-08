@@ -1,4 +1,4 @@
-//final my ass
+//final my
 
 "use strict";
 
@@ -8,6 +8,9 @@ function gatherBio(){
 		//NaN = false
 		if(parseInt($(this).val())){
 			bio.push(parseInt($(this).val()));
+		}
+		else{
+			bio.push(0);
 		}
 	});
 	return bio;
@@ -41,7 +44,7 @@ function gatherAmt(){
 
 //totals all aid and resources
 function totalAid(){
-	console.log("totalaid just fired")
+	//.log("totalaid just fired")
 	var bio = gatherBio();
 	var aid = gatherAmt() + bio[2];
 	//number
@@ -62,7 +65,7 @@ function sumNeed(){
 			needAid += 0;
 		}
 	};
-	console.log(needAid);
+	//.log(needAid);
 	//number
 	return needAid;
 }
@@ -124,7 +127,7 @@ function reviseLforNeed(){
 		}
 	};
 	//overage exists  - set amts to 0
-	console.log(needLoans);
+	//.log(needLoans);
 	return needLoans;
 }
 
@@ -140,7 +143,7 @@ function readdLoans(){
 	else{
 		var readd = 0;
 	}
-	//console.log('to be readded ' + readd);
+	////.log('to be readded ' + readd);
 	return readd;	
 }
 
@@ -169,7 +172,7 @@ function adjNBloans(){
 			}
 		}
 	};
-	console.log(revisedNeedloans);
+	//.log(revisedNeedloans);
 	return revisedNeedloans;
 }
 
@@ -188,7 +191,7 @@ function retotalNeed(){
 		totalNBamt += adjusted[x].amt;
 	}
 	var newNeed = (need - amount) + totalNBamt;
-	//console.log(newNeed);
+	////.log(newNeed);
 	//returns new amt of need based aid
 	return newNeed;
 }
@@ -215,7 +218,7 @@ function needbasedGrants(){
 	//sort in order of preferred reductions
 	needGrants.sort(function(a,b){return a.type - b.type});
 	//object array
-	//console.log(needGrants);
+	////.log(needGrants);
 	return needGrants;
 }
 
@@ -366,7 +369,7 @@ function checkCost(){
 	else{
 		cost = 0;
 	}
-	console.log(cost);
+	//.log(cost);
 	return cost;
 }
 
@@ -387,7 +390,7 @@ function nonNeedLoans(){
 
 //if an overage exists - set all other loan amounts to = 0
 function reviseLforCost(){
-	console.log(525600);
+	//.log(525600);
 	//if k is positive, no overage, if negative, overage
 	var cost = checkCost();
 	//array of need based loans
@@ -400,7 +403,6 @@ function reviseLforCost(){
 		loans[i].amt = 0;
 		}
 	};
-	console.log(525600);
 	return loans;
 	
 }
@@ -417,15 +419,15 @@ function readdCostloans(){
 	else{
 		var readd = 0;
 	}
-	console.log(123407390412);
-	console.log(readd);
+	//.log(123407390412);
+	//.log(readd);
 	return readd;	
 }
 
 //readds loans if too much was zeroed 
 //this will only happen if need overage is less than total loan amt
 function adjCostloans(){
-	console.log("I work");
+	//.log("I work");
 	var reAdd = readdCostloans();
 	var loans = nonNeedLoans();
 	var length = loans.length;
@@ -434,25 +436,25 @@ function adjCostloans(){
 	var revisedCostloans = [];
 	var total = reAdd;
 	if(reAdd === 0){
-		console.log('Im being triggered');
+		//.log('Im being triggered');
 		revisedCostloans = reviseLforCost();
 	}
 	else{
 		for(var x=0; x < length; x++){
 			if(reversed[x].amt <  total){
-				console.log('elseif being triggered');
+				//.log('elseif being triggered');
 				revisedCostloans.push(reversed[x])
 				total -= reversed[x].amt;
 			}
 			else if(reversed[x].amt > total){
-				console.log('else elseif being triggered');
+				//.log('else elseif being triggered');
 				reversed[x].amt = total;
 				total = 0;
 				revisedCostloans.push(reversed[x]);
 			}
 		}
 	};
-	console.log(revisedCostloans);
+	//.log(revisedCostloans);
 	return revisedCostloans;
 }
 
@@ -477,5 +479,5 @@ function test(){
 	var j = displayupdatedAmts();
 	//this is just here to make sure earlier problem doesn't reoccur
 	//var j = megaArray();
-	//console.log(j);
+	////.log(j);
 }

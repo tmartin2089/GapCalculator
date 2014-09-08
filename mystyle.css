@@ -53,8 +53,12 @@ body {
 }
 
 .bio{
-	width: 15%;
+	width: 25%;
 	padding: 2px 2px;
+}
+
+.p6{
+	margin: 5px 5px;
 }
 
 .aidInput{
