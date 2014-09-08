@@ -1,7 +1,7 @@
 //todo: remove 342000 from array p6 osch code
-//todo: reset all named scholarships to 331000
-//todo: reset all gms/terry to 341000
-//todo:  future- shouldn't matter w/copy and paste but 0 amts fuck it up
+//todo: reset all named scholarships to 15
+//todo: reset all gms/terry to 15
+//todo:  future- shouldn't matter w/copy and paste but 0 amts f it up
 
 
 "use strict";
@@ -38,18 +38,13 @@ function separateType(){
 			type.push(getArray[x])
 		};
 	};
-	//umbrella converts all 331 scholarships to 15
+	//umbrella converts all 331 & 341 scholarships to 15
 	for(var y = 0; y < type.length; y++){
-		if(type[y].toString().substring(0,3)==="331" || "341"){
+		if(type[y].toString().substring(0,3)==="331" || type[y].toString().substring(0,3)==="341"){
 			type[y] = 15;
 		};
 	};
 	//ibid all 341 scholarships to 15
-	for(var y = 0; y < type.length; y++){
-		if(type[y].toString().substring(0,3)==="331"){
-			type[y] = 15;
-		};
-	};
 	return convertType(type);
 }
 
@@ -75,7 +70,7 @@ function convertType(val){
 		
 		//unsub
 		case 214125:
-		case 215126:
+		case 214126:
 		val[x] = 2;
 		break;
 		
@@ -184,8 +179,12 @@ function aidObject(){
 		typeAmt.push({type:getType[x], amt:getAmt[x]});
 	}
 	//removes .amt and .type if amt = 0
+	 // typeAmt = typeAmt.filter(function(loan){
+		// return loan.amt > 0;
+	 // })
+	 //filters out any osch codes - counted in st res gift
 	 typeAmt = typeAmt.filter(function(loan){
-	 return loan.amt > 0;
+		return loan.type != 342000;
 	 })
 	 console.log(typeAmt);
 	return typeAmt;
