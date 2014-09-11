@@ -1,6 +1,3 @@
-//todo: remove 342000 from array p6 osch code
-//todo: reset all named scholarships to 15
-//todo: reset all gms/terry to 15
 //todo:  future- shouldn't matter w/copy and paste but 0 amts f it up
 
 
@@ -24,11 +21,6 @@ function getPaste(){
 	return pastedArray;
 }
 
-function removeOSCH(){
-	var pastedArray = getPaste();
-	
-
-}
 
 function separateType(){
 	var getArray = getPaste();
@@ -177,10 +169,6 @@ function aidObject(){
 	for(var x = 0; x< getType.length; x++){
 		typeAmt.push({type:getType[x], amt:getAmt[x]});
 	}
-	//removes .amt and .type if amt = 0
-	 // typeAmt = typeAmt.filter(function(loan){
-		// return loan.amt > 0;
-	 // })
 	 //filters out any osch codes - counted in st res gift
 	 typeAmt = typeAmt.filter(function(loan){
 		return loan.type != 342000;
