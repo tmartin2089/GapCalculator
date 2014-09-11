@@ -34,7 +34,7 @@ body {
 
 #calcarea{
 	float:left;
-	width: 60%;
+	width: 30%;
 }
 
 
@@ -43,17 +43,13 @@ body {
 	padding-left: 10px;
 }
 
-#results{
-	float:left;
-	width:30%;
-}
 
 #bio{
 	width:100%;
 }
 
 .bio{
-	width: 35%;
+	width: 50%;
 	padding: 2px 2px;
 }
 
@@ -78,69 +74,18 @@ body {
 	width: 35%;
 }
 
+
+
+/* results here */
+
+#results{
+	float:left;
+	width:30%;
+}
+
 /*These divs are presentation of jscript calcs in hmtl*/
 	
-#update {
-	font-family: Georgia, "Times New Roman", Times, serif;
-	width: 70%;
-	margin: 0 auto;
-	border-top: 1px solid #CCC;	
-}
 
-#update ul{
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-#update ul li {
-	width: 100%;
-	padding: 0 20px;
-	background: #EEE;
-	padding-bottom: 10px;
-	height: 110px;
-	overflow: hidden;
-	border-bottom: 1px dotted #CCC;
-	/* calls the myanim css3 effect */
-	-webkit-animation: myanim 1s;
-	-moz-animation: myanim 1s;
-	-o-animation: myanim 1s;
-	animation: myanim 1s;
-	
-	/*makes for smoother transition */
-	-webkit-transition: height 0.3s ease-out 0s;
-	-moz-transition: height 0.3s ease-out 0s;
-	-o-transition: height 0.3s ease-out 0s;
-	transition: height 0.3s ease-out 0s;
-}
-
-#update li:hover{
-	background: #FFFCE5;
-	min-height: 110px;
-	height: 250px;
-	overflow:visible;
-}
-
-#update h2{
-	margin:0;
-	padding:0;
-	font-size: 1.2em;
-	padding-bottom: 5px;
-	padding-top: 20px;
-	font-family: Arial, Helvetica, sans-serif;
-	color: #BF5841;
-	border-bottom: 1px dotted #CCC;
-	margin-bottom: 10px;
-}
-
-#update img {
-	float:left;
-	width:80px;
-	margin-right:10px;
-	-webkit-border-radius:10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-}
 
 #results{
 	float:right;
