@@ -474,6 +474,10 @@ function displayupdatedAmts(){
 	//$('#display2').append('<p> Cost overage is ' + display2[0].type + '</p>');
 }
 
+function clearResult(){
+	$('.result').empty();
+}
+
 function test(){
 
 	var j = displayupdatedAmts();
