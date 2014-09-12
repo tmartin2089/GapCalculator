@@ -142,14 +142,7 @@ function convertType(val){
 		case 321380:
 		case 321396:
 		val[x] = 14;
-		break;
-		
-		
-		//catchall for gms/terry - convert to 341000
-		case 341000:
-		val[x] = 16;
-		break;
-		
+		break;	
 		
 		default:
 		break;

@@ -458,24 +458,114 @@ function adjCostloans(){
 	return revisedCostloans;
 }
 
+//reconvert .type values to aid strings
+function unconvertType(val){
+	for(var x= 0; x < val.length; x++){
+		switch(val[x].type){
+		
+		//plus
+		case 1:
+		val[x].type = "PLUS";
+		break;
+		
+		//unsub
+		case 2:
+		val[x].type = "Unsubsidized Loan";
+		break;
+		
+		//cal/alt
+		case 3:
+		val[x].type = "Cal/Alternative Loan";
+		break;
+		
+		//bot
+		case 4:
+		val[x].type = "Be On Time Loan";
+		break;
+		
+		//perkins
+		case 5:
+		val[x].type = "Perkins Loan";
+		break;
+		
+		//sub
+		case 6:
+		val[x].type = "Subsidized Loan";
+		break;
+		
+		//UT grant	
+		case 7:
+		val[x].type = "UT Grant";
+		break;
+		
+		//PTG
+		case 8:
+		val[x].type = "Partial Tuition Grant";
+		break;
+		
+		//TPEG
+		case 9:
+		val[x].type = "TPEG";
+		break;
+		
+		//tx grant match
+		case 10:
+		val[x].type = "TEXAS Grant Match";
+		break;
+		
+		//tx grant
+		case 11:
+		val[x].type = "TEXAS Grant";
+		break;
+		
+		//fws
+		case 12:
+		val[x].type = "Federal Work-Study";
+		break;
+		
+		//pell
+		case 13:
+		val[x].type = "Pell Grant";
+		break;
+		
+		//top 10
+		case 14:
+		val[x].type = "Top 10% Scholarship";
+		break;
+		
+		
+		//catchall for gms/terry 
+		case 15:
+		val[x].type = "Misc. OSFS Scholarship";
+		break;
+		
+		
+		default:
+		break;
+		}
+	};	
+	return val;
+};
+
+function joinrevisedAid(){
+	var finalArray = joinRevisedNBaid().concat(adjCostloans());
+	return unconvertType(finalArray); 
+}
+
 
 function displayupdatedAmts(){
 	var display = checkCost();
-	var display2 = joinRevisedNBaid();
-	var display3 = adjCostloans();
-	var length = display2.length;
-	for(var x = 0; x < length; x++){
-		$('#display' + display2[x].type).append('<p>Reduce to: ' + display2[x].amt + '</p>').css("display", "block");
-	};
-	for(var y = 0; y < display3.length; y++){
-		$('#display' + display3[y].type).append('<p>Reduce to: ' + display3[y].amt + '</p>').css("display", "block");
-	};
-	$('#cost').append('<p>Must reduce for cost: $' + Math.abs(display) + '</p>').css("display", "block");
-	//$('#display2').append('<p> Cost overage is ' + display2[0].type + '</p>');
-}
+	var display1 = joinrevisedAid();
+	console.log(display1);
+	var length = display1.length;
+		for(var x = 0; x < length; x++){
+			$('#results').append('<div class="updated"> <p>' + display1[x].type + '</p><p>Amount:' + display1[x].amt + '</p></div>').css("display", "block");
+		};
+ }
 
 function clearResult(){
-	$('.result').empty();
+	document.getElementById("bio").reset();
+	$('#results').empty();
 }
 
 function test(){

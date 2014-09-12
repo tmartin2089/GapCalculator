@@ -81,6 +81,7 @@ body {
 #results{
 	float:left;
 	width:30%;
+	display:none;
 }
 
 /*These divs are presentation of jscript calcs in hmtl*/
@@ -98,7 +99,6 @@ body {
 .updated{
 	background: #DAD7C7;
 	color: #3D3328;
-	display:none;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
