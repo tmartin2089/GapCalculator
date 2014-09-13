@@ -7,16 +7,18 @@ Configuring Need/Cost/GAP rules for Title IV and institutional aid
  ++++++++++++++++++++++
  +Future to do        +
  ++++++++++++++++++++++
-	I. Block Copy/Paste from P6 to determine
-	amounts and types of aid - do away with selects and inputs
-		a. Split strings along blanks - should produce 3 
-		fields - i.e. 214025 Subsidized Loan 3500.00
-			1. Plug into array from there.  First 6 #s and amt - 
-			won't need title except for secondary verification
-			2. To determine if need or need based - large array -
-			for loop to search through type (all will be 6 numbers)
-			to match need/nonneed types
-
+	I. If entitlements only at end of calc (can check sacred aid === totalaidAmt) -
+	modal window to confirm that need/cost is being checked for the year.
+	
+	II.  Add in graduate student support
+	
+	III. Hyperlink - Is this AR code a resource?
+	
+	IV.  Add in form validation elements for each field
+	
+	V. CSS styling - need to differentiate each field.
+	
+	VI - change buttons into css divs - easier for stylin'
 
 
  ++++++++++++++++++++++
