@@ -57,6 +57,8 @@ function convertType(val){
 		//plus
 		case 215025:
 		case 215026:
+		case 215125:
+		case 215126:
 		val[x] = 1;
 		break;
 		

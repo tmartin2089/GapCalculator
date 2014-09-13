@@ -11,7 +11,7 @@ body {
 	margin:0 auto;    /*why does this move div to the middle? */
 	background: #BF996B;
 	padding: 10px;
-	width: 50%;
+	width: 400px;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	border-radius: 10px 10px 0 0;
@@ -34,7 +34,7 @@ body {
 
 #calcarea{
 	float:left;
-	width: 30%;
+	width: 40%;
 }
 
 
@@ -79,18 +79,16 @@ body {
 /* results here */
 
 #results{
-	float:left;
-	width:30%;
+	float:right;
 	display:none;
+	padding-left:45px;
 }
 
 /*These divs are presentation of jscript calcs in hmtl*/
 	
 
 
-#results{
-	float:right;
-}
+
 
 #cost{
 	border-radius: 10px;
@@ -103,6 +101,7 @@ body {
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	margin-bottom: 5px;
+	clear:both;
 }
 
 .updated:hover{
