@@ -16,12 +16,14 @@ function gatherBio(){
 	return bio;
 }
 
+//bio[0]= COA  bio[1] & bio[2] = PC and SC  bio[3] = st res gift
+
 
 function determineNeed(){
 	var bio = gatherBio();
 	var cost = bio[0];
-	var efc = bio[1];
-	var stRes = bio[2];
+	var efc = bio[1] + bio[2];
+	var stRes = bio[3];
 	if(cost - efc <= 0 || (cost - efc) - stRes <= 0){
 		//then there is no need
 		var need = 0;
@@ -46,7 +48,7 @@ function gatherAmt(){
 function totalAid(){
 	//.log("totalaid just fired")
 	var bio = gatherBio();
-	var aid = gatherAmt() + bio[2];
+	var aid = gatherAmt() + bio[3];
 	//number
 	return aid;
 }
@@ -359,7 +361,7 @@ function sumRevisedNBaid(){
 function checkCost(){
 	var bio = gatherBio();
 	var total = sumNonNeed() + sumRevisedNBaid();
-	var cost = (bio[0] - bio[2]) - total;
+	var cost = (bio[0] - bio[3]) - total;
 	//number
 	//return cost;
 	if(cost < 0){
@@ -547,6 +549,7 @@ function unconvertType(val){
 	return val;
 };
 
+
 function joinrevisedAid(){
 	var finalArray = joinRevisedNBaid().concat(adjCostloans());
 	return unconvertType(finalArray); 
@@ -559,19 +562,17 @@ function displayupdatedAmts(){
 	console.log(display1);
 	var length = display1.length;
 		for(var x = 0; x < length; x++){
-			$('#results').append('<div class="updated"> <p>' + display1[x].type + '</p><p>Amount:' + display1[x].amt + '</p></div>').css("display", "block");
+			$('#results').append('<div class="updated"> <p>' + display1[x].type + '</p><p>Amount: ' + display1[x].amt + '</p></div>').css("display", "block");
 		};
  }
+ 
 
 function clearResult(){
 	document.getElementById("bio").reset();
 	$('#results').empty();
 }
 
-function test(){
 
+function test(){
 	var j = displayupdatedAmts();
-	//this is just here to make sure earlier problem doesn't reoccur
-	//var j = megaArray();
-	////.log(j);
 }

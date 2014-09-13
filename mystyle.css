@@ -105,6 +105,10 @@ body {
 	margin-bottom: 5px;
 }
 
+.updated:hover{
+	background: #eeeDe6;
+}
+
 .updated p {
 	padding:10px 10px;
 }
