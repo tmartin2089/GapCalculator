@@ -84,6 +84,29 @@ body {
 	padding-left:45px;
 }
 
+.changedAid{
+	background-color: #FFE600;
+	color: #3D3328;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	margin-bottom: 5px;
+	clear:both;
+}
+
+.changedAid:hover{
+	background: #eeeDe6;
+}
+
+.changedAid p {
+	padding:10px 10px;
+}
+
+.changedAid h3{
+	margin: 5px 5px;
+	padding: 5px 5px;
+}
+
 /*These divs are presentation of jscript calcs in hmtl*/
 	
 
