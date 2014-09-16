@@ -549,21 +549,32 @@ function unconvertType(val){
 	return val;
 };
 
-
+//concats for unconvertType switch 
 function joinrevisedAid(){
 	var finalArray = joinRevisedNBaid().concat(adjCostloans());
-	return unconvertType(finalArray); 
+	//sort in ascending for comparison w/original array - to allow for conditional 
+	//css formatting
+	var sorted = finalArray.sort(function(a,b){return a.type - b.type});
+	return unconvertType(sorted); 
 }
+
+
 
 
 function displayupdatedAmts(){
 	var display = checkCost();
 	var display1 = joinrevisedAid();
-	console.log(display1);
+	//for comparison purposes - pulls initial array
+	var display2 = aidObject().sort(function(a,b){return a.type - b.type});
 	var length = display1.length;
 		for(var x = 0; x < length; x++){
-			$('#results').append('<div class="updated"> <p>' + display1[x].type + '</p><p>Amount: ' + display1[x].amt + '</p></div>').css("display", "block");
-		};
+			if(display2[x].amt != display1[x].amt){
+				$('#results').append('<div class="changedAid"> <p>' + display1[x].type + '</p><p>Amount: ' + display1[x].amt + '</p></div>').css("display","block");
+			}
+			else{
+				$('#results').append('<div class="updated"> <p>' + display1[x].type + '</p><p>Amount: ' + display1[x].amt + '</p></div>').css("display", "block");
+			};
+		}	
  }
  
 
@@ -574,5 +585,5 @@ function clearResult(){
 
 
 function test(){
-	var j = displayupdatedAmts();
+	var j = compareChanges();
 }
