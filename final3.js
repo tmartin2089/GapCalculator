@@ -2,6 +2,12 @@
 
 "use strict";
 
+var el = document.getElementById('calc');
+el.addEventListener('click', displayupdatedAmts);
+
+var el2 = document.getElementById('clear');
+el2.addEventListener('click', clearResult);
+
 function gatherBio(){
 	var bio = [];
 	$('.bio').each(function(index){
