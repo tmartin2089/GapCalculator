@@ -79,6 +79,7 @@ function sumNeed(){
 	//cant reuse megaArray variable name as it's already a global function
 	//knowledge is power!
 	var megaArray = aidObject();
+	console.log(megaArray);
 	var length = megaArray.length;
 	var needAid = 0;
 	for(var x = 0; x<length; x++){
@@ -90,6 +91,7 @@ function sumNeed(){
 		}
 	};
 	//number
+	console.log(needAid);
 	return needAid;
 }
 
@@ -206,8 +208,10 @@ function retotalNeed(){
 	var length = adjusted.length;
 	//recalls total need amt from start of function
 	var need = sumNeed();
+	console.log(need);
 	//recalls total need b loan amt from start of function
 	var amount = nbloanamt()
+	console.log(amount);
 	var newNeed;
 	//sums up revised need amts
 	for(var x = 0; x < length; x++){
@@ -215,6 +219,7 @@ function retotalNeed(){
 	}
 	var newNeed = (need - amount) + totalNBamt;
 	//returns new amt of need based aid
+	console.log(newNeed);
 	return newNeed;
 }
 
@@ -222,6 +227,7 @@ function retotalNeed(){
 function recheckNeed(){
 	//retotalNeed is totaling amount of nb aid after nb loan revisions
 	var need = determineNeed() - retotalNeed();
+	console.log(need);
 	return need;
 	//if need is negative, then over need
 	//if need is positive, then under need
