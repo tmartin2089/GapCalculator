@@ -99,14 +99,14 @@ function convertType(val){
 		case 131254:
 		case 131255:
 		case 131256:
-		val[x] = 7;
+		val[x] = 11;
 		break;
 		
 		//PTG
 		case 131200:
 		case 131201:
 		case 131202:
-		val[x] = 8;
+		val[x] = 10;
 		break;
 		
 		//TPEG
@@ -119,14 +119,14 @@ function convertType(val){
 		
 		//tx grant match
 		case 131114:
-		val[x] = 10;
+		val[x] = 8;
 		break;
 		
 		//tx grant
 		case 121176:
 		case 121178:
 		case 121180:
-		val[x] = 11;
+		val[x] = 7;
 		break;
 		
 		//fws

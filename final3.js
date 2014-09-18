@@ -2,11 +2,25 @@
 
 "use strict";
 
-var el = document.getElementById('calc');
-el.addEventListener('click', displayupdatedAmts);
 
-var el2 = document.getElementById('clear');
-el2.addEventListener('click', clearResult);
+function doX(){
+     var k = 9;
+     return k;
+}
+
+function doY(){
+     var j = doX();
+     console.log(j);
+     j = 0;
+	 console.log(j);
+}
+
+
+  var el = document.getElementById('calc');
+  el.addEventListener('click', displayupdatedAmts);
+
+  var el2 = document.getElementById('clear');
+  el2.addEventListener('click', clearResult);
 
 function gatherBio(){
 	var bio = [];
@@ -43,6 +57,7 @@ function determineNeed(){
 //totals amount of aid not including bio
 function gatherAmt(){
 	 var megaArray = aidObject();
+	 //console.log(megaArray);
 	 var amt = 0;
 	 for(var x = 0; x < megaArray.length; x++){
 		amt += megaArray[x].amt;
@@ -59,6 +74,7 @@ function totalAid(){
 	return aid;
 }
 
+//sums up total amt of need aid
 function sumNeed(){
 	//cant reuse megaArray variable name as it's already a global function
 	//knowledge is power!
@@ -73,7 +89,6 @@ function sumNeed(){
 			needAid += 0;
 		}
 	};
-	//.log(needAid);
 	//number
 	return needAid;
 }
@@ -199,13 +214,13 @@ function retotalNeed(){
 		totalNBamt += adjusted[x].amt;
 	}
 	var newNeed = (need - amount) + totalNBamt;
-	////.log(newNeed);
 	//returns new amt of need based aid
 	return newNeed;
 }
 
 //takes adjusted need amt and determines if there is an overage 
 function recheckNeed(){
+	//retotalNeed is totaling amount of nb aid after nb loan revisions
 	var need = determineNeed() - retotalNeed();
 	return need;
 	//if need is negative, then over need
@@ -226,7 +241,7 @@ function needbasedGrants(){
 	//sort in order of preferred reductions
 	needGrants.sort(function(a,b){return a.type - b.type});
 	//object array
-	////.log(needGrants);
+	console.log(needGrants);
 	return needGrants;
 }
 
@@ -283,9 +298,12 @@ function sacredAidarray(){
 
 
 //if an overage exists - set all NB grant amounts to = 0
+//only gets called if condition occurs in adjNBgrants
 function reviseGforNeed(){
+	console.log('im working');
 	//if need is positive, no overage, if negative, overage
 	var need = recheckNeed();
+	console.log(need);
 	//array of need based loans
 	var grantArray = needbasedGrants();
 	var length = grantArray.length;
@@ -301,6 +319,7 @@ function reviseGforNeed(){
 
 function readdGrants(){
 	var need = recheckNeed();
+	console.log(need);
 	var nonEntit = nbgrantamt()-sacredAid();
 	//if need overage is less than nb grant amt
 	//then too much was taken away
@@ -317,10 +336,16 @@ function readdGrants(){
 //this will only happen if need overage is less than total grant amt
 function adjNBgrants(){
 	var reAdd = readdGrants();
-	var grantArray = needbasedGrants();
+	var grantArray1 = needbasedGrants();
+	var grantArray= needbasedGrants();
+	//var grantArray3 = grantArray1;
+	//console.log(grantArray1);
+	//console.log(grantArray3);
+	//console.log(grantArray);
 	var length = grantArray.length;
 	var revisedGrants = [];
 	var total = reAdd;
+	console.log(total);
 	if(reAdd === 0){
 		revisedGrants = reviseGforNeed();
 	}
@@ -328,15 +353,22 @@ function adjNBgrants(){
 		for(var x = 0; x < length; x++){
 			if(grantArray[x].amt <  total){
 				revisedGrants.push(grantArray[x])
+				console.log('doin shit2');
+				console.log(total);
 				total -= grantArray[x].amt;
+				console.log(total);
 			}
 			else if(grantArray[x].amt > total){
 					grantArray[x].amt = total;
+					console.log('doin shit');
+					console.log(total);
 					total = 0;
 					revisedGrants.push(grantArray[x]);
+					console.log(total);
 			}
 		}
 	};
+	console.log(revisedGrants);
 	return revisedGrants;
 }
 
@@ -502,12 +534,12 @@ function unconvertType(val){
 		break;
 		
 		//UT grant	
-		case 7:
+		case 11:
 		val[x].type = "UT Grant";
 		break;
 		
 		//PTG
-		case 8:
+		case 10:
 		val[x].type = "Partial Tuition Grant";
 		break;
 		
@@ -516,14 +548,14 @@ function unconvertType(val){
 		val[x].type = "TPEG";
 		break;
 		
-		//tx grant match
-		case 10:
-		val[x].type = "TEXAS Grant Match";
+		//tx grant
+		case 7:
+		val[x].type = "TEXAS Grant";
 		break;
 		
-		//tx grant
-		case 11:
-		val[x].type = "TEXAS Grant";
+		//tx grant match
+		case 8:
+		val[x].type = "TEXAS Grant Match";
 		break;
 		
 		//fws
