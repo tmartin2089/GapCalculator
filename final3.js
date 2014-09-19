@@ -3,6 +3,9 @@
 "use strict";
 
 
+//event listeners rather than HTML events 
+//safer from XSS attacks
+
   var el = document.getElementById('calc');
   el.addEventListener('click', displayupdatedAmts);
 
@@ -12,7 +15,7 @@
 function gatherBio(){
 	var bio = [];
 	$('.bio').each(function(index){
-		//NaN = false
+		//NaN = falsey 
 		if(parseInt($(this).val())){
 			bio.push(parseInt($(this).val()));
 		}
@@ -26,6 +29,7 @@ function gatherBio(){
 //bio[0]= COA  bio[1] & bio[2] = PC and SC  bio[3] = st res gift
 
 
+//calculates initial need - Coa - efc - st res
 function determineNeed(){
 	var bio = gatherBio();
 	var cost = bio[0];
@@ -52,7 +56,7 @@ function gatherAmt(){
 	 return amt;
 }
 
-//totals all aid and resources
+//totals all aid and st res gift from bio
 function totalAid(){
 	//.log("totalaid just fired")
 	var bio = gatherBio();
@@ -63,10 +67,9 @@ function totalAid(){
 
 //sums up total amt of need aid
 function sumNeed(){
-	//cant reuse megaArray variable name as it's already a global function
 	//knowledge is power!
 	var megaArray = aidObject();
-	console.log(megaArray);
+	//console.log(megaArray);
 	var length = megaArray.length;
 	var needAid = 0;
 	for(var x = 0; x<length; x++){
@@ -78,12 +81,12 @@ function sumNeed(){
 		}
 	};
 	//number
-	console.log(needAid);
+	//console.log(needAid);
 	return needAid;
 }
 
 
-//anything remaining after taking away need from total aid must be nonneed
+//total aid - total nb aid = nonneed aid total
 function sumNonNeed(){
 	return gatherAmt() - sumNeed();
 }
