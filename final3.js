@@ -3,19 +3,6 @@
 "use strict";
 
 
-function doX(){
-     var k = 9;
-     return k;
-}
-
-function doY(){
-     var j = doX();
-     console.log(j);
-     j = 0;
-	 console.log(j);
-}
-
-
   var el = document.getElementById('calc');
   el.addEventListener('click', displayupdatedAmts);
 
