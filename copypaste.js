@@ -70,7 +70,9 @@ function convertType(val){
 		
 		//cal/alt
 		case 222001:
+		case 222002:
 		case 241002:
+		case 241003:
 		val[x] = 3;
 		break;
 		
