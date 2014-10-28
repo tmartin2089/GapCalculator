@@ -105,8 +105,9 @@ function needbasedLoans(){
 	var needLoans = [];
 	var length = megaArray.length;
 	for(var i= 0; i < length; i++){
-		if(megaArray[i].type === 5 || megaArray[i].type === 6){
-			needLoans.push(megaArray[i]);
+		var megaArrayLoop = megaArray[i];
+		if(megaArrayLoop.type === 5 || megaArrayLoop.type === 6){
+			needLoans.push(megaArrayLoop);
 		}
 	}
 	//sort so perkins can be reduced before sub
@@ -230,8 +231,9 @@ function needbasedGrants(){
 	var needGrants = [];
 	var length = megaArray.length;
 	for(var i= 0; i < length; i++){
-		if(megaArray[i].type >= 7 && megaArray[i].type <= 12){
-			needGrants.push(megaArray[i]);
+	var megaArrayLoop = megaArray[i];
+		if(megaArrayLoop.type >= 7 && megaArrayLoop.type <= 12){
+			needGrants.push(megaArrayLoop);
 		}
 	}
 	//sort in order of preferred reductions
@@ -349,14 +351,12 @@ function adjNBgrants(){
 		for(var x = 0; x < length; x++){
 			if(grantArray[x].amt <  total){
 				revisedGrants.push(grantArray[x])
-				console.log('doin shit2');
 				console.log(total);
 				total -= grantArray[x].amt;
 				console.log(total);
 			}
 			else if(grantArray[x].amt > total){
 					grantArray[x].amt = total;
-					console.log('doin shit');
 					console.log(total);
 					total = 0;
 					revisedGrants.push(grantArray[x]);
