@@ -1,5 +1,3 @@
-//sup sexy
-
 "use strict";
 
 
@@ -199,10 +197,10 @@ function retotalNeed(){
 	var length = adjusted.length;
 	//recalls total need amt from start of function
 	var need = sumNeed();
-	console.log(need);
+	//console.log(need);
 	//recalls total need b loan amt from start of function
 	var amount = nbloanamt()
-	console.log(amount);
+	//console.log(amount);
 	var newNeed;
 	//sums up revised need amts
 	for(var x = 0; x < length; x++){
@@ -210,7 +208,7 @@ function retotalNeed(){
 	}
 	var newNeed = (need - amount) + totalNBamt;
 	//returns new amt of need based aid
-	console.log(newNeed);
+	//console.log(newNeed);
 	return newNeed;
 }
 
@@ -218,7 +216,7 @@ function retotalNeed(){
 function recheckNeed(){
 	//retotalNeed is totaling amount of nb aid after nb loan revisions
 	var need = determineNeed() - retotalNeed();
-	console.log(need);
+	//console.log(need);
 	return need;
 	//if need is negative, then over need
 	//if need is positive, then under need
@@ -239,7 +237,7 @@ function needbasedGrants(){
 	//sort in order of preferred reductions
 	needGrants.sort(function(a,b){return a.type - b.type});
 	//object array
-	console.log(needGrants);
+	//console.log(needGrants);
 	return needGrants;
 }
 
@@ -298,10 +296,10 @@ function sacredAidarray(){
 //if an overage exists - set all NB grant amounts to = 0
 //only gets called if condition occurs in adjNBgrants
 function reviseGforNeed(){
-	console.log('im working');
+	//console.log('im working');
 	//if need is positive, no overage, if negative, overage
 	var need = recheckNeed();
-	console.log(need);
+	//console.log(need);
 	//array of need based loans
 	var grantArray = needbasedGrants();
 	var length = grantArray.length;
@@ -317,7 +315,7 @@ function reviseGforNeed(){
 
 function readdGrants(){
 	var need = recheckNeed();
-	console.log(need);
+	//console.log(need);
 	var nonEntit = nbgrantamt()-sacredAid();
 	//if need overage is less than nb grant amt
 	//then too much was taken away
@@ -343,7 +341,7 @@ function adjNBgrants(){
 	var length = grantArray.length;
 	var revisedGrants = [];
 	var total = reAdd;
-	console.log(total);
+	//console.log(total);
 	if(reAdd === 0){
 		revisedGrants = reviseGforNeed();
 	}
@@ -351,20 +349,20 @@ function adjNBgrants(){
 		for(var x = 0; x < length; x++){
 			if(grantArray[x].amt <  total){
 				revisedGrants.push(grantArray[x])
-				console.log(total);
+				//console.log(total);
 				total -= grantArray[x].amt;
-				console.log(total);
+				//console.log(total);
 			}
 			else if(grantArray[x].amt > total){
 					grantArray[x].amt = total;
-					console.log(total);
+					//console.log(total);
 					total = 0;
 					revisedGrants.push(grantArray[x]);
-					console.log(total);
+					//console.log(total);
 			}
 		}
 	};
-	console.log(revisedGrants);
+	//console.log(revisedGrants);
 	return revisedGrants;
 }
 
@@ -593,7 +591,33 @@ function joinrevisedAid(){
 }
 
 
+//captures need and cost overage into object array for rotating results div display
+function createOverageobj(){
+	var displayArray = [];
+	displayArray.push( {
+		type: "Over NEED by:",
+		amount: checkNeed(),
+	});
+	displayArray.push( {
+		type: "After revising for need, over COST by:",
+		amount: checkCost(),
+	});
+	return displayArray;
+}
 
+	var intervalIndex = 0;
+//display above createOverageobj array of need/cost overage before full revisions
+//cost overage will reflect cost overage after need calculation completed
+function displayNeedCost(){
+	var needcostArray = createOverageobj();
+	console.log(intervalIndex);
+	$('#results').append('<div class="changedAid"> <p>' + needcostArray[intervalIndex].type + "<br>" + needcostArray[intervalIndex].amount + '</p> </div>' );
+	intervalIndex++;
+	console.log(intervalIndex);
+	if(intervalIndex >= needcostArray.length){
+		intervalIndex = 0;
+	};
+}
 
 function displayupdatedAmts(){
 	var display = checkCost();
@@ -619,5 +643,5 @@ function clearResult(){
 
 
 function test(){
-	var j = compareChanges();
+	setInterval(displayNeedCost, 2000);
 }
