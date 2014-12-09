@@ -89,8 +89,27 @@ body {
 
 #results{
 	float:left;
-	display:none;
+/* 	display:none; */
 	padding-left:15px;
+}
+
+#ncresults{
+	float:left;
+}
+
+#ncresults p{
+	float:left;
+/* 	display:none; */
+	padding:10px 10px;
+}
+
+.ncresults{
+	background-color: #FFE600;
+	color: #3D3328;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	margin-bottom: 5px;
 }
 
 .changedAid{

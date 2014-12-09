@@ -46,12 +46,11 @@ function determineNeed(){
 //totals amount of aid not including bio
 function gatherAmt(){
 	 var megaArray = aidObject();
-	 //console.log(megaArray);
-	 var amt = 0;
-	 for(var x = 0; x < megaArray.length; x++){
-		amt += megaArray[x].amt;
-	 }
-	 return amt;
+	 var amount = 0;
+	 $.each(megaArray, function(){
+		amount += this.amt;
+	 })
+	 return amount;
 }
 
 //totals all aid and st res gift from bio
@@ -595,12 +594,12 @@ function joinrevisedAid(){
 function createOverageobj(){
 	var displayArray = [];
 	displayArray.push( {
-		type: "Over NEED by:",
-		amount: checkNeed(),
+		type: "Over NEED:",
+		amount: "$" + checkNeed(),
 	});
 	displayArray.push( {
-		type: "After revising for need, over COST by:",
-		amount: checkCost(),
+		type: "After NEED, over COST:",
+		amount: "$" + checkCost(),
 	});
 	return displayArray;
 }
@@ -611,7 +610,7 @@ function createOverageobj(){
 function displayNeedCost(){
 	var needcostArray = createOverageobj();
 	console.log(intervalIndex);
-	$('#results').append('<div class="changedAid"> <p>' + needcostArray[intervalIndex].type + "<br>" + needcostArray[intervalIndex].amount + '</p> </div>' );
+	$('#ncresults').html('<p>' + needcostArray[intervalIndex].type + "</p><p>" + needcostArray[intervalIndex].amount + '</p>' );
 	intervalIndex++;
 	console.log(intervalIndex);
 	if(intervalIndex >= needcostArray.length){

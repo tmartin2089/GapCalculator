@@ -1,0 +1,6 @@
+todo:
+
+replace switch statements w/object literals
+
+replace mega array with object constructor
+
