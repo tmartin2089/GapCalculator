@@ -4,8 +4,8 @@
 //event listeners rather than HTML events 
 //safer from XSS attacks
 
-  var el = document.getElementById('calc');
-  el.addEventListener('click', displayupdatedAmts);
+  //var el = document.getElementById('calc');
+  //el.addEventListener('click', displayupdatedAmts);
 
   var el2 = document.getElementById('clear');
   el2.addEventListener('click', clearResult);

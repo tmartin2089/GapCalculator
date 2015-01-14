@@ -5,9 +5,11 @@
 //gathers award information
 
 
-//gets rid of all extraneous and returns numbers only
+//gathers aid from p6 paste here
 function getPaste(){
-	var pasted = $('.paste').val().replace(/_/g,' ');
+	console.log("wtf");
+	var pasted = $('.paste').val().replace(/_/g,' '); //remove underscores
+	console.log(pasted);
 	var split = pasted.split(' ');
 	var pastedArray = [];
 	for(var x= 0; x< split.length; x++){
@@ -18,7 +20,9 @@ function getPaste(){
 			pastedArray.push(parseInt(split[x]));
 		}
 	}
+	console.log(pastedArray);
 	return pastedArray;
+	
 }
 
 
