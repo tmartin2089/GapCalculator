@@ -1,5 +1,5 @@
 "use strict";
-
+//does switching the branch in git let me save updates there?
 
 var myDom = document.getElementById('result');
 
