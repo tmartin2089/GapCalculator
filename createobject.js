@@ -41,13 +41,13 @@ function runitThrough(thingy){
 	var errorarr = [];
 	var j;
 	//the errorarr is pointless, this needs refining 
+	//you're getting undefined results because they're only becoming undefined after being run through convertaid - b4 the array is fine
 	$.each(thingy, function(){
-		if(isNaN(this.type) || (this === undefined)){
-			errorarr.push(this.type, this.value);
-		}
-		else{
 			k.push(convertAid(this.type, this.value));
-		}
+	})
+	//filters out undefined values
+	k = k.filter(function(x){
+		return (x);
 	})
 	console.log(errorarr);
 	console.log(k);
