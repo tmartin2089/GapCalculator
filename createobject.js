@@ -4,7 +4,7 @@
 //need to convert any osfs scholarship award codes to simple 331
 var myDom = document.getElementById('result');
 
-//gather p6 paste information
+//gather p6 paste information and clean it up
 function getPaste(){
 	//clean up your input
 	var pasted = $('.paste').val().replace(/_/g,' ').split(' '); //remove underscores
@@ -23,12 +23,17 @@ function getPaste(){
 			pastedArray2.push({type:this, value:pastedArray[index+1]});
 		}
 	})
+	//convert all OSFS scholarships to same type
+	$.each(pastedArray2,function(index){
+		var testVar = this.type;
+			if(testVar.toString().substring(0,3)==="331" || testVar.toString().substring(0,3)==="341"){
+				pastedArray2[index].type = 331000;
+			}				
+	})
 	console.log(pastedArray2);
 	return pastedArray2;	
 }
 
-
-//next up - need to umbrella convert named scholarships and filter outside scholarships
 
 
 //needRank determines order of reduction.  Lowest needRank gets reduced first  needBased flag will be used to gather need objects only for need redux
@@ -38,10 +43,6 @@ function getPaste(){
 
 function runitThrough(thingy){
 	var k = [];
-	var errorarr = [];
-	var j;
-	//the errorarr is pointless, this needs refining 
-	//you're getting undefined results because they're only becoming undefined after being run through convertaid - b4 the array is fine
 	$.each(thingy, function(){
 			k.push(convertAid(this.type, this.value));
 	})
@@ -49,9 +50,7 @@ function runitThrough(thingy){
 	k = k.filter(function(x){
 		return (x);
 	})
-	console.log(errorarr);
 	console.log(k);
-	//console.log(myObj);
 	return k;
 }
 
