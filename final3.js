@@ -11,6 +11,7 @@
 
   var el2 = document.getElementById('clear');
   el2.addEventListener('click', clearResult);
+  
 
 function gatherBio(){
 	var bio = [];
@@ -48,7 +49,7 @@ function determineNeed(){
 //totals amount of aid not including bio
 function gatherAmt(){
 	 var megaArray = aidObject();
-	 //console.log(megaArray);
+	 ////(megaArray);
 	 var amt = 0;
 	 for(var x = 0; x < megaArray.length; x++){
 		amt += megaArray[x].amt;
@@ -69,7 +70,7 @@ function totalAid(){
 function sumNeed(){
 	//knowledge is power!
 	var megaArray = aidObject();
-	//console.log(megaArray);
+	////(megaArray);
 	var length = megaArray.length;
 	var needAid = 0;
 	for(var x = 0; x<length; x++){
@@ -81,7 +82,7 @@ function sumNeed(){
 		}
 	};
 	//number
-	//console.log(needAid);
+	////(needAid);
 	return needAid;
 }
 
@@ -94,6 +95,8 @@ function sumNonNeed(){
 
 //subtracts total need based aid from Fed Need  
 function checkNeed(){
+	var k = determineNeed() - sumNeed();
+	//(k);
 	return determineNeed() - sumNeed();
 	//if negative, then over need
 	//if positive or 0, then under or at need
@@ -113,6 +116,7 @@ function needbasedLoans(){
 	//sort so perkins can be reduced before sub
 	needLoans.sort(function(a,b){return a.type - b.type});
 	//object array
+	//(needLoans);
 	return needLoans;
 }
 
@@ -124,6 +128,7 @@ function nbloanamt(){
 	for(var i= 0; i < length; i++){
 		needLoansAmt += needLoans[i].amt;
 	}
+	//(needLoansAmt);
 	return needLoansAmt;
 }
 
@@ -131,7 +136,9 @@ function nbloanamt(){
 function reviseLforNeed(){
 	//if need is positive, no overage, if negative, overage bc subtracting
 	//total nb aid from need
+	//("I just fired");
 	var need = checkNeed();
+	//(need);
 	//array of need based loans
 	var needLoans = needbasedLoans();
 	var length = needLoans.length;
@@ -143,7 +150,7 @@ function reviseLforNeed(){
 		}
 	};
 	//overage exists  - set amts to 0
-	//.log(needLoans);
+	//(needLoans);
 	return needLoans;
 }
 
@@ -159,7 +166,7 @@ function readdLoans(){
 	else{
 		var readd = 0;
 	}
-	////.log('to be readded ' + readd);
+	//('to be readded ' + readd);
 	return readd;	
 }
 
@@ -167,19 +174,25 @@ function readdLoans(){
 //this will only happen if need overage is less than total loan amt
 function adjNBloans(){
 	var readd = readdLoans();
+	//(readd);
 	var needLoans = needbasedLoans();
+	//(needLoans);
 	var length = needLoans.length;
 	var reversed = needLoans.reverse();
+	//(reversed);
 	var revisedNeedloans = [];
 	var total = readd;
+	//(total);
 	if(readd === 0){
 		revisedNeedloans = reviseLforNeed();
 	}
 	else{
+		//("second branch firing");
 		for(var x=0; x < length; x++){
-			if(reversed[x].amt <  total){
-				revisedNeedloans.push(reversed[x])
+			if(reversed[x].amt <=  total){
+				revisedNeedloans.push(reversed[x]);
 				total -= reversed[x].amt;
+				//(total);
 			}
 			else if(reversed[x].amt > total){
 					reversed[x].amt = total;
@@ -188,7 +201,7 @@ function adjNBloans(){
 			}
 		}
 	};
-	//.log(revisedNeedloans);
+	//(revisedNeedloans);
 	return revisedNeedloans;
 }
 
@@ -199,10 +212,10 @@ function retotalNeed(){
 	var length = adjusted.length;
 	//recalls total need amt from start of function
 	var need = sumNeed();
-	console.log(need);
+	//(need);
 	//recalls total need b loan amt from start of function
 	var amount = nbloanamt()
-	console.log(amount);
+	//(amount);
 	var newNeed;
 	//sums up revised need amts
 	for(var x = 0; x < length; x++){
@@ -210,7 +223,7 @@ function retotalNeed(){
 	}
 	var newNeed = (need - amount) + totalNBamt;
 	//returns new amt of need based aid
-	console.log(newNeed);
+	//(newNeed);
 	return newNeed;
 }
 
@@ -218,7 +231,7 @@ function retotalNeed(){
 function recheckNeed(){
 	//retotalNeed is totaling amount of nb aid after nb loan revisions
 	var need = determineNeed() - retotalNeed();
-	console.log(need);
+	//(need);
 	return need;
 	//if need is negative, then over need
 	//if need is positive, then under need
@@ -239,7 +252,7 @@ function needbasedGrants(){
 	//sort in order of preferred reductions
 	needGrants.sort(function(a,b){return a.type - b.type});
 	//object array
-	console.log(needGrants);
+	//(needGrants);
 	return needGrants;
 }
 
@@ -255,6 +268,7 @@ function allGrants(){
 	//sort in order of preferred reductions
 	needGrants.sort(function(a,b){return a.type - b.type});
 	//object array
+	//(megaArray);
 	return needGrants;
 }
 
@@ -298,10 +312,10 @@ function sacredAidarray(){
 //if an overage exists - set all NB grant amounts to = 0
 //only gets called if condition occurs in adjNBgrants
 function reviseGforNeed(){
-	console.log('im working');
+	//('im working');
 	//if need is positive, no overage, if negative, overage
 	var need = recheckNeed();
-	console.log(need);
+	//(need);
 	//array of need based loans
 	var grantArray = needbasedGrants();
 	var length = grantArray.length;
@@ -317,7 +331,7 @@ function reviseGforNeed(){
 
 function readdGrants(){
 	var need = recheckNeed();
-	console.log(need);
+	//(need);
 	var nonEntit = nbgrantamt()-sacredAid();
 	//if need overage is less than nb grant amt
 	//then too much was taken away
@@ -337,13 +351,13 @@ function adjNBgrants(){
 	var grantArray1 = needbasedGrants();
 	var grantArray= needbasedGrants();
 	//var grantArray3 = grantArray1;
-	//console.log(grantArray1);
-	//console.log(grantArray3);
-	//console.log(grantArray);
+	////(grantArray1);
+	////(grantArray3);
+	////(grantArray);
 	var length = grantArray.length;
 	var revisedGrants = [];
 	var total = reAdd;
-	console.log(total);
+	//(total);
 	if(reAdd === 0){
 		revisedGrants = reviseGforNeed();
 	}
@@ -351,20 +365,20 @@ function adjNBgrants(){
 		for(var x = 0; x < length; x++){
 			if(grantArray[x].amt <  total){
 				revisedGrants.push(grantArray[x])
-				console.log(total);
+				//(total);
 				total -= grantArray[x].amt;
-				console.log(total);
+				//(total);
 			}
 			else if(grantArray[x].amt > total){
 					grantArray[x].amt = total;
-					console.log(total);
+					//(total);
 					total = 0;
 					revisedGrants.push(grantArray[x]);
-					console.log(total);
+					//(total);
 			}
 		}
 	};
-	console.log(revisedGrants);
+	//(revisedGrants);
 	return revisedGrants;
 }
 
@@ -373,10 +387,12 @@ function adjNBgrants(){
 function joinRevisedNBaid(){
 	//loans after adj for need & readd
 	var nLoans = adjNBloans();
+	//(nLoans);
 	//grants after adj for need & readd
 	var grants = adjNBgrants();
 	var sacred = sacredAidarray()
 	var newNeedarray = nLoans.concat(grants,sacred);
+	//(newNeedarray);
 	return newNeedarray;
 }
 
@@ -586,6 +602,7 @@ function unconvertType(val){
 //concats for unconvertType switch 
 function joinrevisedAid(){
 	var finalArray = joinRevisedNBaid().concat(adjCostloans());
+	//(finalArray);
 	//sort in ascending for comparison w/original array - to allow for conditional 
 	//css formatting
 	var sorted = finalArray.sort(function(a,b){return a.type - b.type});

@@ -5,7 +5,7 @@
 var myDom = document.getElementById('result');
 
 //gather p6 paste information and clean it up
-function getPaste(){
+function newgetPaste(){
 	//clean up your input
 	var pasted = $('.paste').val().replace(/_/g,' ').split(' '); //remove underscores
 	var pastedArray = [];
@@ -55,6 +55,6 @@ function runitThrough(thingy){
 }
 
 $('#onf').on("click",function(){
-	var k = runitThrough(getPaste());
+	var k = runitThrough(newgetPaste());
 })
 

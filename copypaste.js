@@ -18,6 +18,7 @@ function getPaste(){
 			pastedArray.push(parseInt(split[x]));
 		}
 	}
+	console.log(pastedArray);
 	return pastedArray;
 }
 
@@ -170,6 +171,7 @@ function aidObject(){
 	 typeAmt = typeAmt.filter(function(loan){
 		return loan.type != 342000;
 	 })
+	 console.log(typeAmt);
 	return typeAmt;
 }
 
