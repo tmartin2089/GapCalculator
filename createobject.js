@@ -1,4 +1,4 @@
-/*///////////////////Table of Contents////////////////////
+/* -------------------------Table of Contents-------------------------
 	Howto -	Ctrl-F for the caret and # you want i.e. "^2" for bio functions  
   ^1 - This section gathers and parses p6 paste into a useful object
   ^2 - Gathers and parses bio information - budget/pc/sc/st res gift
@@ -8,7 +8,7 @@
   ^6 -
   ^7 - 
   ^8 -
-////////////////////End Table of Contents///////////////  
+ 
  */
 
  
@@ -20,8 +20,25 @@
 "use strict";
 
 
+
 //global = bad bad dev, let mama mytestScope protect your pretty variables in her scoped arms
 var mytestScope = (function(){
+
+function gatherBio(){
+	var bio = [];
+	$('.bio').each(function(index){
+		//NaN = falsey 
+		if(parseInt($(this).val())){
+			bio.push(parseInt($(this).val()));
+		}
+		else{
+			bio.push(0);
+		}
+	});
+	console.log(bio);
+	return bio;
+}
+
 
 	var myDom = document.getElementById('result');
 
@@ -86,9 +103,9 @@ console.log(aidObject);
 	console.log(aidObject);
 }());
 
-
 });
 
-	$('#onf').on("click",function(){
+
+$('#onf').on("click",function(){
 		mytestScope();
-	})
+});
