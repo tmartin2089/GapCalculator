@@ -97,7 +97,7 @@ var mytestScope = (function(){
 	//consider adding flag to parameters being passed to additup so the function knows what it's
 	//adding up - i.e. flag = need or flag = cost, then will only check for aid.flag === need etc.
 	function additUp(aid, flag){
-		var need = 0;
+		var total = 0;
 		$.each(aid, function(){
 			console.log(aid);
 			if(flag === "need"){
@@ -105,12 +105,15 @@ var mytestScope = (function(){
 					need += this.amount;
 				}
 			}
+			else if(flag === "cost"){
+				total += this.amount;
+			}
 		})
-		console.log(need);
+		console.log(total);
 	}
 
 gatherBio();
-additUp(aidObject, "need");
+additUp(aidObject, "cost");
 	
 
 });   //end mytestScope
