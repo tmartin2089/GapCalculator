@@ -19,8 +19,6 @@
 
 "use strict";
 
-
-
 //global = bad bad dev, let mama mytestScope protect your pretty variables in her safe scoped arms
 var mytestScope = (function(){
 
@@ -40,7 +38,6 @@ var mytestScope = (function(){
 		});
 		return bio;
 	}
-
 
 	//gather p6 paste information and clean it up
 	function newgetPaste(){
@@ -66,12 +63,10 @@ var mytestScope = (function(){
 			var testVar = this.type;
 				if(testVar.toString().substring(0,3)==="331" || testVar.toString().substring(0,3)==="341"){
 					pastedArray2[index].type = 331000;
-				}				
-		})
+				};				
+		});
 		return pastedArray2;	
 	}
-
-
 
 	//needRank determines order of reduction.  Lowest needRank gets reduced first  needBased flag will be used to gather need objects only for need redux
 
@@ -98,12 +93,16 @@ var mytestScope = (function(){
 	function additUp(aid, flag){
 		var total = 0;
 		$.each(aid, function(){
-			console.log(aid);
+			//add up only NB aid
 			if(flag === "need"){
+				console.log("need is firin'")
 				if(this.needBased){
-					need += this.amount;
+					console.log(this.amount);
+					total += this.amount;
+					console.log("total NBA is " + total);
 				}
 			}
+			//add it all up
 			else if(flag === "cost"){
 				total += this.amount;
 			}
@@ -112,11 +111,47 @@ var mytestScope = (function(){
 			}
 		})
 		console.log(total);
+		return total;
+	}
+	
+	//
+	function determineNeed(){
+		var needAid = false;
+		var needOverage;
+		$.each(aidObject,function(){
+			if(this.needBased){
+				needAid = true;
+				//to break out of $.each
+				return false;
+			}
+		//return needbased;
+		});	
+		if(!needAid){
+			//jump straight to cost evaluation
+			return costEval();
+			console.log("thar be no need based aid ahoy");
+		}
+		else{
+			needOverage = (bioObject[0]-additUp(bioObject)) - additUp(aidObject, "need");
+			//return fedneed - nba
+			console.log(needOverage);
+			console.log("there is need aid so do some calculations dumbass");
+		}
+		
+		console.log(needAid);
+		return needAid;
+	};
+	
+	
+	function costEval(){
+		console.log("If this worked correctly, you jumped to cost eval");
 	}
 
+//bio[0] = cost, bio[1] = sc, bio[2] = pc, bio[3] = resources
 var bioObject = gatherBio();
 console.log(bioObject);
 additUp(bioObject);
+determineNeed();
 	
 
 });   //end mytestScope
