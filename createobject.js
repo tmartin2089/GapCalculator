@@ -38,7 +38,6 @@ var mytestScope = (function(){
 				bio.push(0);
 			}
 		});
-		console.log(bio);
 		return bio;
 	}
 
@@ -108,12 +107,16 @@ var mytestScope = (function(){
 			else if(flag === "cost"){
 				total += this.amount;
 			}
+			else{
+				total = aid[1] + aid[2] + aid[3];
+			}
 		})
 		console.log(total);
 	}
 
-gatherBio();
-additUp(aidObject, "cost");
+var bioObject = gatherBio();
+console.log(bioObject);
+additUp(bioObject);
 	
 
 });   //end mytestScope

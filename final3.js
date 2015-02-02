@@ -13,6 +13,7 @@ setp6Values.value = "131252 UT Grant-UG  _1500.00 331384 JFDS  __2906 131110 TPE
 //am I allowed to get away with breaking scheme if consonance and assonance remain intact?
 var biotestArray = [13000, 1000, 2000, 3000];
 var setbioValues = document.getElementsByClassName("bio");
+
 (function(){
 	$.each(setbioValues,function(index){
 		this.value = biotestArray[index];
