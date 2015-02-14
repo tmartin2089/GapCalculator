@@ -15,6 +15,7 @@
  //helpful functions - determine onlysacredAid?  if so - skip all calcs 
  //helpful functions - determine noneedbasedAid - if so skip all need calcs
  //helpful function - total NBA less than need - skip need redux entirely
+ //consider caching in variables immutable #s like total NBA, total aid, need and cost
 
 
 "use strict";
@@ -22,9 +23,16 @@
 //global = bad bad dev, let mama mytestScope protect your pretty variables in her safe scoped arms
 var mytestScope = (function(){
 
-//this is the processed aid object that we will be referencing so we don't keep calling the  function like in the bad old days	
+//this is the processed aid object that we will be referencing so we don't keep calling the  function like in the bad old days
 	var aidObject = runitThrough(newgetPaste());
+	
+	//duplicate array for revision purposes
+	var revisionObject = new runitThrough(newgetPaste());
+	
+	var totalNeedamount = additUp(aidObject, "need");
+	console.log(totalNeedamount);
 
+	//gather bio info
 	function gatherBio(){
 		var bio = [];
 		$('.bio').each(function(index){
@@ -70,8 +78,6 @@ var mytestScope = (function(){
 
 	//needRank determines order of reduction.  Lowest needRank gets reduced first  needBased flag will be used to gather need objects only for need redux
 
-	//will need to look for (!object.sacred) to exclude pell & etc 
-
 	//convert p6 array input through object literal call - richer return than switch statement
 	function runitThrough(thingy){
 		var k = [];
@@ -82,39 +88,35 @@ var mytestScope = (function(){
 		k = k.filter(function(x){
 			return (x);
 		})
-		console.log(k);
+		console.dir(k);
 		return k;
-	}
+	};
 	
-	//lets attempt to make one adding function so we don't have to litter our code with multiple
-	//cost and need adder uppers 
-	//consider adding flag to parameters being passed to additup so the function knows what it's
-	//adding up - i.e. flag = need or flag = cost, then will only check for aid.flag === need etc.
+	//generic totalling function - depending on flag can calc total NBA, total cost aid, or
+	//no flag =  bio resources
 	function additUp(aid, flag){
 		var total = 0;
 		$.each(aid, function(){
 			//add up only NB aid
 			if(flag === "need"){
-				console.log("need is firin'")
 				if(this.needBased){
-					console.log(this.amount);
-					total += this.amount;
-					console.log("total NBA is " + total);
+					total += this.amount; 
 				}
 			}
 			//add it all up
 			else if(flag === "cost"){
 				total += this.amount;
 			}
+			//no flag - sum up bio resources
 			else{
 				total = aid[1] + aid[2] + aid[3];
 			}
 		})
-		console.log(total);
+		console.log("the additUp amount is " + total + " for " + flag);
 		return total;
-	}
+	};
 	
-	//
+	//determine overage || jump to cost if no need aid/overage
 	function determineNeed(){
 		var needAid = false;
 		var needOverage;
@@ -124,36 +126,52 @@ var mytestScope = (function(){
 				//to break out of $.each
 				return false;
 			}
-		//return needbased;
 		});	
+		//evaluates $.each result
 		if(!needAid){
-			//jump straight to cost evaluation
+			//no need aid - jump to cost eval
 			return costEval();
-			console.log("thar be no need based aid ahoy");
 		}
 		else{
+			//there is NBA - evaluate for possible overage
 			needOverage = (bioObject[0]-additUp(bioObject)) - additUp(aidObject, "need");
-			//return fedneed - nba
-			console.log(needOverage);
-			console.log("there is need aid so do some calculations dumbass");
-		}
-		
-		console.log(needAid);
-		return needAid;
+			//should be negative number in current example
+			needRevisions(needOverage);
+		};
 	};
 	
+	//next up - need overage?  then reduce in order of need rank until need overage is fixed
+	//should just copy new aid object (something something scope)
 	
+	//should check if need revisions are needed - if not jump to costEval()
+	function needRevisions(amount){
+		if(amount >= 0){
+			//need is fine, jump to cost
+			return costEval();
+		}
+		//
+		else if(amount < 0){
+			doNeedmath(Math.abs(amount)); //convert negative to positive for doNeedmath()
+		};
+	};
+	
+	function doNeedmath(amount){
+		console.log("inside of doNeedmath I am " + amount);
+	}
+	
+	//jumped straight to if determineNeed returns false
+	//jumped to if no need overage
 	function costEval(){
 		console.log("If this worked correctly, you jumped to cost eval");
 	}
 
 //bio[0] = cost, bio[1] = sc, bio[2] = pc, bio[3] = resources
 var bioObject = gatherBio();
+determineNeed();
 console.log(bioObject);
 additUp(bioObject);
-determineNeed();
 	
-
+document.getEle
 });   //end mytestScope
 
 

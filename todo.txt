@@ -1,0 +1,10 @@
+	//needRank determines order of reduction.  Lowest needRank gets reduced first  needBased flag will be used to gather need objects only for need redux
+
+	//will need to look for (!object.sacred) to exclude pell & etc 
+
+
+
+if total needAmount - sacredAmounts is less than total need overage, then
+zero out all needbased nonsacred amounts
+
+i.e. $8000 over need.  $7000 in NBA including 2k Pell.  Zero out everything Needbased but sacred

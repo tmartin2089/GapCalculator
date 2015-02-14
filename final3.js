@@ -1,5 +1,3 @@
-//sup sexy
-
 "use strict";
 
 //below is to auto-populate #paste.paste for testing - for future testing, put a bunch of award codes in JSON, have an AJAX call serve them //up one by one, and have them cross-checked with pre-stored numbers  - would like to be able to do rigorous testing automatically 
