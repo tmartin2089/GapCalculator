@@ -46,22 +46,29 @@ var mytestScope = (function(){
 		});
 		return bio;
 	}
+	
+	//couldn't I just do an arguments.filter(){return words excluded & no 10 and  }
 
 	//gather p6 paste information and clean it up
 	function newgetPaste(){
 		//clean up your input
-		var pasted = $('.paste').val().replace(/_/g,' ').split(' '); //remove underscores
+		var pasted = $('.paste').val().replace(/_/g,' ').split(' '); //remove underscores and splits into array
 		var pastedArray = [];
 		var pastedArray2 = [];
-		//get rid of big ol' words
+		//excludes non-numerical values from array (gets big of text)
 		$.each(pasted,function(){
-			if(parseInt(this) && (parseInt(this) > 10)){ //to avoid top 10% counted as amt
+			if(parseInt(this) && (parseInt(this) > 10)){ //if converts to # and is larger than 10 - top 10
+														//was being counted as an amt
 				pastedArray.push(parseInt(this));
 			}
 		})
+		console.log(pastedArray);
 		//convert into prelim object array for later conversionObject
 		//added as separate each statement for ease of comprehension/I really dont want to put together a longer boolean in the above
+		
+		//creates initial object array
 		$.each(pastedArray,function(index){
+			//even indexes will be award codes
 			if((index % 2) === 0){
 				pastedArray2.push({type:this, value:pastedArray[index+1]});
 			}
