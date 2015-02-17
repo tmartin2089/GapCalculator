@@ -15,7 +15,7 @@
  //helpful functions - determine onlysacredAid?  if so - skip all calcs 
  //helpful functions - determine noneedbasedAid - if so skip all need calcs
  //helpful function - total NBA less than need - skip need redux entirely
- //consider caching in variables immutable #s like total NBA, total aid, need and cost
+ //consider caching in variables for immutable #s like total NBA, total aid, need and cost
 
 
 "use strict";
@@ -29,7 +29,10 @@ var mytestScope = (function(){
 	//duplicate array for revision purposes
 	var revisionObject = new runitThrough(newgetPaste());
 	
+	//total amount of need based aid
 	var totalNeedamount = additUp(aidObject, "need");
+	var totalAidamount = additUp(aidObject, "cost");
+	console.log(totalAidamount);
 	console.log(totalNeedamount);
 
 	//gather bio info
@@ -62,7 +65,6 @@ var mytestScope = (function(){
 				pastedArray.push(parseInt(this));
 			}
 		})
-		console.log(pastedArray);
 		//convert into prelim object array for later conversionObject
 		//added as separate each statement for ease of comprehension/I really dont want to put together a longer boolean in the above
 		
