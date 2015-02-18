@@ -20,7 +20,7 @@
 
 "use strict";
 
-//global = bad bad dev, let mama mytestScope protect your pretty variables in her safe scoped arms
+//global === bad bad dev, let mama mytestScope protect your pretty variables in her safe scoped arms
 var mytestScope = (function(){
 
 //this is the processed aid object that we will be referencing so we don't keep calling the  function like in the bad old days
@@ -31,9 +31,14 @@ var mytestScope = (function(){
 	
 	//total amount of need based aid
 	var totalNeedamount = additUp(aidObject, "need");
+	
+	//total amount of aid
 	var totalAidamount = additUp(aidObject, "cost");
-	console.log(totalAidamount);
-	console.log(totalNeedamount);
+	
+	//resources (pc, sc and osch)
+	var bioResources = additUp(gatherBio());
+
+
 
 	//gather bio info
 	function gatherBio(){
@@ -143,8 +148,8 @@ var mytestScope = (function(){
 		}
 		else{
 			//there is NBA - evaluate for possible overage
-			needOverage = (bioObject[0]-additUp(bioObject)) - additUp(aidObject, "need");
-			//should be negative number in current example
+			needOverage = (bioObject[0] - bioResources) - totalNeedamount;
+			//should be negative number if overage
 			needRevisions(needOverage);
 		};
 	};
@@ -156,7 +161,7 @@ var mytestScope = (function(){
 	function needRevisions(amount){
 		if(amount >= 0){
 			//need is fine, jump to cost
-			return costEval();
+			return costEval(amount);
 		}
 		//
 		else if(amount < 0){
@@ -164,14 +169,33 @@ var mytestScope = (function(){
 		};
 	};
 	
+	//amount === need overage amount
 	function doNeedmath(amount){
+		//overage is greater than total grants
+		if(amount > totalNeedamount){
+			$.each(revisionObject,function(){
+				if(this.needBased && !this.sacred){
+					this.amount = 0;
+					//fwd revisionObject to costEval return revisionObject;
+				}
+			})
+			//console.log(JSON.stringify(revisionObject));
+		}
+		//overage exists, but is less than total grants - redux needed but not to all !sacred aid
+		else if(amount < totalNeedamount){
+			
+		console.log("inside of doNeedmath I am " + amount);	
+			
+		}
+		
 		console.log("inside of doNeedmath I am " + amount);
 	}
+	console.log(revisionObject);
 	
 	//jumped straight to if determineNeed returns false
 	//jumped to if no need overage
-	function costEval(){
-		console.log("If this worked correctly, you jumped to cost eval");
+	function costEval(array){
+		console.log(JSON.stringify(array));
 	}
 
 //bio[0] = cost, bio[1] = sc, bio[2] = pc, bio[3] = resources
@@ -180,7 +204,6 @@ determineNeed();
 console.log(bioObject);
 additUp(bioObject);
 	
-document.getEle
 });   //end mytestScope
 
 
