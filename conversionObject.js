@@ -3,31 +3,33 @@
 //future dev - barring major Title IV reg changes, the only thing that should ever need to be tinkered with is needRank and
 //costRank, as these determine the order in which reductions are made
 
+//why 42?  needed an arbitrary high number,  since sort couldn't handle a non-number when sorting for nb redux
+
 function convertAid(type, val8){
 	var aidType = {
 		
 		//plus
-		"215025": {type: "PLUS Loan", amount: val8, needBased: false, needRank: "#", costRank: 2, sacred: false}, 
-		"215026": {type: "PLUS Loan", amount: val8, needBased: false, needRank: "#", costRank: 2, sacred: false}, 
-		"215125": {type: "PLUS Loan", amount: val8, needBased: false, needRank: "#", costRank: 2, sacred: false}, 
-		"215126": {type: "PLUS Loan", amount: val8, needBased: false, needRank: "#", costRank: 2, sacred: false}, 
+		"215025": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false}, 
+		"215026": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false}, 
+		"215125": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false}, 
+		"215126": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false}, 
 		
 		//unsub
-		"214125": {type: "Unsub Loan", amount: val8, needBased: false, needRank: "#", costRank: 3, sacred: false},
-		"214126": {type: "Unsub Loan", amount: val8, needBased: false, needRank: "#", costRank: 3, sacred: false},  
+		"214125": {type: "Unsub Loan", amount: val8, needBased: false, needRank: 42, costRank: 3, sacred: false},
+		"214126": {type: "Unsub Loan", amount: val8, needBased: false, needRank: 42, costRank: 3, sacred: false},  
 		
 		//cal & alt
-		"222001": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: "#", costRank: 1, sacred: false},
-		"222002": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: "#", costRank: 1, sacred: false},
-		"241002": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: "#", costRank: 1, sacred: false},
-		"241003": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: "#", costRank: 1, sacred: false},
-		
+		"222001": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: 42, costRank: 1, sacred: false},
+		"222002": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: 42, costRank: 1, sacred: false},
+		"241002": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: 42, costRank: 1, sacred: false},
+		"241003": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: 42, costRank: 1, sacred: false},
+																				   
 		//be on time
-		"223001": {type: "B On Time", amount: val8, needBased: false, needRank: "#", costRank: 4, sacred: false},
-		"223002": {type: "B On Time", amount: val8, needBased: false, needRank: "#", costRank: 4, sacred: false},
-		"223003": {type: "B On Time", amount: val8, needBased: false, needRank: "#", costRank: 4, sacred: false},
-		"223004": {type: "B On Time", amount: val8, needBased: false, needRank: "#", costRank: 4, sacred: false},
-		
+		"223001": {type: "B On Time", amount: val8, needBased: false, needRank: 42, costRank: 4, sacred: false},
+		"223002": {type: "B On Time", amount: val8, needBased: false, needRank: 42, costRank: 4, sacred: false},
+		"223003": {type: "B On Time", amount: val8, needBased: false, needRank: 42, costRank: 4, sacred: false},
+		"223004": {type: "B On Time", amount: val8, needBased: false, needRank: 42, costRank: 4, sacred: false},
+																				
 		//sub
 		"214025": {type: "Sub Loan", amount: val8, needBased: true, needRank: 2, costRank: 6, sacred: false},
 		"214026": {type: "Sub Loan", amount: val8, needBased: true, needRank: 2, costRank: 6, sacred: false},
@@ -65,15 +67,15 @@ function convertAid(type, val8){
 		"411001": {type: "Work-Study", amount: val8, needBased: true, needRank: 3, costRank: 7, sacred: false},
 		
 		//Pell
-		"111028": {type: "Pell", amount: val8, needBased: true, needRank: "#", costRank:"#", sacred: true},
-		"111029": {type: "Pell", amount: val8, needBased: true, needRank: "#", costRank:"#", sacred: true},
-		
+		"111028": {type: "Pell", amount: val8, needBased: true, needRank: 42, costRank:"#", sacred: true},
+		"111029": {type: "Pell", amount: val8, needBased: true, needRank: 42, costRank:"#", sacred: true},
+																		  
 		//Top 10%
-		"321380": {type: "Top 10%", amount: val8, needBased: true, needRank: "#", costRank:"#", sacred: true},
-		"321396": {type: "Top 10%", amount: val8, needBased: true, needRank: "#", costRank:"#", sacred: true},
+		"321380": {type: "Top 10%", amount: val8, needBased: true, needRank: 42, costRank:"#", sacred: true},
+		"321396": {type: "Top 10%", amount: val8, needBased: true, needRank: 42, costRank:"#", sacred: true},
 		
 		//OSFS scholarship
-		"331000": {type: "OSFS Scholarship", amount: val8, needBased:true, needRank: "#", costRank:"#", sacred: true}
+		"331000": {type: "OSFS Scholarship", amount: val8, needBased:true, needRank: 42, costRank:"#", sacred: true}
 		};
 	return aidType[type]
 }

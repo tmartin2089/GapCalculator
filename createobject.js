@@ -15,7 +15,7 @@
  //helpful functions - determine onlysacredAid?  if so - skip all calcs 
  //helpful functions - determine noneedbasedAid - if so skip all need calcs
  //helpful function - total NBA less than need - skip need redux entirely
- //consider caching in variables for immutable #s like total NBA, total aid, need and cost
+//filter out by needBased and !sacred works great, but consider making it a function you can call anywhere
 
 
 "use strict";
@@ -25,6 +25,11 @@ var mytestScope = (function(){
 
 //this is the processed aid object that we will be referencing so we don't keep calling the  function like in the bad old days
 	var aidObject = runitThrough(newgetPaste());
+	console.log(aidObject[0].needRank);
+	
+	var sortme = aidObject.sort(function(a,b){return a.needRank - b.needRank})
+	console.log(sortme);
+	console.log(sortme[0]);
 	
 	//duplicate array for revision purposes
 	var revisionObject = new runitThrough(newgetPaste());
@@ -183,14 +188,54 @@ var mytestScope = (function(){
 		}
 		//overage exists, but is less than total grants - redux needed but not to all !sacred aid
 		else if(amount < totalNeedamount){
-			
-		console.log("inside of doNeedmath I am " + amount);	
-			
-		}
-		
-		console.log("inside of doNeedmath I am " + amount);
+			var total = amount;
+			//sort by needRank and filter out non-need && sacred 
+			var sorted = revisionObject.sort(function(a,b){return a.needRank - b.needRank}).filter(function(aid){
+				if(aid.needBased && !aid.sacred){
+					return aid.type
+				}
+			});
+			return needCalcs(sorted, amount, 0);
+		}	//filter out into array, then reset revision array to match?  no - refilter and slice those index values, then concat the sliced revisionObject with the new filtered values
 	}
-	console.log(revisionObject);
+	
+	//recursion attempt #2
+	function needCalcs(nbarray, overage, x){
+		console.log(nbarray);
+		var x = x;
+		var total = overage;
+		var runtime = 4;
+		//termination
+		if(total < 0){
+			console.log("I should not have fired");
+			return;
+		};
+		if(runtime === 0){
+			console.log("runtime exceeded");
+			return;
+		}
+		//base    - what if overage is less than grant being reviewed?  should also be a base case
+		if(total === 0){
+			console.log("should be w/in need now");
+			return;
+		};
+		//other base case
+		if(total < nbarray[x].amount){
+			console.log("other base case fired");
+			nbarray[x].amount = total;
+			return;
+		}
+		//total > nba[x].amount
+		console.log(nbarray[x].amount);
+		total -= nbarray[x].amount;
+		nbarray[x].amount = 0;
+		runtime--;
+		return needCalcs(nbarray, total, x+1);
+		console.log(total);
+		console.log(nbarray);
+		//return needCalcs(nbarray, total);
+	}
+
 	
 	//jumped straight to if determineNeed returns false
 	//jumped to if no need overage
