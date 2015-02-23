@@ -25,4 +25,4 @@
   22000 - 16744     5256
   
   
- 
+ /create .every() test - wherein every element is checked to see if only sacred - if so, skip everything
