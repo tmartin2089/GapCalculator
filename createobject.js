@@ -3,10 +3,8 @@
   ^1 - Higher order variables - cached at top of anon function b/c they will be used multiple places 
   ^2 - DRY functions
   ^3 - Gathers and parses bio information - budget/pc/sc/st res gift
-  
-  This section gathers and parses p6 paste into a useful object
- 
-  ^3 - Calculates need/this is skipped if no NB aid
+  ^4 - This section gathers and parses p6 paste into a useful object
+  ^5 - Need calculations - is skipped if no NB aid
   ^4 - 
   ^5 - 
   ^6 -
@@ -20,14 +18,13 @@
  //helpful functions - determine noneedbasedAid - if so skip all need calcs
  //helpful function - total NBA less than need - skip need redux entirely
 //filter out by needBased and !sacred works great, but consider making it a function you can call anywhere
-//if else logic to skip all calcs and go straight to DOM output if .every(sacred)
+
 
 
 "use strict";
 
 //global === bad bad dev, let mama mytestScope protect your pretty variables in her safe scoped arms
 var mytestScope = (function(){
-
 
 	// ^1 -----------------------------Useful Higher Order Variables------------------------------------
 	
@@ -45,12 +42,31 @@ var mytestScope = (function(){
 	
 	//total amount of aid
 	var totalAidamount = additUp(aidObject, "cost");
+	//console.log(totalAidamount);
 	
-	//resources (pc, sc and osch)
+	//bio Array  - bio[0] = coa - might just be easier to get by id# rather than running the entire array
+	//bio[0] = cost, bio[1] = sc, bio[2] = pc, bio[3] = resources
+	var bioObject = gatherBio();
+
+	
+	//total resources (pc, sc and osch)
 	var bioResources = additUp(gatherBio());
 	
+	//total cost
+	var costofa = bioObject[0];
+
+
+	//check if sacred (entitlements) only
+	var sacredOnly = aidObject.every(function(element){
+		return element.sacred;
+	});
 	
-	
+	//jump straight to dom update - no need to update aid
+	if(sacredOnly){
+		console.log("sacred aid only - jump to DOM manipulation");
+		return;
+	}
+
 	// ^2 -------------------------------DRY Functions-----------------------------------
 	//generic totalling function - depending on flag can calc total NBA, total cost aid, or no flag =  bio resources
 
@@ -76,7 +92,7 @@ var mytestScope = (function(){
 	};	
 	
 	//takes a presorted array & overage and reduces by amount of overage
-	function revisionCalculation(array, overage, x){
+	function revisionCalculation(array, overage, x, flag){
 		var x = x;
 		var total = overage;
 		var length = array.length-1;
@@ -84,39 +100,33 @@ var mytestScope = (function(){
 		if(total < 0 || x > length){
 			return;
 		}
-		//base
+		//base - fires if remaining overage is less than next aid item
+		if(total < array[x].amount){
+			array[x].amount -= total;
+			if(flag === "need"){
+				console.log("just fired");
+				return costEval();
+			}
+			else if(flag === "cost"){
+				console.log(JSON.stringify(revisionObject));
+			return domChanges();		
+			};
+		};
+		//other base 
 		if(total === 0){
 			return;
-		}
-		//other base - fires if remaining overage is less than next aid item
-		if(total < array[x].amount){
-			array[x].amount = total;
-		}
-	}
+		};
+		total -= array[x].amount;
+		array[x].amount = 0;
+		return revisionCalculation(array, total, x+1, flag);
+	};
 	
 /*
-		//recursion attempt #2
-	function needCalcs(nbarray, overage, x){
-		var x = x;
-		var total = overage;
-		var length = nbarray.length-1;
-		//termination
-		if(total < 0 || x > length){
-			return;
-		};
-		//base    
-		if(total === 0){
-			return;
-		};
-		//other base case
-		if(total < nbarray[x].amount){
-			nbarray[x].amount = total;
-			return;
-		};
-		//total > nba[x].amount
-		total -= nbarray[x].amount;
-		nbarray[x].amount = 0;
-		return needCalcs(nbarray, total, x+1); 
+	function lookitUP(){
+		for(var x = 0; x < revisionObject.length; x++){
+			console.log(revisionObject[x]);
+		}	
+		console.log(JSON.stringify(revisionObject));
 	}
 */
 	
@@ -238,11 +248,9 @@ var mytestScope = (function(){
 					//fwd revisionObject to costEval return revisionObject;
 				}
 			})
-			//console.log(JSON.stringify(revisionObject));
 		}
 		//overage exists, but is less than total grants - redux needed but not to all !sacred aid
 		else if(amount < totalNeedamount){
-
 			//sort by needRank and filter out non-need && sacred 
 			var sorted = revisionObject.sort(function(a,b){return a.needRank - b.needRank}).filter(function(aid){
 				if(aid.needBased && !aid.sacred){
@@ -250,51 +258,38 @@ var mytestScope = (function(){
 				}
 			})
 			console.log(sorted);
-			return needCalcs(sorted, amount, 0);
+			return revisionCalculation(sorted, amount, 0, "need");
 		}	//filter out into array, then reset revision array to match?  no - refilter and slice those index values, then concat the sliced revisionObject with the new filtered values
 	}
-	
-	//overage is currently not counting sacred toward remaining need elig
-	function needCalcs(nbarray, overage, x){
-		var x = x;
-		var total = overage;
-		var length = nbarray.length-1;
-		//termination
-		if(total < 0 || x > length){
-			return;
-		};
-		//base    
-		if(total === 0){
-			return;
-		};
-		//other base case
-		if(total < nbarray[x].amount){
-			nbarray[x].amount -= total;
-			return;
-		};
-		//total > nba[x].amount
-		total -= nbarray[x].amount;
-		nbarray[x].amount = 0;
-		return needCalcs(nbarray, total, x+1); 
-	}
 
-	
 	//jumped straight to if determineNeed returns false
 	//jumped to if no need overage
-	function costEval(array){
-		console.log(JSON.stringify(array));
+	function costEval(){
+		//total remaining aid after need revisions
+		var k = additUp(revisionObject, "cost");
+		//arrange by costRank and exclude sacred
+		var sorted = revisionObject.sort(function(a,b){return a.costRank - b.costRank}).filter(function(aid){
+			if(!aid.sacred){
+				return aid.type;
+			}
+		})
+		console.log(sorted);
+		if(k > costofa){
+			k -= costofa;
+			return revisionCalculation(sorted, k, 0, "cost");
+		};
+	}
+	
+	function domChanges(){
+		console.log("im doing shit to the DOM yo!");
 	}
 
-//bio[0] = cost, bio[1] = sc, bio[2] = pc, bio[3] = resources
-var bioObject = gatherBio();
 determineNeed();
-console.log(bioObject);
-additUp(bioObject);
+//lookitUP();
 	
 });   //end mytestScope
 
 
 $('#onf').on("click",function(){
-		mytestScope();
-		
+		mytestScope();	
 });

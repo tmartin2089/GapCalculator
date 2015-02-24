@@ -5,6 +5,41 @@
 
 //why 42?  needed an arbitrary high number,  since sort couldn't handle a non-number when sorting for nb redux
 
+//-------------current costRank index------------------//
+/*
+	1.
+	2.
+	3.
+	4.
+	5.
+	6.
+	7.
+	8.
+	9.
+	10.
+	11.
+	12.
+*/
+//-------------end costRank index------------------//
+
+
+//-------------current needRank index------------------//
+/*
+	1.
+	2.
+	3.
+	4.
+	5.
+	6.
+	7.
+	8.
+	9.
+	10.
+	11.
+	12.
+*/
+//-------------end needRank index------------------//		
+
 function convertAid(type, val8){
 	var aidType = {
 		
@@ -51,9 +86,9 @@ function convertAid(type, val8){
 		"131111": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false},
 		
 		//partial tuition 
-		"131200": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 5, sacred: false},
-		"131201": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 5, sacred: false},
-		"131202": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 5, sacred: false},
+		"131200": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 8, sacred: false},
+		"131201": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 8, sacred: false},
+		"131202": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 8, sacred: false},
 
 		//TEXAS grant
 		"121176": {type: "TEXAS Grant", amount: val8, needBased: true, needRank: 8, costRank: 12, sacred: false},
@@ -67,15 +102,15 @@ function convertAid(type, val8){
 		"411001": {type: "Work-Study", amount: val8, needBased: true, needRank: 3, costRank: 7, sacred: false},
 		
 		//Pell
-		"111028": {type: "Pell", amount: val8, needBased: true, needRank: 42, costRank:"#", sacred: true},
-		"111029": {type: "Pell", amount: val8, needBased: true, needRank: 42, costRank:"#", sacred: true},
+		"111028": {type: "Pell", amount: val8, needBased: true, needRank: 42, costRank:42, sacred: true},
+		"111029": {type: "Pell", amount: val8, needBased: true, needRank: 42, costRank:42, sacred: true},
 																		  
 		//Top 10%
-		"321380": {type: "Top 10%", amount: val8, needBased: true, needRank: 42, costRank:"#", sacred: true},
-		"321396": {type: "Top 10%", amount: val8, needBased: true, needRank: 42, costRank:"#", sacred: true},
+		"321380": {type: "Top 10%", amount: val8, needBased: true, needRank: 42, costRank:42, sacred: true},
+		"321396": {type: "Top 10%", amount: val8, needBased: true, needRank: 42, costRank:42, sacred: true},
 		
 		//OSFS scholarship
-		"331000": {type: "OSFS Scholarship", amount: val8, needBased:true, needRank: 42, costRank:"#", sacred: true}
+		"331000": {type: "OSFS Scholarship", amount: val8, needBased:true, needRank: 42, costRank:42, sacred: true}
 		};
 	return aidType[type]
 }
