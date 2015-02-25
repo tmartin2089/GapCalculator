@@ -284,28 +284,23 @@ var mytestScope = (function(){
 	}
 	
 	function displayUpdatedamts(){
+		var length = revisionObject.length;
 		console.log("im doing shit to the DOM yo!");
 		console.log(aidObject);
 		console.log(revisionObject);
 		var revisionObjectsorted = revisionObject.sort(function(a,b){return a.position - b.position});
-		console.log(revisionObjectsorted);
-	}
-	
-	function displayupdatedAmts(array){
-	var display = checkCost();
-	var display1 = joinrevisedAid();
-	//for comparison purposes - pulls initial array
-	var display2 = aidObject().sort(function(a,b){return a.type - b.type});
-	var length = display1.length;
 		for(var x = 0; x < length; x++){
-			if(display2[x].amt != display1[x].amt){
-				$('#results').append('<div class="changedAid"> <p>' + display1[x].type + '</p><p>Amount: ' + display1[x].amt + '</p></div>').css("display","block");
+			if(aidObject[x].amount != revisionObject[x].amount){
+				$('#results').append('<div class="changedAid"> <p>' + revisionObject[x].type + '</p><p>Amount: ' + revisionObject[x].amount + '</p></div>').css("display","block");
 			}
 			else{
-				$('#results').append('<div class="updated"> <p>' + display1[x].type + '</p><p>Amount: ' + display1[x].amt + '</p></div>').css("display", "block");
-			};
-		}	
- }
+				$('#results').append('<div class="updated"> <p>' + revisionObject[x].type + '</p><p>Amount: ' + revisionObject[x].amount + '</p></div>').css("display", "block");
+			};	
+			
+		}
+		console.log(revisionObjectsorted);
+	}
+
 
 determineNeed();
 
