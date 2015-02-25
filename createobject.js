@@ -4,10 +4,8 @@
   ^2 - DRY functions
   ^3 - Gathers and parses bio information - budget/pc/sc/st res gift
   ^4 - This section gathers and parses p6 paste into a useful object
-  ^5 - Need calculations - is skipped if no NB aid
-  ^4 - 
-  ^5 - 
-  ^6 -
+  ^5 - Need/Cost Overage determination
+  ^6 - DOM display of updated amounts
   ^7 - 
   ^8 -
  
@@ -48,31 +46,25 @@ var mytestScope = (function(){
 	
 	//this is the processed aid object that we will be referencing so we don't keep calling the function like in the bad old days
 	var aidObject = runitThrough(newgetPaste());
-	console.log(aidObject);
-	
+
 	//duplicate array for revision purposes
 	var revisionObject = new runitThrough(newgetPaste());
-	console.log(revisionObject);
 	
 	//total amount of need based aid
 	var totalNeedamount = additUp(aidObject, "need");
-	console.log(totalNeedamount);
 	
 	//total amount of aid
 	var totalAidamount = additUp(aidObject, "cost");
-	//console.log(totalAidamount);
-	
+
 	//bio Array  - bio[0] = coa - might just be easier to get by id# rather than running the entire array
 	//bio[0] = cost, bio[1] = sc, bio[2] = pc, bio[3] = resources
 	var bioObject = gatherBio();
 
-	
 	//total resources (pc, sc and osch)
 	var bioResources = additUp(gatherBio());
 	
 	//total cost
 	var costofa = bioObject[0];
-
 
 	//check if sacred (entitlements) only
 	var sacredOnly = aidObject.every(function(element){
@@ -122,17 +114,20 @@ var mytestScope = (function(){
 		if(total < array[x].amount){
 			array[x].amount -= total;
 			if(flag === "need"){
-				console.log("just fired");
 				return costEval();
 			}
 			else if(flag === "cost"){
-				console.log(JSON.stringify(revisionObject));
-			return displayUpdatedamts();		
+				return displayUpdatedamts();		
 			};
 		};
 		//other base 
 		if(total === 0){
-			return;
+			if(flag === "need"){
+				return costEval();
+			}
+			else if(flag === "cost"){
+				return displayUpdatedamts();		
+			};
 		};
 		total -= array[x].amount;
 		array[x].amount = 0;
@@ -202,6 +197,7 @@ var mytestScope = (function(){
 	};
 
 	
+	// ^5 -------------------------------Need/Cost Booleans-----------------------------------
 	//determine overage || jump to cost if no need aid/overage
 	function determineNeed(){
 		var needAid = false;
@@ -226,14 +222,12 @@ var mytestScope = (function(){
 		};
 	};
 	
-	//next up - need overage?  then reduce in order of need rank until need overage is fixed
-	//should just copy new aid object (something something scope)
 	
 	//should check if need revisions are needed - if not jump to costEval()
 	function needRevisions(amount){
 		if(amount >= 0){
-			//need is fine, jump to cost
-			return costEval(amount);
+			//negative number means there is a need overage, so if > 0 there is no overage, jump to cost
+			return costEval();
 		}
 		//
 		else if(amount < 0){
@@ -260,7 +254,6 @@ var mytestScope = (function(){
 					return aid.type;
 				}
 			})
-			console.log(sorted);
 			return revisionCalculation(sorted, amount, 0, "need");
 		}	//filter out into array, then reset revision array to match?  no - refilter and slice those index values, then concat the sliced revisionObject with the new filtered values
 	}
@@ -276,18 +269,15 @@ var mytestScope = (function(){
 				return aid.type;
 			}
 		})
-		console.log(sorted);
 		if(k > costofa){
 			k -= costofa;
 			return revisionCalculation(sorted, k, 0, "cost");
 		};
 	}
 	
+	// ^6 -------------------------------DOM display of updated amounts-----------------------------------	
 	function displayUpdatedamts(){
 		var length = revisionObject.length;
-		console.log("im doing shit to the DOM yo!");
-		console.log(aidObject);
-		console.log(revisionObject);
 		var revisionObjectsorted = revisionObject.sort(function(a,b){return a.position - b.position});
 		for(var x = 0; x < length; x++){
 			if(aidObject[x].amount != revisionObject[x].amount){
@@ -295,10 +285,8 @@ var mytestScope = (function(){
 			}
 			else{
 				$('#results').append('<div class="updated"> <p>' + revisionObject[x].type + '</p><p>Amount: ' + revisionObject[x].amount + '</p></div>').css("display", "block");
-			};	
-			
+			};		
 		}
-		console.log(revisionObjectsorted);
 	}
 
 
@@ -307,16 +295,15 @@ determineNeed();
 	
 });   //end mytestScope
 
+  var el = document.getElementById('calc');
+  el.addEventListener('click',mytestScope);
 
-$('#onf').on("click",function(){
-		mytestScope();	
-});
+  var el2 = document.getElementById('clear');
+  el2.addEventListener('click', clearResult);
 
 
-//uncomment this when testing amounts are cleared out
-/*
 function clearResult(){
 	document.getElementById("bio").reset();
 	$('#results').empty();
 }
-*/
+
