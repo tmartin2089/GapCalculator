@@ -11,6 +11,7 @@
  
  */
 
+//first unintended behaviour - set cost to 9000 - won't return anything
 
 //below is to auto-populate #paste.paste for testing - for future testing, put a bunch of award codes in JSON, have an AJAX call serve them //up one by one, and have them cross-checked with pre-stored numbers  - would like to be able to do rigorous testing automatically instead of continuing to hope for the best with each effort.
 
@@ -46,10 +47,10 @@ var mytestScope = (function(){
 	
 	//this is the processed aid object that we will be referencing so we don't keep calling the function like in the bad old days
 	var aidObject = runitThrough(newgetPaste());
-
+	console.log(aidObject);
 	//duplicate array for revision purposes
 	var revisionObject = new runitThrough(newgetPaste());
-	
+	console.log(revisionObject);
 	//total amount of need based aid
 	var totalNeedamount = additUp(aidObject, "need");
 	
@@ -71,12 +72,29 @@ var mytestScope = (function(){
 		return element.sacred;
 	});
 	
+	var sacredAmt = aidObject.filter(function(i){
+		if(i.sacred){
+			return i;
+		}
+	})
+	
+	var sacredTotal = additUp(sacredAmt, "need");
+	console.log(sacredTotal);
+	
 	//jump straight to dom update - no need to update aid
-	if(sacredOnly){
-		console.log("sacred aid only - jump to DOM manipulation");
+	if(sacredOnly && aidObject.length > 1){
+		console.log("entitlements only");
 		return;
 	}
-
+	else if(sacredTotal + bioResources >= costofa){
+		$.each(revisionObject,function(){
+			if(!this.sacred){
+				this.amount = 0;
+			}
+		})
+		return displayUpdatedamts();
+	}
+	
 	// ^2 -------------------------------DRY Functions-----------------------------------
 	//generic totalling function - depending on flag can calc total NBA, total cost aid, or no flag =  bio resources
 
@@ -102,13 +120,20 @@ var mytestScope = (function(){
 	};	
 	
 	//takes a presorted array & overage and reduces by amount of overage
+	//if need overage > available need to reduce - termination case fires - this is not preferred behaviour as this ignores costeval()
 	function revisionCalculation(array, overage, x, flag){
 		var x = x;
 		var total = overage;
 		var length = array.length-1;
 		//termination
 		if(total < 0 || x > length){
-			return;
+			//if still overage and all aid has been reduced, x > length should catch it
+			if(flag === "need"){
+				return costEval();
+			}
+			else if(flag === "cost"){
+				return displayUpdatedamts();
+			}
 		}
 		//base - fires if remaining overage is less than next aid item
 		if(total < array[x].amount){
