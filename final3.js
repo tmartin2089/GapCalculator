@@ -629,7 +629,7 @@ function joinrevisedAid(){
 
 
 
-function displayupdatedAmts(){
+function displayupdatedAmts(array){
 	var display = checkCost();
 	var display1 = joinrevisedAid();
 	//for comparison purposes - pulls initial array
