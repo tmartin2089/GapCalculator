@@ -11,37 +11,12 @@
  
  */
 
-//first unintended behaviour - set cost to 9000 - won't return anything
-
-//below is to auto-populate #paste.paste for testing - for future testing, put a bunch of award codes in JSON, have an AJAX call serve them //up one by one, and have them cross-checked with pre-stored numbers  - would like to be able to do rigorous testing automatically instead of continuing to hope for the best with each effort.
-
-var setp6Values = document.getElementById('paste');
-setp6Values.value = "131252 UT Grant-UG  _1500.00 331384 JFDS  __2906 131110 TPEG Residen _2500.00 131200 Partial Tuit __644.00 214125 Unsub Shit __23400.00 214025 Unsub Shit __50 213003 Perksin   ___5000 342000 JFDS  __1331 111028 Pell __2500";
-
-
-//populates bio windows for easy peasy testing lemon squeezy weezy breezy sneezy uhhhh queasy?  
-//am I allowed to get away with breaking scheme if consonance and assonance remain intact?
-var biotestArray = [13000, 1000, 2000, 3000];
-var setbioValues = document.getElementsByClassName("bio");
-
-(function(){
-	$.each(setbioValues,function(index){
-		this.value = biotestArray[index];
-	})
-}())
-
-
- 
- //helpful functions - determine onlysacredAid?  if so - skip all calcs 
  //helpful functions - determine noneedbasedAid - if so skip all need calcs
  //helpful function - total NBA less than need - skip need redux entirely
 
-
-
 "use strict";
 
-//global === bad bad dev, let mama mytestScope protect your pretty variables in her safe scoped arms
-var mytestScope = (function(){
+var doAidmagic = (function(){
 
 	// ^1 -----------------------------Useful Higher Order Variables------------------------------------
 	
@@ -81,11 +56,11 @@ var mytestScope = (function(){
 	var sacredTotal = additUp(sacredAmt, "need");
 	console.log(sacredTotal);
 	
-	//jump straight to dom update - no need to update aid
+	//entitlements only - skip all calcs
 	if(sacredOnly && aidObject.length > 1){
-		console.log("entitlements only");
-		return;
+		return displayUpdatedamts();
 	}
+	//entitlements + outside resources > COA - zero out all else
 	else if(sacredTotal + bioResources >= costofa){
 		$.each(revisionObject,function(){
 			if(!this.sacred){
@@ -225,6 +200,7 @@ var mytestScope = (function(){
 	// ^5 -------------------------------Need/Cost Booleans-----------------------------------
 	//determine overage || jump to cost if no need aid/overage
 	function determineNeed(){
+		console.log("am I still firing?");
 		var needAid = false;
 		var needOverage;
 		$.each(aidObject,function(){
@@ -318,10 +294,10 @@ var mytestScope = (function(){
 determineNeed();
 
 	
-});   //end mytestScope
+});   //end doAidmagic()
 
   var el = document.getElementById('calc');
-  el.addEventListener('click',mytestScope);
+  el.addEventListener('click',doAidmagic);
 
   var el2 = document.getElementById('clear');
   el2.addEventListener('click', clearResult);
