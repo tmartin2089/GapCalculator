@@ -264,16 +264,18 @@ var doAidmagic = (function(){
 	function costEval(){
 		//total remaining aid after need revisions
 		var k = additUp(revisionObject, "cost");
+		var remainingCost = costofa - bioObject[3];
 		//arrange by costRank and exclude sacred
 		var sorted = revisionObject.sort(function(a,b){return a.costRank - b.costRank}).filter(function(aid){
 			if(!aid.sacred){
 				return aid.type;
 			}
 		})
-		if(k > costofa){
-			k -= costofa;
+		if(k > remainingCost){
+			k -= remainingCost;
 			return revisionCalculation(sorted, k, 0, "cost");
 		};
+		return displayUpdatedamts();
 	}
 	
 	// ^6 -------------------------------DOM display of updated amounts-----------------------------------	
