@@ -60,8 +60,8 @@ var doAidmagic = (function(){
 	if(sacredOnly && aidObject.length > 1){
 		return displayUpdatedamts();
 	}
-	//entitlements + outside resources > COA - zero out all else
-	else if(sacredTotal + bioResources >= costofa){
+	//entitlements + outside scholarships > COA - zero out all else
+	else if(sacredTotal + bioResources[3] >= costofa){
 		$.each(revisionObject,function(){
 			if(!this.sacred){
 				this.amount = 0;
