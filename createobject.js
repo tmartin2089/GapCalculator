@@ -61,7 +61,7 @@ var doAidmagic = (function(){
 		return displayUpdatedamts();
 	}
 	//entitlements + outside scholarships > COA - zero out all else
-	else if(sacredTotal + bioResources[3] >= costofa){
+	else if(sacredTotal + bioObject[3] >= costofa){
 		$.each(revisionObject,function(){
 			if(!this.sacred){
 				this.amount = 0;
@@ -201,7 +201,6 @@ var doAidmagic = (function(){
 	// ^5 -------------------------------Need/Cost Booleans-----------------------------------
 	//determine overage || jump to cost if no need aid/overage
 	function determineNeed(){
-		console.log("am I still firing?");
 		var needAid = false;
 		var needOverage;
 		$.each(aidObject,function(){
@@ -245,6 +244,7 @@ var doAidmagic = (function(){
 				if(this.needBased && !this.sacred){
 					this.amount = 0;
 					//fwd revisionObject to costEval return revisionObject;
+					return costEval(revisionObject);
 				}
 			});
 		}

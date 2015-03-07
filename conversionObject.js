@@ -79,12 +79,14 @@ function convertAid(type, val8, index){
 		"131254": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
 		"131255": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
 		"131256": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
+		"131257": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
 		
 		//TPEG
 		"131115": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
 		"131110": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
 		"131116": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
 		"131111": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
+		"131117": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
 		
 		//partial tuition 
 		"131200": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 8, sacred: false, position: index},
