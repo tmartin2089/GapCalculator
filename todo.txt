@@ -5,11 +5,11 @@
 5. Entitlements only - under cost - good
 6. Entitlements only - at cost - good
 7. Entitlements, other aid - over need - good
-8. Entitlements, other aid - under need
-9. Entitlements, other aid - at need -  
-10. Entitlements, other aid - over cost
-11. Entitlements, other aid - under cost
-12. Entitlements, other aid - at cost
+8. Entitlements, other aid - under need - good
+9. Entitlements, other aid - at need -  good
+10. Entitlements, other aid - over cost - good
+11. Entitlements, other aid - under cost - good
+12. Entitlements, other aid - at cost - good
 13. No entitlements, other aid - over need
 14. No entitlements, other aid - under need
 15. No entitlements, other aid - at need

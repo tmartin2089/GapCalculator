@@ -57,7 +57,7 @@ var doAidmagic = (function(){
 	console.log(sacredTotal);
 	
 	//entitlements only - skip all calcs
-	if(sacredOnly && aidObject.length > 1){
+	if(sacredOnly && aidObject.length >= 1){
 		return displayUpdatedamts();
 	}
 	//entitlements + outside scholarships > COA - zero out all else
@@ -243,8 +243,6 @@ var doAidmagic = (function(){
 			$.each(revisionObject,function(){
 				if(this.needBased && !this.sacred){
 					this.amount = 0;
-					//fwd revisionObject to costEval return revisionObject;
-					//return costEval(revisionObject);
 				}
 			});
 			return costEval(revisionObject);
