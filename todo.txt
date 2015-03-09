@@ -1,10 +1,24 @@
-	//needRank determines order of reduction.  Lowest needRank gets reduced first  needBased flag will be used to gather need objects only for need redux
-
-	//will need to look for (!object.sacred) to exclude pell & etc 
-
-
-
-if total needAmount - sacredAmounts is less than total need overage, then
-zero out all needbased nonsacred amounts
-
-i.e. $8000 over need.  $7000 in NBA including 2k Pell.  Zero out everything Needbased but sacred
+1. Entitlements only - over need   — good
+2. Entitlements only - under need   - good
+3. Entitlements only - at need - good
+4. Entitlements only - over cost - good
+5. Entitlements only - under cost - good
+6. Entitlements only - at cost - good
+7. Entitlements, other aid - over need - good
+8. Entitlements, other aid - under need
+9. Entitlements, other aid - at need -  
+10. Entitlements, other aid - over cost
+11. Entitlements, other aid - under cost
+12. Entitlements, other aid - at cost
+13. No entitlements, other aid - over need
+14. No entitlements, other aid - under need
+15. No entitlements, other aid - at need
+16. No entitlements, other aid - over cost
+17. No entitlements, other aid - under cost
+18. No entitlements, other aid - at cost
+19. No need based aid - over need
+20. No need based aid - under need
+21. No need based aid - at need
+22. No need based aid - over cost
+23. No need based aid - under cost
+24. No need based aid - at cost

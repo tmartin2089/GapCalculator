@@ -239,14 +239,15 @@ var doAidmagic = (function(){
 	//amount === need overage amount
 	function doNeedmath(amount){
 		//overage is greater than total grants
-		if(amount > totalNeedamount){
+		if(amount >= totalNeedamount){
 			$.each(revisionObject,function(){
 				if(this.needBased && !this.sacred){
 					this.amount = 0;
 					//fwd revisionObject to costEval return revisionObject;
-					return costEval(revisionObject);
+					//return costEval(revisionObject);
 				}
 			});
+			return costEval(revisionObject);
 		}
 		//overage exists, but is less than total grants - redux needed but not to all !sacred aid
 		else if(amount < totalNeedamount){
