@@ -17,11 +17,12 @@
 "use strict";
 
 
+/*
 $('#calcp6').keyup(function() {
 	console.log("Ajax stuff is happening here sire");
 	var searchField = $('#search').val();
 	var myExp = new RegExp(searchField, "i");
-	$.getJSON('datafile.json', function(data) {
+	var k = $.getJSON('datafile.json', function(data) {
 		var output = '<ul class="searchresults">';
 		$.each(data, function(key, val) {
 			if ((val.name.search(myExp) != -1) ||
@@ -37,6 +38,7 @@ $('#calcp6').keyup(function() {
 		$('#update').html(output);
 	}); //get JSON
 });
+*/
 
 
 var doAidmagic = (function(){
