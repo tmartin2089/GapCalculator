@@ -307,6 +307,11 @@ var doAidmagic = (function(){
 		return displayUpdatedamts();
 	}
 	
+	function changeBackground(){
+		console.log("I fire only on changed divs");
+	}
+	
+	
 	// ^6 -------------------------------DOM display of updated amounts-----------------------------------	
 	function displayUpdatedamts(){
 		var length = revisionObject.length;
@@ -314,14 +319,15 @@ var doAidmagic = (function(){
 		for(var x = 0; x < length; x++){
 			if(aidObject[x].amount != revisionObject[x].amount){
 				var k = aidObject[x].amount - revisionObject[x].amount;
-				$('#results').append('<div class="changedAid"> <p>' + revisionObject[x].type + '</p><p>Need to return: $' + k + '</p></div>').css("display","block");
+				$('#results').append('<div class="changedAid"> <p>' + revisionObject[x].type + ' is now: $'+ revisionObject[x].amount + '</p><p>Must Return: $'  + k + '</p></div>').css("display","block");
 			}
 			else{
 				$('#results').append('<div class="updated"> <p>' + revisionObject[x].type + '</p><p>Amount Remains: $' + revisionObject[x].amount + '</p></div>').css("display", "block");
 			}		
 		}
-	}
 
+	}
+	
 
 determineNeed();
 
@@ -333,10 +339,20 @@ determineNeed();
 
   var el2 = document.getElementById('clear');
   el2.addEventListener('click', clearResult);
-
+  
 
 function clearResult(){
 	document.getElementById("bio").reset();
 	$('#results').empty();
 }
+
+
+
+//var changed = document.getElementsByClassName('changedAid');
+
+/*
+for(var x=0; x< changed.length; x++){
+	
+}
+*/
 

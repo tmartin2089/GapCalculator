@@ -5,6 +5,10 @@ body {
 	background: #DAD7C7;
 }
 
+p{
+	font-family: helvetica, arial, sans-serif;
+}
+
 
 #main_container{
 	margin:0 auto;    /*why does this move div to the middle? */
@@ -21,6 +25,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', end
 	width: 360px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
+	border: 1px solid grey;
 	border-radius: 10px;
 	height: auto;
 }
@@ -39,9 +44,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', end
 }
 
 #container_border{
-	margin: 1px;
+	margin: 10px;
 	background: #BF996B;
 	border-radius: 10px;
+	border: 1px solid #bf8b6b;
 }
 
 
@@ -108,6 +114,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', end
 	padding-left:15px;
 }
 
+#results p{
+	font-size:14px;
+}
+
 .changedAid{
 	background-color: #FFE600;
 	color: #3D3328;
@@ -134,7 +144,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', end
 /*These divs are presentation of jscript calcs in hmtl*/
 	
 
-
+.button{
+	float:left;
+}
 
 
 #cost{
