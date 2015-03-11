@@ -17,14 +17,17 @@
 "use strict";
 
 
+
 /*
-$('#calcp6').keyup(function() {
+$('#paste').keyup(function() {
 	console.log("Ajax stuff is happening here sire");
-	var searchField = $('#search').val();
+	var searchField = $('#paste').val();
+	console.log(searchField);
+	var ky = document.getElementById("paste").val;
+	console.log(ky);
 	var myExp = new RegExp(searchField, "i");
-	var k = $.getJSON('datafile.json', function(data) {
-		var output = '<ul class="searchresults">';
-		$.each(data, function(key, val) {
+	$.getJSON('datafile.json', function(data) {
+		$.each(datafile, function(key, val) {
 			if ((val.name.search(myExp) != -1) ||
 			(val.bio.search(myExp) != -1)) {
 				output += '<li>';
@@ -39,6 +42,7 @@ $('#calcp6').keyup(function() {
 	}); //get JSON
 });
 */
+
 
 
 var doAidmagic = (function(){
@@ -309,10 +313,11 @@ var doAidmagic = (function(){
 		var revisionObjectsorted = revisionObject.sort(function(a,b){return a.position - b.position});
 		for(var x = 0; x < length; x++){
 			if(aidObject[x].amount != revisionObject[x].amount){
-				$('#results').append('<div class="changedAid"> <p>' + revisionObject[x].type + '</p><p>Amount: ' + revisionObject[x].amount + '</p></div>').css("display","block");
+				var k = aidObject[x].amount - revisionObject[x].amount;
+				$('#results').append('<div class="changedAid"> <p>' + revisionObject[x].type + '</p><p>Need to return: $' + k + '</p></div>').css("display","block");
 			}
 			else{
-				$('#results').append('<div class="updated"> <p>' + revisionObject[x].type + '</p><p>Amount: ' + revisionObject[x].amount + '</p></div>').css("display", "block");
+				$('#results').append('<div class="updated"> <p>' + revisionObject[x].type + '</p><p>Amount Remains: $' + revisionObject[x].amount + '</p></div>').css("display", "block");
 			}		
 		}
 	}

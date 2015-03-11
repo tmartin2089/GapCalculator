@@ -7,46 +7,46 @@
 	</head>
 	<body>
 		<div id="main_container">
-			<div id="calcarea">
+			<div id="container_border">
 				<h1>Aid Calculator</h1>
-				<div class="aidentry">
-					<h2>Bio Information</h2>
-						<form id="bio">
-							<div class="p6">
-								<p>Total Budget stuff</p>
-								<input type="text" class="bio" id="coa" placeholder="Cost/Sem" />
-							</div>
-							
-							<div class="p6">
-								<p>SC</p>
-								<input type="text" class="bio" id="efcP" placeholder="EFC/Sem" />
-							</div>
-							
-							<div class="p6">
-								<p>PC</p>
-								<input type="text" class="bio" id="efcS" placeholder="EFC/Sem" />
-							</div>
-							
-							<div class="p6">
-								<p>St Res Gift/Sem</p>
-								<input type="text" class="bio" id="osch" placeholder="St Res Gift" />
-							</div>
-
-							<div class="p6" id="calcp6">
-								<p>Paste P6 here</p>
-								<input type="text" class="paste" id="paste" placeholder="Paste P6 here" />
-							</div>
-						</form><!--end bio -->
-					<button id="calc">Calc It!</button>	
-					<button id="clear" >Clear Results</button>
-				</div><!--end aidentry -->
-		
-			</div><!--end calcarea div -->
-			<div id="results">
-					<div id="cost" class="updated"></div>
-			</div><!--end results div -->
-			<div id="update"></div>
-			<footer id="footer">Thanks for beta testing!</footer>
+				<div id="calcarea">
+					<div class="aidentry">
+							<form id="bio">
+								<div class="p6">
+									<p>Total Budget</p>
+									<input type="text" class="bio" id="coa" placeholder="Cost/Sem" />
+								</div>
+								
+								<div class="p6">
+									<p>SC</p>
+									<input type="text" class="bio" id="efcP" placeholder="SC/Sem" />
+								</div>
+								
+								<div class="p6">
+									<p>PC</p>
+									<input type="text" class="bio" id="efcS" placeholder="PC/Sem" />
+								</div>
+								
+								<div class="p6">
+									<p>St Res Gift/Sem</p>
+									<input type="text" class="bio" id="osch" placeholder="St Res Gift" />
+								</div>
+	
+								<div class="p6" id="calcp6">
+									<p>Paste P6 here</p>
+									<input type="text" class="paste" id="paste" placeholder="Paste P6 here" />
+								</div>
+							</form><!--end bio -->
+						<button id="calc" class="button">Calc It!</button>	
+						<button id="clear" class="button">Clear Results</button>
+					</div><!--end aidentry -->
+			
+				</div><!--end calcarea div -->
+				<div id="results">
+						<div id="cost" class="updated"></div>
+				</div><!--end results div -->
+				<footer id="footer"></footer>
+			</div><!--end container_border-->
 		</div><!--end main container div -->
 	<script src="jquery.js"></script>
 	<script src="conversionObject.js"></script>

@@ -8,12 +8,20 @@ body {
 
 #main_container{
 	margin:0 auto;    /*why does this move div to the middle? */
-	background: #BF996B;
-	padding: 10px;
+	background: #e6e6e6; /* Old browsers */
+background: -moz-linear-gradient(top,  #e6e6e6 0%, #b8b8b8 100%, #2989d8 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e6e6e6), color-stop(100%,#b8b8b8), color-stop(100%,#2989d8)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #e6e6e6 0%,#b8b8b8 100%,#2989d8 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #e6e6e6 0%,#b8b8b8 100%,#2989d8 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #e6e6e6 0%,#b8b8b8 100%,#2989d8 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #e6e6e6 0%,#b8b8b8 100%,#2989d8 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', endColorstr='#2989d8',GradientType=0 ); /* IE6-9 */
+
+	padding: 3px;
 	width: 360px;
-	-webkit-border-radius: 10px 10px 0 0;
-	-moz-border-radius: 10px 10px 0 0;
-	border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 	height: auto;
 }
 
@@ -30,15 +38,24 @@ body {
 	padding-bottom:5px;
 }
 
+#container_border{
+	margin: 1px;
+	background: #BF996B;
+	border-radius: 10px;
+}
+
 
 #calcarea{
 	float:left;
 	width: 40%;
 }
 
-#calcarea h1{
+#container_border h1{
+	text-align: center;
 	font-size:2em;
 	color:black;
+	padding: 10px;
+	font-size: 30px;
 }
 
 
@@ -82,8 +99,6 @@ body {
 .typeofAid{
 	width: 35%;
 }
-
-
 
 /* results here */
 
