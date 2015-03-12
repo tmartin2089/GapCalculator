@@ -2,42 +2,40 @@
 
 //future dev - barring major Title IV reg changes, the only thing that should ever need to be tinkered with is needRank and costRank, as these determine the order in which reductions are made
 
-//why 42?  needed an arbitrary high number,  since sort couldn't handle a non-number when sorting 
+//why 42?  needed an arbitrary high number,  since sort couldn't handle a non-number when sorting, and it's important to know how many roads a man must walk down before you can call him a man 
 
-//position: index - need a way to capture input order of p6 awards so that the updated amounts can be redisplayed in the same order.  This means aid can be revised in the order it appears on p6
+//Added in preliminary disbursed: property.  This will allow future version of calculator to figure out net amount (minus orig fees).  Likely will run into
+//issues where not having a disbursed property will render a false positive (undefined == falsey)
 
 //-------------current costRank index------------------//
 /*
-	1.
-	2.
-	3.
-	4.
-	5.
-	6.
-	7.
-	8.
-	9.
-	10.
-	11.
-	12.
+	1. CAL/Alt
+	2. PLUS
+	3. Unsub
+	4. B On Time
+	5. Perkins
+	6. Subsidized Loan
+	7. FWS
+	8. TPEG
+	9. UT Grant
+	10. Partial Tuition Grant
+	11. TEXAS Grant Match
+	12. TEXAS Grant
 */
 //-------------end costRank index------------------//
 
 
 //-------------current needRank index------------------//
 /*
-	1.
-	2.
-	3.
-	4.
-	5.
-	6.
-	7.
-	8.
-	9.
-	10.
-	11.
-	12.
+	1. Perkins
+	2. Subsidized Loan
+	3. FWS
+	4. TPEG
+	5. UT Grant
+	6. Partial Tuition Grant
+	7. TEXAS Grant Match
+	8. TEXAS Grant
+
 */
 //-------------end needRank index------------------//		
 
@@ -45,14 +43,14 @@ function convertAid(type, val8, index){
 	var aidType = {
 		
 		//plus
-		"215025": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false, position: index}, 
-		"215026": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false, position: index}, 
-		"215125": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false, position: index}, 
-		"215126": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false, position: index}, 
+		"215025": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false, position: index, disbursed: false}, 
+		"215026": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false, position: index, disbursed: true}, 
+		"215125": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false, position: index, disbursed: false}, 
+		"215126": {type: "PLUS Loan", amount: val8, needBased: false, needRank: 42, costRank: 2, sacred: false, position: index, disbursed: true}, 
 		
 		//unsub
-		"214125": {type: "Unsub Loan", amount: val8, needBased: false, needRank: 42, costRank: 3, sacred: false, position: index},
-		"214126": {type: "Unsub Loan", amount: val8, needBased: false, needRank: 42, costRank: 3, sacred: false, position: index},  
+		"214125": {type: "Unsub Loan", amount: val8, needBased: false, needRank: 42, costRank: 3, sacred: false, position: index, disbursed: false},
+		"214126": {type: "Unsub Loan", amount: val8, needBased: false, needRank: 42, costRank: 3, sacred: false, position: index, disbursed: true},  
 		
 		//cal & alt
 		"222001": {type: "CAL/Alt Loan", amount: val8, needBased: false, needRank: 42, costRank: 1, sacred: false, position: index},
@@ -67,32 +65,32 @@ function convertAid(type, val8, index){
 		"223004": {type: "B On Time", amount: val8, needBased: false, needRank: 42, costRank: 4, sacred: false, position: index},
 																				
 		//sub
-		"214025": {type: "Sub Loan", amount: val8, needBased: true, needRank: 2, costRank: 6, sacred: false, position: index},
-		"214026": {type: "Sub Loan", amount: val8, needBased: true, needRank: 2, costRank: 6, sacred: false, position: index},
+		"214025": {type: "Sub Loan", amount: val8, needBased: true, needRank: 2, costRank: 6, sacred: false, position: index, disbursed: false},
+		"214026": {type: "Sub Loan", amount: val8, needBased: true, needRank: 2, costRank: 6, sacred: false, position: index, disbursed: true},
 		
-		//perkins
+		//Oerkins
 		"213003": {type: "Perkins", amount: val8, needBased: true, needRank: 1, costRank: 5, sacred: false, position: index},
 		
 		//UT grant
-	    "131252": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
-		"131253": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
-		"131254": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
-		"131255": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
-		"131256": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
-		"131257": {type: "UT Grant", amount: val8, needBased: true, needRank: 4, costRank: 7, sacred: false, position: index},
-		
+	    "131252": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
+		"131253": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
+		"131254": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
+		"131255": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
+		"131256": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
+		"131257": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
+																						   
 		//TPEG
-		"131115": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
-		"131110": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
-		"131116": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
-		"131111": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
-		"131117": {type: "TPEG", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
+		"131115": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
+		"131110": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
+		"131116": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
+		"131111": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
+		"131117": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
 		
-		//partial tuition 
-		"131200": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 8, sacred: false, position: index},
-		"131201": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 8, sacred: false, position: index},
-		"131202": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 9, costRank: 8, sacred: false, position: index},
-
+		//Partial Tuition 
+		"131200": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
+		"131201": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
+		"131202": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
+																								  
 		//TEXAS grant
 		"121176": {type: "TEXAS Grant", amount: val8, needBased: true, needRank: 8, costRank: 12, sacred: false, position: index},
 		"121178": {type: "TEXAS Grant", amount: val8, needBased: true, needRank: 8, costRank: 12, sacred: false, position: index},

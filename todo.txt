@@ -10,7 +10,7 @@
 10. Entitlements, other aid - over cost - good
 11. Entitlements, other aid - under cost - good
 12. Entitlements, other aid - at cost - good
-13. No entitlements, other aid - over need 
+13. No entitlements, other aid - over need 	
 14. No entitlements, other aid - under need
 15. No entitlements, other aid - at need
 16. No entitlements, other aid - over cost

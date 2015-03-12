@@ -1,48 +1,16 @@
-/* -------------------------Table of Contents-------------------------
-	Howto -	Ctrl-F for the caret and # you want i.e. "^2" for bio functions  
-  ^1 - Higher order variables - cached at top of anon function b/c they will be used multiple places 
-  ^2 - DRY functions
-  ^3 - Gathers and parses bio information - budget/pc/sc/st res gift
-  ^4 - This section gathers and parses p6 paste into a useful object
-  ^5 - Need/Cost Overage determination
-  ^6 - DOM display of updated amounts
-  ^7 - 
-  ^8 -
- 
- */
-
- //helpful functions - determine noneedbasedAid - if so skip all need calcs
- //helpful function - total NBA less than need - skip need redux entirely
-
 "use strict";
 
-
-
-/*
-$('#paste').keyup(function() {
-	console.log("Ajax stuff is happening here sire");
-	var searchField = $('#paste').val();
-	console.log(searchField);
-	var ky = document.getElementById("paste").val;
-	console.log(ky);
-	var myExp = new RegExp(searchField, "i");
-	$.getJSON('datafile.json', function(data) {
-		$.each(datafile, function(key, val) {
-			if ((val.name.search(myExp) != -1) ||
-			(val.bio.search(myExp) != -1)) {
-				output += '<li>';
-				output += '<h2>'+ val.name +'</h2>';
-				output += '<img src="images/'+ val.shortname +'_tn.jpg" alt="'+ val.name +'" />';
-				output += '<p>'+ val.bio +'</p>';
-				output += '</li>';
-			}
-		});
-		output += '</ul>';
-		$('#update').html(output);
-	}); //get JSON
-});
-*/
-
+/* -------------------------Table of Contents-------------------------
+	Howto -	Ctrl-F for the caret and # you want i.e. "^2" for bio functions  
+  ^1 - Higher order variables - cached/will be used multiple places 
+  ^2 - DRY functions
+  ^3 - Gathers and parses bio information - budget/pc/sc/st res gift
+  ^4 - Gathers and parses p6 mainframe paste into a useful object
+  ^5 - Need/Cost overage determination
+  ^6 - DOM display of updated amounts
+  ^7 - Event Listeners/Buttons
+ 
+ */
 
 
 var doAidmagic = (function(){
@@ -51,24 +19,23 @@ var doAidmagic = (function(){
 	
 	//this is the processed aid object that we will be referencing so we don't keep calling the function like in the bad old days
 	var aidObject = new RunitThrough(newgetPaste());
-	console.log(aidObject);
+	
 	//duplicate array for revision purposes
 	var revisionObject = new RunitThrough(newgetPaste());
-	console.log(revisionObject);
+	
 	//total amount of need based aid
 	var totalNeedamount = additUp(aidObject, "need");
 	
-	//total amount of aid
+	//total amount of all aid
 	var totalAidamount = additUp(aidObject, "cost");
 
-	//bio Array  - bio[0] = coa - might just be easier to get by id# rather than running the entire array
-	//bio[0] = cost, bio[1] = sc, bio[2] = pc, bio[3] = resources
+	//bio[0] = cost, bio[1] = sc, bio[2] = pc, bio[3] = st res gift
 	var bioObject = gatherBio();
 
-	//total resources (pc, sc and osch)
+	//total amount of resources (pc, sc and st res gift)
 	var bioResources = additUp(gatherBio());
 	
-	//total cost
+	//total cost of attendance
 	var costofa = bioObject[0];
 
 	//check if sacred (entitlements) only
@@ -76,20 +43,23 @@ var doAidmagic = (function(){
 		return element.sacred;
 	});
 	
+	//Isolate entitlements into array for totalling
 	var sacredAmt = aidObject.filter(function(i){
 		if(i.sacred){
 			return i;
 		}
 	});
 	
+	//total up sacred here
 	var sacredTotal = additUp(sacredAmt, "need");
-	console.log(sacredTotal);
 	
-	//entitlements only - skip all calcs
+	
+	//sacred only - skip all calcs
 	if(sacredOnly && aidObject.length >= 1){
 		return displayUpdatedamts();
 	}
-	//entitlements + outside scholarships > COA - zero out all else
+	
+	//sacred + outside scholarships > COA - skip calcs, zero out everything but sacred (entitlements)
 	else if(sacredTotal + bioObject[3] >= costofa){
 		$.each(revisionObject,function(){
 			if(!this.sacred){
@@ -99,9 +69,10 @@ var doAidmagic = (function(){
 		return displayUpdatedamts();
 	}
 	
+	
 	// ^2 -------------------------------DRY Functions-----------------------------------
-	//generic totalling function - depending on flag can calc total NBA, total cost aid, or no flag =  bio resources
-
+	
+	//generic totalling function - depending on flag can calc total need based, total cost aid, or no flag =  bio resources
 	function additUp(aid, flag){
 		var total = 0;
 		$.each(aid, function(){
@@ -123,13 +94,13 @@ var doAidmagic = (function(){
 		return total;
 	};	
 	
+	
 	//takes a presorted array & overage and reduces by amount of overage
-	//if need overage > available need to reduce - termination case fires - this is not preferred behaviour as this ignores costeval()
 	function revisionCalculation(array, overage, x, flag){
 		var x = x;
 		var total = overage;
 		var length = array.length-1;
-		//termination
+		//termination case
 		if(total < 0 || x > length){
 			//if still overage and all aid has been reduced, x > length should catch it
 			if(flag === "need"){
@@ -165,6 +136,7 @@ var doAidmagic = (function(){
 	
 	
 	// ^3 -------------------------------Bio Information-----------------------------------
+	
 	function gatherBio(){
 		var bio = [];
 		$('.bio').each(function(index){
@@ -180,8 +152,8 @@ var doAidmagic = (function(){
 	}
 	
 	
-	// ^4 -------------------------------P6 Paste Information Parsers-----------------------------------			
-	//couldn't I just do an arguments.filter(){return words excluded & no top 10} gather p6 paste information and clean it up
+	// ^4 -------------------------------P6 Paste Information Parsers-----------------------------------		
+		
 	function newgetPaste(){
 		var pasted = $('.paste').val().replace(/_/g,' ').split(' '); //remove underscores and splits into array
 		var pastedArray = [];
@@ -201,10 +173,9 @@ var doAidmagic = (function(){
 				pastedArray2.push({type:this, value:pastedArray[index+1], position: index});
 			}
 		}); 
-		//convert all OSFS scholarships to same type
+		//convert osfs scholarships to general award code (many awd codes, all treated the same)
 		$.each(pastedArray2,function(index){
 			var testVar = this.type;
-				//convert osfs scholarships to general award code (many awd codes, all treated the same)
 				if(testVar.toString().substring(0,3)==="331" || testVar.toString().substring(0,3)==="341"){
 					pastedArray2[index].type = 331000;
 				}				
@@ -212,14 +183,14 @@ var doAidmagic = (function(){
 		return pastedArray2;	
 	}
 
-	//convert p6 array input through object literal call - richer return than switch statement
-	//constructs aid object array
+
+	//convert p6 array input through object literal call - richer return than switch statement - constructs aid object array
 	function RunitThrough(thingy){
 		var k = [];
 		$.each(thingy, function(){
 			k.push(convertAid(this.type, this.value, this.position));
 		});
-		//filters out undefined values generated by no match <oschs>
+		//filters out undefined values generated by no match <oschs> - assuming you aren't a counselor future dev - these amounts are already in st res gift
 		k = k.filter(function(x){
 			return (x);
 		});
@@ -228,10 +199,12 @@ var doAidmagic = (function(){
 
 	
 	// ^5 -------------------------------Need/Cost Booleans-----------------------------------
+	
 	//determine overage || jump to cost if no need aid/overage
 	function determineNeed(){
 		var needAid = false;
 		var needOverage;
+		//if there is any need based aid, needAid will be set to true to force need calc
 		$.each(aidObject,function(){
 			if(this.needBased){
 				needAid = true;
@@ -245,9 +218,9 @@ var doAidmagic = (function(){
 			return costEval();
 		}
 		else{
-			//there is NBA - evaluate for possible overage
+			//there is NBA - evaluate for possible overage  (COA - pc/sc/st res gift) - total amount of NBA
 			needOverage = (bioObject[0] - bioResources) - totalNeedamount;
-			//should be negative number if overage
+			//will be negative number if overage
 			needRevisions(needOverage);
 		}
 	}
@@ -265,9 +238,10 @@ var doAidmagic = (function(){
 		}
 	}
 	
+	
 	//amount === need overage amount
 	function doNeedmath(amount){
-		//overage is greater than total grants
+		//overage greater than total grants - the > is likely unneeded with boolean at bottom ^1 but needed for rare instance of amount === totalNeedamount
 		if(amount >= totalNeedamount){
 			$.each(revisionObject,function(){
 				if(this.needBased && !this.sacred){
@@ -276,7 +250,7 @@ var doAidmagic = (function(){
 			});
 			return costEval(revisionObject);
 		}
-		//overage exists, but is less than total grants - redux needed but not to all !sacred aid
+		//overage exists, but is less than total grants - reductions needed  
 		else if(amount < totalNeedamount){
 			//sort by needRank and filter out non-need && sacred 
 			var sorted = revisionObject.sort(function(a,b){return a.needRank - b.needRank}).filter(function(aid){
@@ -285,14 +259,16 @@ var doAidmagic = (function(){
 				}
 			});
 			return revisionCalculation(sorted, amount, 0, "need");
-		}	//filter out into array, then reset revision array to match?  no - refilter and slice those index values, then concat the sliced revisionObject with the new filtered values
+		}	
 	}
+
 
 	//jumped straight to if determineNeed returns false
 	//jumped to if no need overage
 	function costEval(){
 		//total remaining aid after need revisions
 		var k = additUp(revisionObject, "cost");
+		//COA - st res gift
 		var remainingCost = costofa - bioObject[3];
 		//arrange by costRank and exclude sacred
 		var sorted = revisionObject.sort(function(a,b){return a.costRank - b.costRank}).filter(function(aid){
@@ -306,13 +282,10 @@ var doAidmagic = (function(){
 		}
 		return displayUpdatedamts();
 	}
-	
-	function changeBackground(){
-		console.log("I fire only on changed divs");
-	}
-	
+
 	
 	// ^6 -------------------------------DOM display of updated amounts-----------------------------------	
+	
 	function displayUpdatedamts(){
 		var length = revisionObject.length;
 		var revisionObjectsorted = revisionObject.sort(function(a,b){return a.position - b.position});
@@ -325,34 +298,26 @@ var doAidmagic = (function(){
 				$('#results').append('<div class="updated"> <p>' + revisionObject[x].type + '</p><p>Amount Remains: $' + revisionObject[x].amount + '</p></div>').css("display", "block");
 			}		
 		}
-
 	}
 	
-
 determineNeed();
-
 	
 });   //end doAidmagic()
 
-  var el = document.getElementById('calc');
-  el.addEventListener('click',doAidmagic);
 
-  var el2 = document.getElementById('clear');
-  el2.addEventListener('click', clearResult);
-  
-
-function clearResult(){
-	document.getElementById("bio").reset();
-	$('#results').empty();
-}
-
-
-
-//var changed = document.getElementsByClassName('changedAid');
-
-/*
-for(var x=0; x< changed.length; x++){
+	// ^7 -----------------------------Event Listeners/Buttons------------------------------------
 	
-}
-*/
+	var el = document.getElementById('calc');
+	el.addEventListener('click', doAidmagic);
+
+	var el2 = document.getElementById('clear');
+	el2.addEventListener('click', clearResult);
+  
+	function clearResult(){
+		document.getElementById("bio").reset();
+		$('#results').empty();
+	}
+
+
+
 
