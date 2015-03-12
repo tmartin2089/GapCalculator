@@ -35,7 +35,6 @@
 	6. Partial Tuition Grant
 	7. TEXAS Grant Match
 	8. TEXAS Grant
-
 */
 //-------------end needRank index------------------//		
 
@@ -72,12 +71,12 @@ function convertAid(type, val8, index){
 		"213003": {type: "Perkins", amount: val8, needBased: true, needRank: 1, costRank: 5, sacred: false, position: index},
 		
 		//UT grant
-	    "131252": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
-		"131253": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
-		"131254": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
-		"131255": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
-		"131256": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
-		"131257": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: , sacred: false, position: index},
+	    "131252": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: 9, sacred: false, position: index},
+		"131253": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: 9, sacred: false, position: index},
+		"131254": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: 9, sacred: false, position: index},
+		"131255": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: 9, sacred: false, position: index},
+		"131256": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: 9, sacred: false, position: index},
+		"131257": {type: "UT Grant", amount: val8, needBased: true, needRank: 5, costRank: 9, sacred: false, position: index},
 																						   
 		//TPEG
 		"131115": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
