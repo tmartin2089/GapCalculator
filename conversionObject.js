@@ -84,6 +84,7 @@ function convertAid(type, val8, index){
 		"131116": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
 		"131111": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
 		"131117": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
+		"131118": {type: "TPEG", amount: val8, needBased: true, needRank: 4, costRank: 8, sacred: false, position: index},
 		
 		//Partial Tuition 
 		"131200": {type: "Partial Tuition", amount: val8, needBased: true, needRank: 6, costRank: 10, sacred: false, position: index},
