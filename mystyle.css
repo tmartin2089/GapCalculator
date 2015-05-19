@@ -50,17 +50,6 @@ p{
 	border: 1px solid #bf8b6b;
 }
 
-hr{
-	width:75%;
-	background-color:green;
-	margin-top:0px;
-}
-
-#calcarea{
-	float:left;
-	width: 40%;
-}
-
 #container_border h1{
 	text-align: center;
 	font-size:2em;
@@ -69,12 +58,20 @@ hr{
 	font-family: arial, helvetica, sans-serif;
 }
 
+hr{
+	width:75%;
+	margin-top:0px;
+}
+
+#calcarea{
+	float:left;
+	width: 40%;
+}
 
 .aidentry{
 	width: 90%;
 	padding-left: 10px;
 }
-
 
 #bio{
 	width:100%;
@@ -86,11 +83,6 @@ hr{
 	border: 1px solid #9b7343;
 }
 
-.paste{
-	width: 75%;
-}
-
-
 .p6{
 	margin: 5px 5px;
 }
@@ -99,12 +91,8 @@ hr{
 	color: white;
 }
 
-.aidInput{
-	width: 100%;
-}
-
-.amount{
-	width:25%;
+.paste{
+	width: 75%;
 }
 
 /* results here */
@@ -112,13 +100,14 @@ hr{
 #results{
 	float:left;
 	display:none;
-	padding-left:15px;
 }
 
 #results p{
 	font-size:14px;
 }
 
+
+/* The below only exists after calc button is pressed - this is javascript created html */
 .changedAid{
 	background-color: #FFE600;
 	color: #3D3328;
@@ -142,18 +131,6 @@ hr{
 	padding: 5px 5px;
 }
 
-/*These divs are presentation of jscript calcs in hmtl*/
-	
-
-.button{
-	float:left;
-}
-
-#clear{
-	margin-bottom:10px;
-}
-
-
 .updated{
 	background: #D8D8D8;
 	color: #3D3328;
@@ -175,6 +152,17 @@ hr{
 .updated h3{
 	margin: 5px 5px;
 	padding: 5px 5px;
+}
+
+/* Buttons and Footer */
+	
+
+.button{
+	float:left;
+}
+
+#clear{
+	margin-bottom:10px;
 }
 
 #footer{
