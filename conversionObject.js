@@ -20,6 +20,7 @@
 	10. Partial Tuition Grant
 	11. TEXAS Grant Match
 	12. TEXAS Grant
+	13. Cost Impacted UT Scholarships
 */
 //-------------end costRank index------------------//
 
@@ -95,8 +96,25 @@ function convertAid(type, val8, index){
 		"121178": {type: "TEXAS Grant", amount: val8, needBased: true, needRank: 8, costRank: 12, sacred: false, position: index, disbursed: false},
 		"121180": {type: "TEXAS Grant", amount: val8, needBased: true, needRank: 8, costRank: 12, sacred: false, position: index, disbursed: false},
 		
-		//TX grant match   - should be reduced for need befored TX Grant
+		//TX grant match   - should be reduced for need before TX Grant
 		"131114": {type: "TEXAS Match", amount: val8, needBased: true, needRank: 7, costRank: 11, sacred: false, position: index, disbursed: false},
+		
+		//New for 15/16 - OSFS scholarships impacted by cost
+		"331278": {type: "5th Year Acct", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331401": {type: "LPCA", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331402": {type: "LPCA", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331403": {type: "LPCA", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331439": {type: "Longhorn Guaranty", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331458": {type: "ULN", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331459": {type: "PAS", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331460": {type: "PAS", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331461": {type: "PAS", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"331462": {type: "Posse", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"341159": {type: "Terry", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"341160": {type: "Terry Transfer", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"341161": {type: "Terry Transfer", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"341162": {type: "Gates", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
+		"341163": {type: "Gates", amount: val8, needBased: true, needRank: 42, costRank: 13, sacred: false, position: index, disbursed: false},
 		
 		//FWS
 		"411001": {type: "Work-Study", amount: val8, needBased: true, needRank: 3, costRank: 7, sacred: false, position: index, disbursed: false},

@@ -176,10 +176,11 @@ var doAidmagic = (function(){
 		//convert osfs scholarships to general award code (many awd codes, all treated the same)
 		$.each(pastedArray2,function(index){
 			var testVar = this.type;
-				if(testVar.toString().substring(0,3)==="331" || testVar.toString().substring(0,3)==="341"){
-					pastedArray2[index].type = 331000;
-				}				
+			if(testVar.toString().substring(0,3)==="331" || testVar.toString().substring(0,3)==="341"){
+				pastedArray2[index].type = 331000;
+			}				
 		});
+		console.log(pastedArray2);
 		return pastedArray2;	
 	}
 
