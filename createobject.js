@@ -176,7 +176,8 @@ var doAidmagic = (function(){
 		//convert osfs scholarships to general award code (many awd codes, all treated the same)
 		$.each(pastedArray2,function(index){
 			var testVar = this.type.toString();
-			if(costEntitlements(testVar) === undefined && testVar.substring(0,3)==="331" || testVar.substring(0,3)==="341"){
+			//protects true entitlements
+			if(costEntitlements(testVar) === undefined && testVar.substring(0,3)=== "331" || testVar.substring(0,3)=== "341"){
 				pastedArray2[index].type = 331000;
 			}				
 		});
@@ -195,6 +196,7 @@ var doAidmagic = (function(){
 		k = k.filter(function(x){
 			return (x);
 		});
+		console.log(k);
 		return k;
 	}
 
@@ -255,7 +257,7 @@ var doAidmagic = (function(){
 		else if(amount < totalNeedamount){
 			//sort by needRank and filter out non-need && sacred 
 			var sorted = revisionObject.sort(function(a,b){return a.needRank - b.needRank}).filter(function(aid){
-				if(aid.needBased && !aid.sacred){
+				if(aid.needBased && !aid.sacred && !aid.osfsCoa){
 					return aid.type;
 				}
 			});

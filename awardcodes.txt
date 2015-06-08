@@ -2,10 +2,10 @@
  
  
  131252 UT Grant-UG  _1500.00
- 331278 JFDS  __29906
+ 331278 JFDS  __9906
   131110 TPEG Residen _2500.00
   131200 Partial Tuit __644.00
-  214125 Unsub Shit __23400.00
+  214125 Unsub Shit __3400.00
   214025 Unsub Shit __50
   213003 Perksin   ___5000
   342000 JFDS  __1331
