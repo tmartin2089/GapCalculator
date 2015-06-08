@@ -132,3 +132,26 @@ function convertAid(type, val8, index){
 		};
 	return aidType[type]
 }
+
+
+
+function costEntitlements(type){
+	return{
+		"331278": "I\'m an entitlement but I\'m impacted by aid",
+		"331401": "I\'m an entitlement but I\'m impacted by aid",
+		"331402": "I\'m an entitlement but I\'m impacted by aid",
+		"331403": "I\'m an entitlement but I\'m impacted by aid",
+		"331439": "I\'m an entitlement but I\'m impacted by aid",
+		"331458": "I\'m an entitlement but I\'m impacted by aid",
+		"331459": "I\'m an entitlement but I\'m impacted by aid",
+		"331460": "I\'m an entitlement but I\'m impacted by aid",
+		"331461": "I\'m an entitlement but I\'m impacted by aid",
+		"331462": "I\'m an entitlement but I\'m impacted by aid",
+		"341159": "I\'m an entitlement but I\'m impacted by aid",
+		"341160": "I\'m an entitlement but I\'m impacted by aid",
+		"341161": "I\'m an entitlement but I\'m impacted by aid",
+		"341162": "I\'m an entitlement but I\'m impacted by aid",
+		"341163": "I\'m an entitlement but I\'m impacted by aid"
+	}[type];	
+}
+		
